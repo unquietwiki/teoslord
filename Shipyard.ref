@@ -1,0 +1,1422 @@
+;This file contains the routines used for Shipyard Beta & the Snaken Yard
+;If you wish to add a ship, check the routine used for buying a Thrustmaster.
+
+
+
+@#CATALOG
+;This will be presented before the person reaches the dealers; Ship catalog.
+;This will also activate the option to see the list in the Helperpad.
+
+;This makes sure the person dosen't see the list again if already dl'd.
+@IF BITCHECK `t01 1 0 THEN DO
+ @BEGIN
+
+;This is the catalog display.
+ @CLEAR SCREEN
+ @SHOW
+                                `$Ship's Catalog`1
+
+Cost     Name          Wep/Arm-L  HP-L   Torp-L  Hold-L  React-L  Org.
+`$58599    `!Thrustmaster`$    1   1      75     1       50      11       `!N
+`$13000    `6Garbage Scow`$    1   1      100    0       40      9        `!N
+`$33500    `$Bantam`$          1   1      20     0       25      13       `!N
+`$237000   `#Maxiport`$        1   1      300    0       125     11       `!N
+`$1224200  `!Sentinel`$        2   2      50     2       70      13       `!N
+`$1840000  `1Reconnoiter`$     3   3      100    3       90      12       `!N
+`$5000000  `4Mauler`$          4   4      100    4       150     14       `!N
+`$3500000  `$Ardent Supplier`$ 2   2      500    0       400     8        `0A
+`$7243900  `4Revelation`$      2   2      500    4       75      11       `0A
+`$9220000  `#Prophecy`$        4   4      1000   6       225     12       `0A
+`$36000000 `!Accolade`$        4   4      10000  10      100     16       `0A
+`$2269999  `$Mayhem Master`$   3   3      100    6       75      12       `4M
+`$5699999  `4Nognutter`$       4   4      1000   2       100     14       `4M
+`$6499999  `4Quietus`$         2   2      100    10      50      16       `4M
+`$13438999 `9Lexor`$           4   4      1000   5       200     14       `4M
+`$29339999 `8Apocalypse`$      4   4      10000  10      300     16       `4M
+
+ @KEY
+
+;Downloads program if a helperpad is available.
+ @IF `i16 MORE 0 THEN DO
+  @BEGIN
+  @CLEAR SCREEN
+  @SHOW
+     `0Your helperpad beeps loudly.
+
+     `5You check it, and find the catalog is now in your helperpad.
+
+     `7How convient!
+
+  @KEY
+  @BITSET `t01 1 1
+  @END
+ @drawmap
+ @update
+ @END
+
+;Exits
+@routineabort
+
+
+
+
+
+@#DEALERN
+;Anyone can buy, no refusal routines here.
+
+;Routine for preventing "over-arming"
+@CLEAR SCREEN
+@IF s&wep_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have a weapon equipped. All weapons & armour must be inactive
+ before sale!
+
+ `$Also, if you possess any high-powered material and buy a low-powered ship,
+ it will be removed. Please visit the arms buyer in the lobby.
+
+ @KEY
+ @ROUTINE END
+ @END
+@IF s&arm_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have armour equipped. All weapons & armour must be inactive
+ before sale!
+
+ `$Also, if you possess any high-powered material and buy a low-powered ship,
+ it will be removed. Please visit the arms buyer in the lobby.
+
+ @KEY
+ @ROUTINE END
+ @END
+
+;Determine if items are possessed
+@IF `i17 MORE 0 THEN GOTO IWARN
+@IF `i18 MORE 0 THEN GOTO IWARN
+@IF `i19 MORE 0 THEN GOTO IWARN
+@IF `i20 MORE 0 THEN GOTO IWARN
+@IF `i21 MORE 0 THEN GOTO IWARN
+@IF `i22 MORE 0 THEN GOTO IWARN
+@IF `i23 MORE 0 THEN GOTO IWARN
+@IF `i24 MORE 0 THEN GOTO IWARN
+@IF `i25 MORE 0 THEN GOTO IWARN
+@IF `i26 MORE 0 THEN GOTO IWARN
+@IF `i27 MORE 0 THEN GOTO IWARN
+@IF `i28 MORE 0 THEN GOTO IWARN
+
+;Determine if ship has been sold yet, otherwise goes to menu
+@IF `p36 IS 0 THEN DO
+@BEGIN
+@DO GOTO NSMENU
+@END
+
+;Ship not sold yet, going to SHIPBUY
+@ROUTINE SHIPBUY
+
+@LABEL NSMENU
+@CLEAR SCREEN
+@SHOW
+                              `9General Ships`%
+
+                         Ships available at fair price.
+                         `$Anyone may buy!
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>&money 58599 `!Thrustmaster
+>&money 12999 `6Garbage Scow
+>&money 33499 `$Bantam
+>&money 236999 `#Maxiport
+>&money 1224199 `!Sentinel
+>&money 1839999 `1Reconnoiter
+>&money 4999999 `4Mauler
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+;This routine buys a Thrustmaster. Use this as a guide.
+
+;Buys ship
+@DO money - 58600
+
+;Assigns name, check RULES.REF if any changes are made.
+@DO `s05 is `!Thrustmaster
+
+;Shielding maximum, & provide 10% (or 10) of limit.
+@DO `p34 is 75
+@DO `p02 is 10
+@DO `p03 is 10
+
+;Ship number (Start new ships at 21 or more)
+@DO `p36 is 1
+
+;Assign reactor limit and provide some. If > than limit, shrink to limit.
+@DO `p47 is 11
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+
+;Assign weapon & armour limits, applied at weapon/armour shops.
+@DO `p50 is 1
+@DO `p51 is 1
+
+;Assign torpedo limit. If > than limit, shrink to limit.
+@DO `p52 is 1
+
+;Assign hold limit, provide & free-up some.
+@DO `p54 is 50
+@DO `p55 is 10
+@DO `p56 is 10
+
+;Delete unallowed war material.
+@DO `i04 IS 0
+@DO `i05 IS 0
+@DO `i06 IS 0
+@DO `i07 IS 0
+@DO `i08 IS 0
+@DO `i11 IS 0
+@DO `i12 IS 0
+@DO `i13 IS 0
+@DO `i14 IS 0
+@DO `i15 IS 0
+
+;This routine is complete.
+@ROUTINE BUYEND
+@END
+
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO money - 13900
+@DO `s05 is `6Garbage Scow
+@DO `p34 is 100
+@DO `p02 is 10
+@DO `p03 is 10
+@DO `p36 is 2
+@DO `p47 is 9
+@DO `p48 is 7
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 1
+@DO `p51 is 1
+@DO `i04 IS 0
+@DO `i05 IS 0
+@DO `i06 IS 0
+@DO `i07 IS 0
+@DO `i08 IS 0
+@DO `i11 IS 0
+@DO `i12 IS 0
+@DO `i13 IS 0
+@DO `i14 IS 0
+@DO `i15 IS 0
+@DO `p52 is 0
+@DO `p54 is 40
+@DO `p55 is 7
+@DO `p56 is 7
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 33500
+@DO `s05 is `$Bantam
+@DO `p34 is 20
+@DO `p02 is 10
+@DO `p03 is 10
+@DO `p36 is 3
+@DO `p47 is 13
+@DO `p48 is 5
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 1
+@DO `p51 is 1
+@DO `p52 is 0
+@DO `p54 is 25
+@DO `p55 is 5
+@DO `p56 is 5
+@DO `i04 IS 0
+@DO `i05 IS 0
+@DO `i06 IS 0
+@DO `i07 IS 0
+@DO `i08 IS 0
+@DO `i11 IS 0
+@DO `i12 IS 0
+@DO `i13 IS 0
+@DO `i14 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 237000
+@DO `s05 is `#Maxiport
+@DO `p34 is 300
+@DO `p02 is 30
+@DO `p03 is 30
+@DO `p36 is 4
+@DO `p47 is 11
+@DO `p48 is 7
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 1
+@DO `p51 is 1
+@DO `p52 is 0
+@DO `p54 is 125
+@DO `p55 is 35
+@DO `p56 is 35
+@DO `i04 IS 0
+@DO `i05 IS 0
+@DO `i06 IS 0
+@DO `i07 IS 0
+@DO `i08 IS 0
+@DO `i11 IS 0
+@DO `i12 IS 0
+@DO `i13 IS 0
+@DO `i14 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money - 1224200
+@DO `s05 is `!Sentinel
+@DO `p34 is 50
+@DO `p02 is 10
+@DO `p03 is 10
+@DO `p36 is 5
+@DO `p47 is 13
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 2
+@DO `p51 is 2
+@DO `p52 is 2
+@DO `p54 is 70
+@DO `p55 is 20
+@DO `p56 is 20
+@DO `i06 IS 0
+@DO `i07 IS 0
+@DO `i08 IS 0
+@DO `i13 IS 0
+@DO `i14 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@DO money - 1840000
+@DO `s05 is `1Reconnoiter
+@DO `p34 is 100
+@DO `p02 is 10
+@DO `p03 is 10
+@DO `p36 is 6
+@DO `p47 is 12
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 3
+@DO `p51 is 3
+@DO `p52 is 3
+@DO `p54 is 90
+@DO `p55 is 20
+@DO `p56 is 20
+@DO `i08 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@DO money - 5000000
+@DO `s05 is `4Mauler
+@DO `p34 is 1500
+@DO `p02 is 150
+@DO `p03 is 150
+@DO `p36 is 9
+@DO `p47 is 14
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 4
+@DO `p51 is 4
+@DO `p52 is 4
+@DO `p54 is 150
+@DO `p55 is 45
+@DO `p56 is 45
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+
+
+@#DEALERA
+;Determine Allegance, this dealer is for Alliance only.
+@IF `p19 IS 0 THEN DO
+@BEGIN
+@ROUTINE NOTALLY
+@END
+@IF `p19 IS 2 THEN DO
+@BEGIN
+@ROUTINE NOTALLY
+@END
+@IF `p19 IS 3 THEN DO
+@BEGIN
+@ROUTINE NOTALLY
+@END
+
+;Routine for preventing "over-arming"
+@CLEAR SCREEN
+@IF s&wep_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have a weapon equipped. All weapons & armour must be inactive
+ before sale!
+
+ `$Also, if you possess any high-powered material and buy a low-powered ship,
+ it will be removed. Please visit the arms buyer in the lobby.
+
+ @KEY
+ @ROUTINE END
+ @END
+@IF s&arm_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have armour equipped. All weapons & armour must be inactive
+ before sale!
+
+ `$Also, if you possess any high-powered material and buy a low-powered ship,
+ it will be removed. Please visit the arms buyer in the lobby.
+
+ @KEY
+ @ROUTINE END
+ @END
+
+;Determine if items are possessed
+@IF `i17 MORE 0 THEN GOTO IWARN
+@IF `i18 MORE 0 THEN GOTO IWARN
+@IF `i19 MORE 0 THEN GOTO IWARN
+@IF `i20 MORE 0 THEN GOTO IWARN
+@IF `i21 MORE 0 THEN GOTO IWARN
+@IF `i22 MORE 0 THEN GOTO IWARN
+@IF `i23 MORE 0 THEN GOTO IWARN
+@IF `i24 MORE 0 THEN GOTO IWARN
+@IF `i25 MORE 0 THEN GOTO IWARN
+@IF `i26 MORE 0 THEN GOTO IWARN
+@IF `i27 MORE 0 THEN GOTO IWARN
+@IF `i28 MORE 0 THEN GOTO IWARN
+
+;Determine if ship has been sold yet, otherwise goes to menu
+@IF `p36 IS 0 THEN DO
+@BEGIN
+@DO GOTO ASMENU
+@END
+
+;Ship not sold yet, going to SHIPBUY
+@ROUTINE SHIPBUY
+
+@LABEL ASMENU
+@CLEAR SCREEN
+@SHOW
+                              `0Alliance Ships`%
+
+                   Alliance ships available at fair price.
+
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>&money 3499999 `$Ardent Supplier
+>&money 7243899 `4Revelation
+>&money 9219999 `#Prophecy
+>&money 35999999 `!Accolade
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO money - 3500000
+@DO `s05 is `$Ardent Supplier
+@DO `p34 is 500
+@DO `p02 is 50
+@DO `p03 is 50
+@DO `p36 is 8
+@DO `p47 is 8
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 2
+@DO `p51 is 2
+@DO `p52 is 0
+@DO `p54 is 400
+@DO `p55 is 20
+@DO `p56 is 20
+@DO `i06 IS 0
+@DO `i07 IS 0
+@DO `i08 IS 0
+@DO `i13 IS 0
+@DO `i14 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO money - 7243900
+@DO `s05 is `4Revelation
+@DO `p34 is 500
+@DO `p02 is 50
+@DO `p03 is 50
+@DO `p36 is 12
+@DO `p47 is 11
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 3
+@DO `p51 is 3
+@DO `p52 is 4
+@DO `p54 is 75
+@DO `p55 is 40
+@DO `p56 is 40
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 9220000
+@DO `s05 is `#Prophecy
+@DO `p34 is 1000
+@DO `p02 is 100
+@DO `p03 is 100
+@DO `p36 is 13
+@DO `p47 is 12
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 4
+@DO `p51 is 4
+@DO `p52 is 6
+@DO `p54 is 225
+@DO `p55 is 75
+@DO `p56 is 75
+@DO `i08 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 36000000
+@DO `s05 is `!Accolade
+@DO `p34 is 10000
+@DO `p02 is 1000
+@DO `p03 is 1000
+@DO `p36 is 14
+@DO `p47 is 16
+@DO `p48 is 10
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 4
+@DO `p51 is 4
+@DO `p52 is 10
+@DO `p54 is 100
+@DO `p55 is 100
+@DO `p56 is 100
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+
+
+@#DEALERM
+;Determine Allegance, this dealer is for Maraken only.
+@IF `p19 IS 0 THEN DO
+@BEGIN
+@ROUTINE NOTALLY
+@END
+@IF `p19 IS 1 THEN DO
+@BEGIN
+@ROUTINE NOTALLY
+@END
+@IF `p19 IS 3 THEN DO
+@BEGIN
+@ROUTINE NOTALLY
+@END
+
+;Routine for preventing "over-arming"
+@CLEAR SCREEN
+@IF s&wep_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have a weapon equipped. All weapons & armour must be inactive
+ before sale!
+
+ `$Also, if you possess any high-powered material and buy a low-powered ship,
+ it will be removed. Please visit the arms buyer in the lobby.
+
+ @KEY
+ @ROUTINE END
+ @END
+@IF s&arm_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have armour equipped. All weapons & armour must be inactive
+ before sale!
+
+ `$Also, if you possess any high-powered material and buy a low-powered ship,
+ it will be removed. Please visit the arms buyer in the lobby.
+
+ @KEY
+ @ROUTINE END
+ @END
+
+;Determine if items are possessed
+@IF `i17 MORE 0 THEN GOTO IWARN
+@IF `i18 MORE 0 THEN GOTO IWARN
+@IF `i19 MORE 0 THEN GOTO IWARN
+@IF `i20 MORE 0 THEN GOTO IWARN
+@IF `i21 MORE 0 THEN GOTO IWARN
+@IF `i22 MORE 0 THEN GOTO IWARN
+@IF `i23 MORE 0 THEN GOTO IWARN
+@IF `i24 MORE 0 THEN GOTO IWARN
+@IF `i25 MORE 0 THEN GOTO IWARN
+@IF `i26 MORE 0 THEN GOTO IWARN
+@IF `i27 MORE 0 THEN GOTO IWARN
+@IF `i28 MORE 0 THEN GOTO IWARN
+
+;Determine if ship has been sold yet, otherwise goes to menu
+@IF `p36 IS 0 THEN DO
+@BEGIN
+@DO GOTO MSMENU
+@END
+
+;Ship not sold yet, going to SHIPBUY
+@ROUTINE SHIPBUY
+
+@LABEL MSMENU
+@CLEAR SCREEN
+@SHOW
+                              `4Maraken Ships`%
+
+                    Maraken ships available at fair price.
+
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>&money 2269999 `$Mayhem Master
+>&money 5699999 `4Nognutter
+>&money 6499999 `4Quietus
+>&money 13438999 `9Lexor
+>&money 29339999 `8Apocalypse
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO money - 2270000
+@DO `s05 is `$Mayhem Master
+@DO `p34 is 100
+@DO `p02 is 10
+@DO `p03 is 10
+@DO `p36 is 7
+@DO `p47 is 12
+@DO `p48 is 6
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 3
+@DO `p51 is 3
+@DO `p52 is 6
+@DO `p54 is 75
+@DO `p55 is 20
+@DO `p56 is 20
+@DO `i08 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO money - 5700000
+@DO `s05 is `4Nognutter
+@DO `p34 is 1000
+@DO `p02 is 100
+@DO `p03 is 100
+@DO `p36 is 10
+@DO `p47 is 14
+@DO `p48 is 4
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 4
+@DO `p51 is 4
+@DO `p52 is 2
+@DO `p54 is 100
+@DO `p55 is 25
+@DO `p56 is 25
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 6500000
+@DO `s05 is `4Quietus
+@DO `p34 is 100
+@DO `p02 is 12
+@DO `p03 is 12
+@DO `p36 is 11
+@DO `p47 is 16
+@DO `p48 is 10
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 2
+@DO `p51 is 2
+@DO `p52 is 10
+@DO `p54 is 50
+@DO `p55 is 12
+@DO `p56 is 12
+@DO `i06 IS 0
+@DO `i07 IS 0
+@DO `i08 IS 0
+@DO `i13 IS 0
+@DO `i14 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 13439000
+@DO `s05 is `9Lexor
+@DO `p34 is 1000
+@DO `p02 is 100
+@DO `p03 is 100
+@DO `p36 is 15
+@DO `p47 is 14
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 4
+@DO `p51 is 4
+@DO `p52 is 5
+@DO `p54 is 200
+@DO `p55 is 40
+@DO `p56 is 40
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money - 29340000
+@DO `s05 is `8Apocalypse
+@DO `p34 is 10000
+@DO `p02 is 1000
+@DO `p03 is 1000
+@DO `p36 is 16
+@DO `p47 is 16
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 4
+@DO `p51 is 4
+@DO `p52 is 10
+@DO `p54 is 300
+@DO `p55 is 100
+@DO `p56 is 100
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+
+
+@#SHIPBUY
+@CLEAR SCREEN
+@SHOW
+                                `6Selling Your Ship`$
+
+
+In order to buy a new ship, you must sell your old one first. Ships will be
+bought at a flat rate of full hull-cost. All ship parts (Minus reactors,
+10 shields, weapons, and armour) will be taken. Once finished, you may return
+and buy a ship; or use the free `0Earth transport`$ to head back to Earth
+(At Earth, there is a transport you can use to come back here).
+
+`@Y `9is Yes
+`8N `9is No
+@DO READSPECIAL `s01 YN
+
+;N will bypass the buying mechanism
+@IF `s01 IS N THEN DO
+ @BEGIN
+ @ROUTINE END
+ @END
+
+;Y allows mechanism. Determining amount to pay back...
+@IF `p36 IS 1 THEN DO
+@BEGIN
+@DO MONEY + 58900
+@END
+@IF `p36 IS 2 THEN DO
+@BEGIN
+@DO MONEY + 13900
+@END
+@IF `p36 IS 3 THEN DO
+@BEGIN
+@DO MONEY + 33500
+@END
+@IF `p36 IS 4 THEN DO
+@BEGIN
+@DO MONEY + 237000
+@END
+@IF `p36 IS 5 THEN DO
+@BEGIN
+@DO MONEY + 1224200
+@END
+@IF `p36 IS 6 THEN DO
+@BEGIN
+@DO MONEY + 1840000
+@END
+@IF `p36 IS 7 THEN DO
+@BEGIN
+@DO MONEY + 2270000
+@END
+@IF `p36 IS 8 THEN DO
+@BEGIN
+@DO MONEY + 3500000
+@END
+@IF `p36 IS 9 THEN DO
+@BEGIN
+@DO MONEY + 5000000
+@END
+@IF `p36 IS 10 THEN DO
+@BEGIN
+@DO MONEY + 5700000
+@END
+@IF `p36 IS 11 THEN DO
+@BEGIN
+@DO MONEY + 6500000
+@END
+@IF `p36 IS 12 THEN DO
+@BEGIN
+@DO MONEY + 7243900
+@END
+@IF `p36 IS 13 THEN DO
+@BEGIN
+@DO MONEY + 9220000
+@END
+@IF `p36 IS 14 THEN DO
+@BEGIN
+@DO MONEY + 36000000
+@END
+@IF `p36 IS 15 THEN DO
+@BEGIN
+@DO MONEY + 13439000
+@END
+@IF `p36 IS 16 THEN DO
+@BEGIN
+@DO MONEY + 29340000
+@END
+@IF `p36 IS 17 THEN DO
+@BEGIN
+@DO MONEY + 1000000
+@END
+@IF `p36 IS 18 THEN DO
+@BEGIN
+@DO MONEY + 5000000
+@END
+@IF `p36 IS 19 THEN DO
+@BEGIN
+@DO MONEY + 20000000
+@END
+@ROUTINE SELLEND
+
+
+
+
+
+@#DEALERS
+;Catalog of ships
+@IF BITCHECK `t01 5 0 THEN DO
+ @BEGIN
+ @CLEAR SCREEN
+ @SHOW
+                                `$Ship's Catalog`1
+
+Cost     Name          Wep/Arm-L  HP-L   Torp-L  Hold-L  React-L  Org.
+`$1000000  `0Snaken Porter`$   1   1      100    0       250     8        `0S
+`$5000000  `0S. Def. Frig.`$   3   3      500    5       50      12       `0S
+`$20000000 `0Megolus`$         4   4      1000   20      100     16       `0S
+
+ @KEY
+;Downloads program if a helperpad is available.
+ @IF `i16 MORE 0 THEN DO
+  @BEGIN
+  @CLEAR SCREEN
+  @SHOW
+     `0Your helperpad beeps loudly.
+
+     `5You check it, and find the catalog is now in your helperpad.
+
+     `7How convient!
+
+  @KEY
+  @BITSET `t01 5 1
+  @END
+ @END
+
+;Determine Allegance, this dealer is for Snaken only.
+@IF `p19 IS 0 THEN DO
+@BEGIN
+@ROUTINE NOTALLY
+@END
+@IF `p19 IS 1 THEN DO
+@BEGIN
+@ROUTINE NOTALLY
+@END
+@IF `p19 IS 2 THEN DO
+@BEGIN
+@ROUTINE NOTALLY
+@END
+
+;Routine for preventing "over-arming"
+@CLEAR SCREEN
+@IF s&wep_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have a weapon equipped. All weapons & armour must be inactive
+ before sale!
+
+ `$Also, if you possess any high-powered material and buy a low-powered ship,
+ it will be removed. Please visit the arms buyer in the lobby.
+
+ @KEY
+ @ROUTINE END
+ @END
+@IF s&arm_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have armour equipped. All weapons & armour must be inactive
+ before sale!
+
+ `$Also, if you possess any high-powered material and buy a low-powered ship,
+ it will be removed. Please visit the arms buyer in the lobby.
+
+ @KEY
+ @ROUTINE END
+ @END
+
+;Determine if items are possessed
+@IF `i17 MORE 0 THEN GOTO IWARN
+@IF `i18 MORE 0 THEN GOTO IWARN
+@IF `i19 MORE 0 THEN GOTO IWARN
+@IF `i20 MORE 0 THEN GOTO IWARN
+@IF `i21 MORE 0 THEN GOTO IWARN
+@IF `i22 MORE 0 THEN GOTO IWARN
+@IF `i23 MORE 0 THEN GOTO IWARN
+@IF `i24 MORE 0 THEN GOTO IWARN
+@IF `i25 MORE 0 THEN GOTO IWARN
+@IF `i26 MORE 0 THEN GOTO IWARN
+@IF `i27 MORE 0 THEN GOTO IWARN
+@IF `i28 MORE 0 THEN GOTO IWARN
+
+;Determine if ship has been sold yet, otherwise goes to menu
+@IF `p36 IS 0 THEN DO
+@BEGIN
+@DO GOTO SSMENU
+@END
+
+;Ship not sold yet, going to SHIPBUY
+@ROUTINE SHIPBUY
+
+@LABEL SSMENU
+@CLEAR SCREEN
+@SHOW
+                              `0Snaken Ships`%
+
+                   Snaken ships available at fair price.
+
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>&money 999999 `0Snaken Porter
+>&money 4999999 `0Snaken `9Defense Frigate
+>&money 29999999 `0Megolus
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO money - 1000000
+@DO `s05 is `0Snaken Porter
+@DO `p34 is 100
+@DO `p02 is 10
+@DO `p03 is 10
+@DO `p36 is 17
+@DO `p47 is 8
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 1
+@DO `p51 is 1
+@DO `p52 is 0
+@DO `p54 is 250
+@DO `p55 is 50
+@DO `p56 is 50
+@DO `i04 IS 0
+@DO `i05 IS 0
+@DO `i06 IS 0
+@DO `i07 IS 0
+@DO `i08 IS 0
+@DO `i13 IS 0
+@DO `i14 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO money - 5000000
+@DO `s05 is `0Snaken `9Defense Frigate
+@DO `p34 is 500
+@DO `p02 is 50
+@DO `p03 is 50
+@DO `p36 is 18
+@DO `p47 is 12
+@DO `p48 is 6
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 3
+@DO `p51 is 3
+@DO `p52 is 5
+@DO `p54 is 50
+@DO `p55 is 10
+@DO `p56 is 10
+@DO `i08 IS 0
+@DO `i15 IS 0
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 20000000
+@DO `s05 is `0Megolus
+@DO `p34 is 1000
+@DO `p02 is 100
+@DO `p03 is 100
+@DO `p36 is 19
+@DO `p47 is 16
+@DO `p48 is 8
+@IF `p49 MORE `p48 THEN DO
+ @BEGIN
+ @DO `p49 is `p48
+ @END
+@DO `p50 is 4
+@DO `p51 is 4
+@DO `p52 is 20
+@DO `p54 is 100
+@DO `p55 is 20
+@DO `p56 is 20
+@ROUTINE BUYEND
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+
+
+;This guy buys your extra weapons & armour!
+@#MATSELL
+@CLEAR SCREEN
+@SHOW
+`r1`%Arms Dealer`r0
+
+
+@IF s&wep_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have a weapon equipped. All weapons & armour must be inactive
+ before sale!
+
+
+ @KEY
+ @ROUTINE END
+ @END
+@IF s&arm_num MORE 0 THEN DO
+ @BEGIN
+ @SHOW
+
+ `%You still have armour equipped. All weapons & armour must be inactive
+ before sale!
+
+
+ @KEY
+ @ROUTINE END
+ @END
+
+@LABEL MATINTRO
+@SHOW
+                                `5Armament Buyer
+
+        `$We buy used war materials at half-price!
+        `%Quests are also available!
+
+@KEY
+
+@LABEL MATMENU
+@CLEAR SCREEN
+@SHOW
+
+`1Current money: `$&money
+`2Green items are armour
+`4Red items are weapons
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>`i02 0 `2Aluminum Skin
+>`i03 0 `2Crystalform Skin
+>`i04 0 `2Special Alloy Skin
+>`i05 0 `2EMF Shield
+>`i06 0 `2Metaphysic Shield
+>`i07 0 `2Smart Shield
+>`i08 0 `2Phase Shield
+>`i09 0 `4Laser
+>`i10 0 `4Tri-Laser
+>`i11 0 `4Phaser
+>`i12 0 `4Mega-Phaser
+>`i13 0 `4Ion-Pulse
+>`i14 0 `4Antimatter Beam
+>`i15 0 `4Temporal Beam
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO money + 2500
+@DO `i02 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO money + 7500
+@DO `i03 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money + 14000
+@DO `i04 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money + 30000
+@DO `i05 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money + 100000
+@DO `i06 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@DO money + 250000
+@DO `i07 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@DO money + 600000
+@DO `i08 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@DO money + 1750
+@DO `i09 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@DO money + 6000
+@DO `i10 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 10 THEN DO
+@BEGIN
+@DO money + 15000
+@DO `i11 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 11 THEN DO
+@BEGIN
+@DO money + 25000
+@DO `i12 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 12 THEN DO
+@BEGIN
+@DO money + 105000
+@DO `i13 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 13 THEN DO
+@BEGIN
+@DO money + 237500
+@DO `i14 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 14 THEN DO
+@BEGIN
+@DO money + 500000
+@DO `i15 - 1
+@DO GOTO MATMENU
+@END
+@IF RESPONCE IS 15 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+;Buy some torpedoes!
+@#TORPDEAL
+@LABEL TORPMENU
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\TORP.ANS
+@PAUSEON
+@SHOW
+
+`1Torpedo cost:  `$25000
+`1Current money: `$&money
+`1Current torpedoes/limit: `$`p53`%/`$`p52
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>`p52 0 <`p53 `p52 >&money 24999 `1Buy a torpedo!
+`$Do you have any quest work?
+`@Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO money - 25000
+@DO `p53 + 1
+@DO GOTO TORPMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO `p20 IS 5
+@run getquest in quest.ref
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+@#ITEMWARN
+@LABEL IWARN
+@CLEAR SCREEN
+@SHOW
+
+     `%You still have items onboard. Go sell them!
+
+@KEY
+@SHOW
+@ROUTINE END
+
+@#NOTALLY
+@CLEAR SCREEN
+@SHOW
+
+     `$You are not one of us!
+     `#You cannot buy our ships!
+
+@KEY
+@ROUTINE END
+
+@#TREE
+@DO SAYBAR
+`%These `2trees`% are quite nice!
+
+@#WELCOME
+@DO SAYBAR
+`%Welcome to `$Shipyard Beta`%.
+
+;Port entries, similar to planet entries
+@#SPORT
+@DO `s04 IS `4Facility
+@DO `p12 IS 99
+@DO `p43 IS 3
+@DO `p44 IS 0
+@DO `p45 IS 0
+@DO `p46 IS 1
+@DO `p57 IS 30
+@DO `p58 IS 10 
+@DO `p59 IS 558
+@DO `p60 IS 39
+@DO `p61 IS 18
+@DO `p62 IS 1523
+@ROUTINE SHIP
+
+@#BPORT
+@DO `s04 IS `4Facility
+@DO `p12 IS 99
+@DO `p43 IS 20
+@DO `p44 IS 0
+@DO `p45 IS 0
+@DO `p46 IS 1
+@DO `p57 IS 41
+@DO `p58 IS 07 
+@DO `p59 IS 1363
+@DO `p60 IS 40
+@DO `p61 IS 03
+@DO `p62 IS 1526
+@ROUTINE SHIP
+
+@#SHIP
+;Go back to the ship
+@IF `p36 IS 20 THEN `p77 IS 1533
+@IF `p36 NOT 20 THEN `p77 IS 1524
+@DO X IS 48
+@DO Y IS 10
+@DO MAP IS `p77
+@LOADMAP MAP
+@drawmap
+@update
+@routineabort
+
+@#BUYEND
+;You bought a ship
+@routine id in id.ref
+@clear screen
+@show
+`r1`$You bought a ship!`r0`%
+
+
+     You have a new ship. Be sure to activate any defense systems you have,
+     and don't forget to get some new holds, shields, and reactors. And if
+     you have a good ship, you can get more advanced defense systems.
+
+
+@key
+@drawmap
+@do moveback
+@update
+@routineabort
+
+@#SELLEND
+;Reset ship vars
+@DO `s05 IS `4No`xShip
+@DO `p02 IS 10
+@DO `p03 IS 10
+@DO `p34 IS 0
+@DO `p36 IS 0
+@DO `p47 IS 0
+@DO `p50 IS 0
+@DO `p51 IS 0
+@DO `p52 IS 0
+@DO `p53 IS 0
+@DO `p54 IS 0
+@DO `p55 IS 0
+@DO `p56 IS 0
+;You sold your ship
+@clear screen
+@show
+`r1`$You sold your ship!`r0`%
+
+
+     You sold your ship! Be sure you get a new one!
+
+
+@key
+@drawmap
+@do moveback
+@update
+@routineabort
+
+;Return to ship, if you have one!
+@#BLAST
+@IF `p36 MORE 0 THEN DO
+ @BEGIN
+ @CLEAR SCREEN
+ @SHOW
+
+     `$You board your ship!
+
+ @KEY
+ @DO X IS 48
+ @DO Y IS 10
+ @DO MAP IS `p77
+ @LOADMAP MAP
+ @drawmap
+ @update
+ @routineabort
+ @END
+@IF `p36 LESS 1 THEN DO
+ @BEGIN
+ @DO SAYBAR
+ `%You don't have a ship!
+ @DO MOVEBACK
+ @END
+
+@#BAY
+@DO SAYBAR
+`%This is a shipyard ship's bay. It is reserved for sale ships only.
+@DO MOVEBACK
+
+@#END
+;Standard exit
+@drawmap
+@do moveback
+@update
+@routineabort

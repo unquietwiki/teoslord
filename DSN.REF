@@ -1,0 +1,748 @@
+@#EARTH
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSN.ANS
+@SHOW
+
+
+
+
+@KEY
+@DO `p28 IS 1
+@LABEL MENU1
+@CLEAR SCREEN
+@SHOW
+                      `4Deep Space Network: `0Earth Terminal`9
+
+
+     This is a terminal for the `4Deep Space Network`9. You may use it for
+     access to the `5Galactic Internet`9, a data-sharing system among
+     unaligned worlds. You may also use it for teleportation: at the cost
+     of `$$100000`9 per teleport. When you have the money, you'll see a
+     list of destinations. Enjoy!
+
+                                  `%Money: `0&money
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`5Galactic Internet
+`!Network Map
+>&money 99999 `#Dreamora
+>&money 99999 `#Waystation
+>&money 99999 `#Western Ja'dra Gate
+>&money 99999 `#Southern Galactic Pole
+>&money 99999 `#Southern Ja'dra Gate
+>&money 99999 `#Snaken
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO NETMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO GOTO NETMAP
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GODREAMORA
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWAYSTATION
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWESTGATE
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHPOLE
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHGATE
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSNAKEN
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+@#DREAMORA
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSN.ANS
+@SHOW
+
+
+
+
+@KEY
+@DO `p28 IS 2
+@LABEL MENU2
+@CLEAR SCREEN
+@SHOW
+                    `4Deep Space Network: `0Dreamora Terminal`9
+
+
+     This is a terminal for the `4Deep Space Network`9. You may use it for
+     access to the `5Galactic Internet`9, a data-sharing system among
+     unaligned worlds. You may also use it for teleportation: at the cost
+     of `$`$$100000`9`9 per teleport. When you have the money, you'll see a
+     list of destinations. Enjoy!
+
+                                  `%Money: `0&money
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`5Galactic Internet
+`!Network Map
+>&money 99999 `#Earth
+>&money 99999 `#Waystation
+>&money 99999 `#Western Ja'dra Gate
+>&money 99999 `#Southern Galactic Pole
+>&money 99999 `#Southern Ja'dra Gate
+>&money 99999 `#Snaken
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO NETMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO GOTO NETMAP
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOEARTH
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWAYSTATION
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWESTGATE
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHPOLE
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHGATE
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSNAKEN
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+@#WAYSTATION
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSN.ANS
+@SHOW
+
+
+
+
+@KEY
+@DO `p28 IS 3
+@LABEL MENU3
+@CLEAR SCREEN
+@SHOW
+                   `4Deep Space Network: `0Waystation Terminal`9
+
+
+     This is a terminal for the `4Deep Space Network`9. You may use it for
+     access to the `5Galactic Internet`9, a data-sharing system among
+     unaligned worlds. You may also use it for teleportation: at the cost
+     of `$$100000`9 per teleport. When you have the money, you'll see a list
+     of destinations. Enjoy!
+
+                                  `%Money: `0&money
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`5Galactic Internet
+`!Network Map
+>&money 99999 `#Earth
+>&money 99999 `#Dreamora
+>&money 99999 `#Western Ja'dra Gate
+>&money 99999 `#Southern Galactic Pole
+>&money 99999 `#Southern Ja'dra Gate
+>&money 99999 `#Snaken
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO NETMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO GOTO NETMAP
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOEARTH
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GODREAMORA
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWESTGATE
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHPOLE
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHGATE
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSNAKEN
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+@#WESTGATE
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSN.ANS
+@SHOW
+
+
+
+
+@KEY
+@DO `p28 IS 4
+@LABEL MENU4
+@CLEAR SCREEN
+@SHOW
+              `4Deep Space Network: `0Western Ja'dra Gate Terminal`9
+
+
+     This is a terminal for the `4Deep Space Network`9. You may use it for
+     access to the `5Galactic Internet`9, a data-sharing system among
+     unaligned worlds. You may also use it for teleportation: at the cost
+     of `$$100000`9 per teleport. When you have the money, you'll see a list
+     of destinations. Enjoy!
+
+                                  `%Money: `0&money
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`5Galactic Internet
+`!Network Map
+>&money 99999 `#Earth
+>&money 99999 `#Dreamora
+>&money 99999 `#Waystation
+>&money 99999 `#Southern Galactic Pole
+>&money 99999 `#Southern Ja'dra Gate
+>&money 99999 `#Snaken
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO NETMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO GOTO NETMAP
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOEARTH
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GODREAMORA
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWAYSTATION
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHPOLE
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHGATE
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSNAKEN
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+@#SOUTHPOLE
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSN.ANS
+@SHOW
+
+
+
+
+@KEY
+@DO `p28 IS 5
+@LABEL MENU5
+@CLEAR SCREEN
+@SHOW
+             `4Deep Space Network: `0Southern Galactic Pole Terminal`9
+
+
+     This is a terminal for the `4Deep Space Network`9. You may use it for
+     access to the `5Galactic Internet`9, a data-sharing system among
+     unaligned worlds. You may also use it for teleportation: at the cost
+     of `$$100000`9 per teleport. When you have the money, you'll see a list
+     of destinations. Enjoy!
+
+                                  `%Money: `0&money
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`5Galactic Internet
+`!Network Map
+>&money 99999 `#Earth
+>&money 99999 `#Dreamora
+>&money 99999 `#Waystation
+>&money 99999 `#Western Ja'dra Gate
+>&money 99999 `#Southern Ja'dra Gate
+>&money 99999 `#Snaken
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO NETMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO GOTO NETMAP
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOEARTH
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GODREAMORA
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWAYSTATION
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWESTGATE
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHGATE
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSNAKEN
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+@#SOUTHGATE
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSN.ANS
+@SHOW
+
+
+
+
+@KEY
+@DO `p28 IS 6
+@LABEL MENU6
+@CLEAR SCREEN
+@SHOW
+              `4Deep Space Network: `0Southern Ja'dra Gate Terminal`9
+
+
+     This is a terminal for the `4Deep Space Network`9. You may use it for
+     access to the `5Galactic Internet`9, a data-sharing system among
+     unaligned worlds. You may also use it for teleportation: at the cost
+     of `$$100000`9 per teleport. When you have the money, you'll see a list
+     of destinations. Enjoy!
+
+                                  `%Money: `0&money
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`5Galactic Internet
+`!Network Map
+>&money 99999 `#Earth
+>&money 99999 `#Dreamora
+>&money 99999 `#Waystation
+>&money 99999 `#Western Ja'dra Gate
+>&money 99999 `#Southern Galactic Pole
+>&money 99999 `#Snaken
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO NETMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO GOTO NETMAP
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOEARTH
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GODREAMORA
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWAYSTATION
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWESTGATE
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHPOLE
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSNAKEN
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+@#SNAKEN
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSN.ANS
+@SHOW
+
+
+
+
+@KEY
+@DO `p28 IS 7
+@LABEL MENU7
+@CLEAR SCREEN
+@SHOW
+                    `4Deep Space Network: `0Snaken Terminal`9
+
+
+     This is a terminal for the `4Deep Space Network`9. You may use it for
+     access to the `5Galactic Internet`9, a data-sharing system among
+     unaligned worlds. You may also use it for teleportation: at the cost
+     of `$$100000`9 per teleport. When you have the money, you'll see a list
+     of destinations. Enjoy!
+
+                                  `%Money: `0&money
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`5Galactic Internet
+`!Network Map
+>&money 99999 `#Earth
+>&money 99999 `#Dreamora
+>&money 99999 `#Waystation
+>&money 99999 `#Western Ja'dra Gate
+>&money 99999 `#Southern Galactic Pole
+>&money 99999 `#Southern Ja'dra Gate
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO NETMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO GOTO NETMAP
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOEARTH
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GODREAMORA
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWAYSTATION
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOWESTGATE
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHPOLE
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@DO money - 100000
+@ROUTINE GOSOUTHGATE
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+
+
+;Network Map
+@LABEL NETMAP
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSN`p28.ANS
+@SHOW
+
+
+@KEY
+@DO GOTO MENU`p28
+
+
+
+;Galaxy Map 
+@LABEL GMAP
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\GALAXY.ANS
+@SHOW
+
+
+@KEY
+@DO GOTO NETMENU
+
+
+
+;Galactic I-net
+@LABEL NETMENU
+@CLEAR SCREEN
+@SHOW
+                              `5Galactic Internet
+
+
+     `9Welcome to the Galactic Internet. Feel free to use our services.
+
+
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`3Message System
+=`v04 1 `7Virtual Schooloria Library
+`!Galactic Map
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+
+     ;Message System
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+                            `$Galactic Message System
+
+@if USERDAT\INET.TXT exist false then do
+ @begin
+ @writefile USERDAT\INET.TXT
+  `4Baron Box: `3Welcome to the system!
+ @end
+@if USERDAT\INET.TXT exist true then do
+ @begin
+ @displayfile USERDAT\INET.TXT
+ @end
+@show
+@
+(Do tricky stuff with name to determine how much they can type)
+@DO `s09 is `%
+@DO `s09 add `n
+@DO STRIP `s09 <-- Strips all none color ` codes out
+@DO `s09 add `x`1:`x`9
+@DO `p25 is length `s09
+@DO `p26 is 76
+@DO `p26 - `p25
+@DO WRITE
+  `1Enter your message or `9ENTER`1 to abort.`\  `s09
+@DO READSTRING `p26 NIL `s10 <--Read string, NIL is default. (nothing)
+@do stripbad `s10
+@SHOW
+
+@DO `p27 is length `s10
+@IF `p27 less 3 then do
+ @begin
+ @DO GOTO NETMENU
+ @end
+ @writefile USERDAT\INET.TXT
+  `%`n`1: `9`s10
+ @do trim USERDAT\INET.TXT 17
+@DO GOTO NETMENU
+@END
+
+;Library
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+
+
+`0Switching over to the virtual library system, Schooloria.`L.`L.`L.`L.`L.
+
+
+@ROUTINE LIBRARY IN LIBRARY.REF
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO GOTO GMAP
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO GOTO MENU`p28
+@END
+
+
+
+
+
+;Actual warps
+@#GOEARTH
+@DO `p57 IS 57
+@DO `p58 IS 06
+@DO `p59 IS 641
+@ROUTINE ENDWARP
+
+@#GODREAMORA
+@DO `p57 IS 61
+@DO `p58 IS 11
+@DO `p59 IS 729
+@ROUTINE ENDWARP
+
+@#GOSNAKEN
+@DO `p57 IS 26
+@DO `p58 IS 14
+@DO `p59 IS 800
+@ROUTINE ENDWARP
+
+@#GOSOUTHPOLE
+@DO `p57 IS 21
+@DO `p58 IS 10
+@DO `p59 IS 1240
+@ROUTINE ENDWARP
+
+@#GOSOUTHGATE
+@DO `p57 IS 23
+@DO `p58 IS 20
+@DO `p59 IS 781
+@ROUTINE ENDWARP
+
+@#GOWESTGATE
+@DO `p57 IS 05
+@DO `p58 IS 06
+@DO `p59 IS 758
+@ROUTINE ENDWARP
+
+@#GOWAYSTATION
+@DO `p57 IS 41
+@DO `p58 IS 11
+@DO `p59 IS 743
+@ROUTINE ENDWARP
+
+@#ENDWARP
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSNWARP.ANS
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\DSNTRAN.ANS
+@DO X IS `p57
+@DO Y IS `p58
+@DO MAP IS `p59
+@LOADMAP MAP
+@drawmap
+@update
+@routineabort
+
+@#END
+@drawmap
+@do moveback
+@update
+@routineabort

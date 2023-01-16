@@ -1,0 +1,690 @@
+@#GARDEN
+@DO SAYBAR
+`%Your mom's `0garden`% is the best in the neighborhood!
+
+@#NICE
+@DO SAYBAR
+`%A nice old lady lives here.
+
+@#SHIP
+@DO SAYBAR
+`%Under construction
+
+@#STATUE
+@CLEAR SCREEN
+@SHOW
+        This statue is raised in honor of the dead warriors who fought
+        off the Dragon Tooth Clan and saved the members of the old lands
+        from annhiliation.
+
+        May I bear the names of the fallen:
+
+        Turgon the trainer                      Susie the warrior
+        George the inventor                     Knight Wenston
+        Councilman Wendle                       Lord Phillip
+        The Unsung Hero                         Spouse of the Unsung Hero
+
+@KEY
+@ROUTINE END
+
+@#HOME
+@LABEL HOMEMENU
+@CLEAR SCREEN
+@SHOW
+                                `0Ma's House
+
+        `%You're in a hallway.
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`$Go to Ma's Room
+`0Go to your room
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`r1`%Ma's Room`r0
+
+
+        You see your Ma.
+
+        "Go see that Rich Man you was blabbing about already!"
+
+@KEY
+@DO GOTO HOMEMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`r1`%Your Room`r0
+
+
+        Ah your room.
+
+        `!What a mess!!!`%
+
+@KEY
+@DO GOTO HOMEMENU
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+@#PUB
+@LABEL PUBMENU
+@CLEAR SCREEN
+@SHOW
+                                  `6The Bar
+
+`3Bartender: `%Welcome to my humble bar.
+`5Barney: `%Hi! Got any kids to munch, err.... teach?
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`3Talk to the Bartender
+`5Talk to Barney
+`!Write on the Bulletin Board
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`r1`%The Bartender`r0
+
+
+        Hello. I'm the bartender, I offer quests.
+
+@KEY
+@do `p20 is 1
+@run getquest in quest.ref
+@DO GOTO PUBMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`5Barney!
+
+
+        Hello. I'm Barney, the `5purple`% dinosaur.
+
+        I like kids.`L.`L.`L.`L.`L.
+
+        `4I like how they taste!
+
+@KEY
+@DO GOTO PUBMENU
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+                               `9Bulletin `1Board
+
+@if USERDAT\PUB.TXT exist false then do
+ @begin
+ @writefile USERDAT\PUB.TXT
+  `3Bartender: `9Welcome to South Greentree.
+  `5Barney: `4Bring the kids! Bring the kids!
+ @end
+@if USERDAT\PUB.TXT exist true then do
+ @begin
+ @displayfile USERDAT\PUB.TXT
+ @end
+@show
+@
+(Do tricky stuff with name to determine how much they can type)
+@DO `s09 is `%
+@DO `s09 add `n
+@DO STRIP `s09 <-- Strips all none color ` codes out
+@DO `s09 add `x`1:`x`9
+@DO `p25 is length `s09
+@DO `p26 is 76
+@DO `p26 - `p25
+@DO WRITE
+  `1Enter your message or `9ENTER`1 to abort.`\  `s09
+@DO READSTRING `p26 NIL `s10 <--Read string, NIL is default. (nothing)
+@do stripbad `s10
+@SHOW
+
+@DO `p27 is length `s10
+@IF `p27 less 3 then do
+ @begin
+ @routine OEND IN PLANET.REF
+ @end
+ @writefile USERDAT\PUB.TXT
+  `%`n`1: `9`s10
+ @do trim USERDAT\PUB.TXT 17
+@ROUTINE OEND IN PLANET.REF
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@ROUTINE END
+@END
+
+@#WEAPON
+@DO SAYBAR
+        This is an abandoned weapons store.
+
+@#ARMOUR
+@DO SAYBAR
+        This is an abandoned armour store.
+
+
+
+@#RICH
+@LABEL RICHMENU
+@CLEAR SCREEN
+@SHOW
+                               `0Rich Man's House
+
+`%You find yourself in a grand hall.
+`%A `8butler `%meets with you...
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`3Are you here to see Mr. Able?
+`5Are you here for the party?
+`%Do you wish to leave?
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@ROUTINE RGA
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+
+`%Let's see... humm...
+
+          `4YOU'RE NOT INVITED!!!
+
+@KEY
+@DO GOTO RICHMENU
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+@#RGA
+@CLEAR SCREEN
+@SHOW
+
+`8The butler `%takes you through many corridors and into a large den.
+
+@KEY
+@LABEL ABLEMENU
+@CLEAR SCREEN
+@SHOW
+`r1`$Mr. Able's Room`r0`%
+
+
+        You see Mr. Able. He is a surprisingly young man, considering his
+        wealth.
+
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+-`t01 2 `%Can I have some `2money`%?
+`%Why are you so rich?
++`t03 2 -`t04 1 `$What do you know about the Ja'dra?
+`%Can I leave now?
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@ROUTINE GETSHIP
+@END
+
+;Able's Story
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`r1`%Able's Tale`r0
+
+
+     A few years ago, I was only a poor person. One day, I found the ruins of
+an ancient city up North. I returned here, and the `$Society of Archaeology`%
+investigated. Turns out the ruins were the remains of `2Greentree`%. The
+scientists were very pleased, and gave me quite a reward.
+     Having gained a small fortune, I invested in the construction of the
+local `1SpacePort`%, and have profited from its operation.
+
+@KEY
+@DO GOTO ABLEMENU
+@END
+
+;The Ja'dra Story: occurs after visiting the old station.
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`r1`$Able & the Ja'dra`r0
+
+
+     `$The Ja'dra?
+
+     `@Yes, the `$Ja'dra`@.
+
+     `%.`L.`L.`L.`L.`L. They hurt us. The 4th command squad. Myself, your
+     father, and a few others went on a mission to explore beyond the `0Snaken
+     `%realm. This was 20 years ago, and the `0Snaken`% were negotiating a
+     peace treaty with us. As for me, I had just opened the `1Spaceport`% on
+     Earth, and joined the Alliance as a Coloniel. Your father was a good
+     friend of mine, and he joined me along with several others to form the
+     squad. The exploration mission was our first. We trained some, learned
+     how to deal with the `0Snaken`%, and then departed through the wormhole,
+     using seven `3Thrustmaster`% vessels.
+
+@KEY
+@CLEAR SCREEN
+@SHOW
+`r1`$Able & the Ja'dra`r0`%
+
+
+     We went along the outside of known `0Snaken`% territory, through the
+     massive asteroid field. After some time, we approached a large
+     spatial-forcefield, penetrated only by a gateway outpost. I managed to
+     catch a glimpse through it: the stars were very different in appearance
+     from outside the field.
+
+     But then they attacked. Dozens of sleek crusiers burst through the
+     gateway and attacked us with unusually powerful weapons. I ordered a
+     retreat, and your father and another man, Gillan, covered the rest of
+     us: and were quickly smited by the enemy. I almost got blown-up myself,
+     but a good lady by the name of Eya rammed her vessel into my attacker:
+     and destroyed them both. They left us to go, but three of us were dead.
+     That could not be helped.
+
+     After the incident, I and another person, the old man on the station,
+     resigned from the service. He went off to the station: recently
+     abandoned by Maraken traders. His name is Roger, and he can prepare you.
+
+@KEY
+@BITSET `t04 1 1
+@DO GOTO ABLEMENU
+@END
+
+;Leave
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+;Get the ship from Mr. Able.
+@#GETSHIP
+@CLEAR SCREEN
+@SHOW
+
+`%I like you. You shall have money, & I will give you a `3ship`% & crew. Be
+sure to stop by the shops in the `1SpacePort`%, & use the blast pad to launch.
+
+@DO money + 15000
+@BITSET `t01 2 1
+@DO `s05 is `!Thrustmaster
+@DO `p34 is 75
+@DO `p36 is 1
+@DO `p47 is 11
+@DO `p48 is 8
+@DO `p49 is 8
+@DO `p50 is 1
+@DO `p51 is 1
+@DO `p52 is 1
+@DO `p53 is 0
+@DO `p54 is 50
+@DO `p55 is 10
+@DO `p56 is 10
+@KEY
+@DO GOTO NAMESHIP
+
+;Name stuff. Uses names from number choices.
+@LABEL NAMESHIP
+@CLEAR SCREEN
+@SHOW
+`%Name your ship.
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`%Enterprise
+`%Voyager
+`%Century Falcon
+`%Machine
+`%Able
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO `p40 IS 1
+@DO GOTO NAMESCI
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO `p40 IS 2
+@DO GOTO NAMESCI
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO `p40 IS 3
+@DO GOTO NAMESCI
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO `p40 IS 4
+@DO GOTO NAMESCI
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO `p40 IS 5
+@DO GOTO NAMESCI
+@END
+
+@LABEL NAMESCI
+@CLEAR SCREEN
+@SHOW
+`%Name your science officer.
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`%Spock
+`%Kim
+`%Furry
+`%Larry
+`%Estella
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO `p41 IS 1
+@DO GOTO NAMEENG
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO `p41 IS 2
+@DO GOTO NAMEENG
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO `p41 IS 3
+@DO GOTO NAMEENG
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO `p41 IS 4
+@DO GOTO NAMEENG
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO `p41 IS 5
+@DO GOTO NAMEENG
+@END
+
+@LABEL NAMEENG
+@CLEAR SCREEN
+@SHOW
+`%Name your engineer.
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`%Scotty
+`%Torres
+`%Solo
+`%Joe
+`%Pip
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO `p42 IS 1
+@DO GOTO FINISH
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO `p42 IS 2
+@DO GOTO FINISH
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO `p42 IS 3
+@DO GOTO FINISH
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO `p42 IS 4
+@DO GOTO FINISH
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@DO `p42 IS 5
+@DO GOTO FINISH
+@END
+
+;Give a helperpad, a communicator, set map #, and complete the ship-giving.
+@LABEL FINISH
+@DO `p77 IS 1524
+@DO `i16 + 1
+@DO `i39 + 1
+@CLEAR SCREEN
+@SHOW
+`r1`$YOU GOT A SHIP!`r0
+
+
+`%You now have a ship and crew. (Handing you a communicator) Here's a
+communicator, to contact your officers while off ship. (Handing you a
+helperpad) Here's a helperpad, complete with trade data on the 30 known
+worlds, and a navigational map to aid you in your travel.
+
+`2Thank you sir.
+
+`%You are welcome to visit anytime.
+@KEY
+@ROUTINE END
+
+@#TELESCOPE
+@CLEAR SCREEN
+@SHOW
+`r1`%The Telescope Operator`r0
+
+
+     Welcome to my telescope. For years, I have looked at the stars, watching
+as new stars form, as ships travel through space. It's a pretty good job.
+
+     `3"What's your current project?" you ask.`%
+
+     Today, I'm charting gas nebulae near the `4Norhaven`% system.
+
+     `3How interesting.`%
+
+@KEY
+@ROUTINE END
+
+
+
+
+;The Alliance Center
+@#ALLIANCE
+     ;Creates roster if non-existant.
+@if USERDAT\AMEMBER.DAT exist false then do
+ @begin
+ @writefile USERDAT\AMEMBER.DAT
+  `0Alliance Roster
+
+ @end
+
+     ;The Grounds
+@LABEL AM1
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\GBASE.ANS
+@SHOW
+`9Where do you want to go?
+
+@PAUSEON
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`%Recruiting Office
+`%Arcade
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO AM2
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@SHOW
+
+`1The arcade has been closed, due to several tax violations.
+
+@KEY
+@DO GOTO AM1
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+     ;Recruiting Office
+@LABEL AM2
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\GHEAD.ANS
+@SHOW
+`9Where do you want to go?
+
+@PAUSEON
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>`i29 0 !`p19 1 `$Apply for membership.
+`%See the membership roster.
+-`t01 4 `@Buy a uniform (Needed to join).
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+;The induction
+
+@CLEAR SCREEN
+@SHOW
+
+`9You face many officers & the high admiral herself.
+
+`@Do you swear to follow our great order until the end?
+Type AGREE if you do!
+
+
+@DO READSTRING 5 NIL `s03
+@IF `s03 IS AGREE THEN DO
+ @BEGIN
+ @CLEAR SCREEN
+ @DO `p19 IS 1
+ @writefile USERDAT\AMEMBER.DAT
+  `%`N
+ @SHOW
+
+`@Welcome to our great order!
+
+
+ @KEY
+ @DO GOTO AM2
+ @END
+@IF `s03 NOT AGREE THEN DO
+ @BEGIN
+ @CLEAR SCREEN
+ @SHOW
+
+`@You hath rejected us! Go now from this place!
+
+
+ @KEY
+ @DO GOTO AM2
+ @END
+@END
+
+@IF RESPONCE IS 2 THEN DO
+;The roster
+@BEGIN
+@CLEAR SCREEN
+@DISPLAYFILE USERDAT\AMEMBER.DAT
+@KEY
+@DO GOTO AM2
+@END
+
+@IF RESPONCE IS 3 THEN DO
+;The uniform
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+
+`9You might want to buy a uniform!
+
+`9It's only `$5000`9 gold!
+
+`@Y `9is Yes
+`8N `9is No
+@DO READSPECIAL `s01 YN
+@IF `s01 IS Y THEN DO
+ @BEGIN
+ @IF money LESS 5000 THEN DO
+  @BEGIN
+  @SHOW
+
+`9You can't afford the `%Alliance Uniform`9. Rats!
+
+  @KEY
+  @END
+ @IF money MORE 4999 THEN DO
+  @BEGIN
+  @DO money - 5000
+  @DO `i29 + 1
+  @BITSET `t01 4 1
+  @SHOW
+
+`9You don an `%Alliance Uniform`9. How spiffy!
+
+  @KEY
+  @END
+ @END
+@IF `s01 IS N THEN DO
+ @BEGIN
+ @SHOW
+
+`9You can't afford the `%Alliance Uniform`9. Rats!
+
+ @KEY
+ @END
+@DO GOTO AM2
+@END
+
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO GOTO AM1
+@END
+
+@#EXIT
+@DO SAYBAR
+`%Alliance troops are training today. No one may leave the city!
+@DO MOVEBACK
+
+@#END
+@drawmap
+@do moveback
+@update
+@routineabort

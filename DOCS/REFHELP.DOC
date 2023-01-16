@@ -1,0 +1,689 @@
+
+        *******  HOW TO MAKE YOUR OWN REF FILES FOR LORD II *******
+
+                        For LORD II:New World V1.00
+                      (and I'm sorry these docs suck!)
+
+Check 3rdparty.doc for more info.
+
+The heart of this system is the .REF format.  It is a script language that
+can be used to do complex gaming things, like math and getting random
+numbers, adding and deleting other varibles in the game - nearly
+everything a simple basic could do.
+
+REF is short for - Relay Execution File?  Reference File?  Who cares!
+
+Although tricky at first, making a ref file is really pretty simple.  If
+something doesn't work, just go look at your .REF file, (a simple text
+file) and fix it!  The .ref language will tell you at runtime about
+words it doesn't understand or syntax errors.
+
+ To see a demonstration of most commands, edit LORD II's .ref files.
+
+ *  If a command isn't understood, it will tell you upon execution
+ *  .REF size is limited by conventional memory
+ *  REF files are completely loaded, and interpreted BEFORE execution for
+    speed
+ *  Allows BEGIN and END statements, thousands of levels deep
+ *  Ansi and SethAnsi (Sorry, don't have another name yet, <G> ) are
+    automatically displayed correctly locally and remotely
+ *  They can save and write their own data
+
+                  ** Varibles the REF's use: **
+
+
+LOCAL : Will equal 5 if the ref is being viewed locally, otherwise 0.
+RESPONSE (or RESPONCE) : What @CHOICE returned.
+
+    NOTE:  If the following are found in a string being displayed they
+           will be replaces with their values:
+
+`V01 through `V40 These are the 40 GLOBAL longint varibles. (for numbers)
+`S01 through `S10 These are 10 GLOBAL string varibles. (for text)
+`P01 through `P99 These are the 99 player longint varibles. (for numbers)
+`T01 through `T99 these are 99 player byte varibles.  (255 max)
+`I01 through `I99 these are the 99 player integer item varibles. 32000 max)
+`+01 through `+99 - Same as above, but shows the item NAME, not amount.
+
+`v05 and `p11 are reserved if you wish to use LORD2's 'limited movements'.
+
+x  (players x cordinates)
+y  (players y cordinates)
+map (players current block #)
+dead (1 is player is dead)
+sexmale (1 if player is male)
+narm (current armour #)
+nwep (current weapon #)
+money (players moola)
+bank (moola in bank)
+enemy (force `e (last monster faught) to equal a certain name)
+
+ALL The above can also be changed. Examples:
+
+@do x is 20   <-sets X to 20
+@do `i05 is 90  <- Gives dude 90 item 5's (item is defined in l2cfg.exe)
+
+These are symbols that will be translated automatically when using
+@show or @do write.  You can also make variables equal these, etc. Simular
+to Renegades MCI codes.
+
+`N this is the users name.
+`E Enemy name.
+`G Current Graphics Level.
+`X Adds a space.
+`D Sends a #8 (delete).
+`0 through `9 and `! through `^ change color.
+`W One tenth a second wait.
+`L About a half second wait.
+`\ Simulates a carriage return.
+`r0 through `r7, change background color.
+`c Clears the screen and simulates 2 carriage returns.
+
+&realname | Real name as passed by the drop file
+&date | The date and time like 12/12/97 format.
+&nicedate | Time AND date like 5:19 on 12/12.
+s&armour | equipped armour name.
+s&arm_num | equipped armour's defensive value
+s&weapon | equipped weapon name.
+s&wep_num | equipped weapon's attack value.
+s&son | son/daughter, depending on current users sex
+s&boy | boy/girl, depending on current users sex
+s&man | man/lady, depending on current users sex
+s&sir | sir/ma'am, depending on current users sex
+s&him | him/her, depending on current users sex
+s&his | his/her, depending on current users sex
+&money | current users gold
+&bank | current users gold in bank
+&lastx | users x position before last move.
+&lasty | users y position before last move - helpfull to determine which
+         direction they came from before the hit the ref, etc.
+&map | current map #
+&time | Current age of the game in days.
+&timeleft | Minutes the user has left in the door.
+&sex | returns 0 if player is female, 1 if player is male
+&playernum | The account # of the current player.
+&totalaccounts | How many player accounts exist. Includes accounts marked
+                 deleted.
+(NOTE: Vars starting with s& usually means if you can control the case
+of the first letter of the outpout by the case of the first s - so
+S&sir would return "Sir" and s&sir would return "sir")
+
+(NOTE: These waits are the SAME on all computers, goes by the clock)
+
+***************** COMMAND LIST, A GOOD THING TO PRINT! *******************
+
+ The newest ones are listed first.. I'll do those in lowercase, that upper
+ case is hard on the eyes kinda.
+
+The following three commands are a new way to save and load data, it is
+much quicker than conventional @writefile and @loadfile, it saves as
+binary and not text.  It takes only 1004 bytes per file, tiny!  Extra room
+is allocated for upgrades and some info about the file.  I called them
+"IGM DATA FILES" or .IDF's.  Use this naming convention so Sysops know
+they should delete them when they reset..
+
+@dataload <filename> <record (1 to 200)> <`p var to put it in> : This loads
+a longint by # from a datafile.  If the file doesn't exist, it is created
+and all 200 longints are set to 0.
+
+@datasave <filename> <record (1 to 200)> <value to make it> : This SAVES
+a longint by # to a datafile.  If the file doesn't exist, it is created
+and all 200 longints are set to 0.
+
+@datanewday <filename> :  If it is the NEXT day since this function was
+called, all #'s in <filename> will be set to 0.  Check EXAMPLE.REF for an
+example of how this works.  
+
+@stripcode <any `s var> : This will remove ALL ` codes from a string.
+@drawpart <x> <y>: this will draw one char of a map screen with whatever
+                  it should be.  (including if people are there)
+@progname : The line UNDER this will be the status bar name of the game
+@moremap : The line UNDER this will be the new <more> prompt.
+@drawmap : This draws the current map the user is on.
+@update : Draws all the people on the screen.
+@update_update : Writes current player data to UPDATE.TMP file.  (if you
+                 can't wait until they are out of the ref file for some
+                 reason)
+@itemexit : Tells the item editor to automatically return the player to the
+            map screen after the item is used.  It is up to you to use the
+            @drawmap and @update commands as usual though.
+@busy : Makes the player appear 'red' to other players currently playing.
+@offmap : Makes the player appear to disappear to other players currently
+          playing.  (so it looks like they actually went into the hut)
+@pauseoff : You can show long ansis etc and it won't do its usuall every
+            24 line pause.
+@pauseon : Turns pause back on.
+
+@do `v01 is 1 : Sets the default option on the next lightbar selection,
+             ALWAYS use before a @choice command.
+@moveback : Use this to move the player back to where he moved from - good
+            for when they push against a treasure chest or such, and you
+            don't want them to appear inside of it when they are done.
+@do addlog : The line UNDER this command is added to the 'lognow.txt' file.
+@loadworld : Loads globals and world data - has never been used, but is
+             included just in case.
+@saveworld : Saves stats and world data - only use yet is in right after
+             @#maint is called to save random stats set for that day and
+             such.
+@loadmap <map #> : Very handy - Lets you change someones map location in
+                   a ref file.  This is the 'block #' not the physical map
+                   location, so it could be 1 to 1600.  (make sure it exist
+                   in l2cfg.exe though) Be SURE to change the map variable
+                   too!!  Using this and changing the X and Y
+                   cords effectivly lets you do a 'warp' from a .ref file.
+
+@statbar | Draws the statbar.
+@clearblock <start y> <end y> | Clears lines quick - @clear block 20 24 would
+                                clear 4 lines starting at 20
+
+@bitset <`t01 to `t99> <bit> <0 or 1> | Sets a certain bit in a byte var, lets
+you have 8 yes/no vars in one `t byte var! Examp: @bitset `t12 1 1 (this
+turns bit 1 in `t12 to ON) (bits can be from 0 to 7)
+
+Now of course you'll want to check sometimes to see if a bit is yes or no...
+
+@if bitcheck `t12 1 1 then do
+  @begin
+  @show
+  Yeah!  Bit 1 of t12 is TRUE!!! Yay.
+  @end
+
+It works like a standard @IF after the 'then' part.
+
+ALSO:  Check the CHOICE command, you can check a bit there too, like this:
++`t12 1 Hey, byte 12 bit 1 is TRUE!
+
+Use '-' for false.
+
+@quebar
+<message>
+
+The above will add a message to the saybar que - This means if the game
+is currently displaying a message, or has a few to display, it will wait
+until the proper time.
+
+@saybar
+<message>
+
+The above is like quebar, except it displays the message instantly,
+without taking into consideration that a message might have just been
+displayed and this will write over it.
+
+@chooseplayer `p20 | Will prompt user for another players name - its the
+                      standard 'full or partial name' thing, with a 'you mean
+                      this guy?'.  It returns the players # or 0 if none.
+
+-=-=-= Stuff to get info from OTHER players in the game, assuming you
+       know their player #...
+
+@do `s01 is getname 8 | Would get the name of player 8 and put it in `s01.
+                     (only works with `s vars)
+@do `p20 is deleted 8 | Puts 1 (yes) or 0 (no) in `p20.
+                     (only works with `p vars)
+
+@DO GOTO <header or LABEL name>
+@NOCHECK : This makes it not scan for labels/headers before running it.
+@ROUTINE <Header or label name> IN <Filename of .REF file> (only one parm is
+          given, it assumes it is in the current .ref)
+@ROUTINEABORT : Stops it from returning.
+@RUN <Header or label name> IN <Filename of .REF file>
+@CHOICE
+@VERSION  <Version it needs>
+@SHOW  : Shows following text/ansi.  Stops when a @ is hit on
+@SHOW SCROLL : Same thing, but puts all the text in a nifty scroll window
+@REPLACE <this> <that> <in this> : Replaces this with that in an `s var.
+@REPLACEALL <this> <that> <in this> : Same as above but replaces all instances
+@DO WRITE
+@DO BEEP :  Makes a weird beep noise, locally only
+@DISPLAYFILE <filename> <options> : This display an entire file.  Possible
+                                options are:  NOPAUSE and NOSKIP.
+@DISPLAY <this> IN <this file> <options> : This is used to display a certain
+part of a file, compatible with the LORDTXT.DAT format.
+@IF <Varible> <Math> <Varible> (Math can be MORE, LESS, NOT, IS)
+@GRAPHICS IS <Num> :  3 or more enable remote ANSI.  If you never wanted
+@CLOSESCRIPT : This ends the script.
+@CLEAR SCREEN: Clears entire screen.
+@KEY : Does a [MORE] prompt, centered on current line.
+@KEY NODISPLAY : Waits for keypress without saying anything.
+@DO <Var To Change> <How To Change It> <Change With What>
+Ways to change it:(-,+,/,*,IS)
+@DO <Varible to put # in> RANDOM <Highest random number> <number added to it>
+@DO MOVE <X> <Y> : This moves the curser.  (like GOTOXY in TP) Enter 0 for
+@DO GETCHAR <String var to put it in> Grabs a keypress, with timeslicing.
+@DO READSPECIAL <String var to put it in> <legal chars, 1st is default>
+@DO GETKEY <String var to put it in> : This command is usefull, *IF* a key
+@DO READNUM <MAX LENGTH> (Optional: <FOREGROUND COLOR> <BACKGROUND COLOR>
+<DEFAULT>: The number is put into `V40.
+@DO READSTRING <MAX LENGTH> <DEFAULT> <VAR TO PUT IT IN> : Get a string.
+@DO STRIPBAD: Strips out illegal ` codes, and replaces badwords with
+              the standard badword.dat file.
+@DO STRIPALL: Strips out all ` codes.  Good for passwords, etc.
+@DO COPY TO NAME  Put whatever is in `S10 into `N.  (name)
+@IF <Word or var> INSIDE <Word or var> THEN (ect) :  Allows you to search
+a string for something inside of it.  Not case sensitive.
+@DO STRIP <string var> : This strips beginning and end spaces of a string.
+@DO UPCASE <string var> : Makes a string all capitals.
+@DO <num var> IS LENGTH <String var>  : Gets length, smart way.
+@DO <num var> IS REALLENGTH <String var>  : Gets length dumb way. (includes
+@DO PAD <string var> <length> :  Adds spaces to end until string is as long
+                                 as <length>.
+@IF <name of file> EXISTS TRUE THEN (..ect..)
+@IF <name of file> EXISTS FALSE THEN (..ect..)
+@WRITEFILE <file name>
+<Thing to write>
+<Thing to write>
+<ect until next @ at beginning of string is hit>
+@READFILE <file name>
+<Var to read into>
+<Var to read into>
+<Ect until next @ at beginning of string is hit>
+@DO DELETE <file name>  : Delete a file.
+@COPYFILE <input filename> <output filename> : Copies a file.  Not that
+hard to use, really.          
+@CONVERT_FILE_TO_ANSI <input file> <output file> : Converts a text file
+of Sethansi (whatever) to regular ansi.  Good for a final score output.
+@CONVERT_FILE_TO_ASCII <input file> <output file> : Converts a text file
+of Sethansi (whatever) to regular ascii, ie, no colors at all.
+@DO TRIM <file name> <number to trim to> :  Trims text file
+@HALT <error level> : Quits and returns correct error level.
+@SHELL <.EXE, BAT or COM> <Parms, up to 8> (note, use `* for node num)
+@DECLARE <Label/header name> <offset in decimal format>
+
+************** NOW TO GO INTO MORE DETAIL ON EACH COMMAND******************
+
+                      ** About headers **
+
+Some may be familiar with the way the door LORD keeps track of it's many
+ansi's and other display files.  It gives each one a HEADER.  Any header
+can be reached with a @DO GOTO <header name> command.
+
+Example header:
+
+@#START
+
+
+This MUST be in a ref file, this is where RTREADER will start.  Anytime
+you wish to return to the start, just do a:
+@DO GOTO START
+command.
+
+                      ** Another kind of header **
+
+Anytime RTREADER hit's a @#, it knows another section is starting, and
+quits.  If you would like to use goto commands INSIDE of a 'section', use
+the @LABEL command.  They work like headers, but don't cause a section to
+'quit'.
+
+Example:
+
+@LABEL LOOP
+
+@DO GOTO LOOP
+
+You can have as many headers/labels as you want, however, the first 300
+'headers' and 'labels' will be INSTANT access, anything past will not be
+quite as quick.
+
+This 'speed up' routine runs by default on all .REF files.  (Processes the
+labels and headers before running)
+
+This takes a noticable pause when doing so, so you may wish to disable this
+feature.  Add a
+
+@NOCHECK
+
+Somewhere near the beginning, it won't check past that point.
+
+Also, the Reader is now capable of mapping labels/headers on the fly if it
+runs across one that isn't - So the SECOND time you run GOTO it, it's
+instantanous.  (this is always active)
+
+@DECLARE <Label/header name> <offset in decimal format>
+
+This statement allows you to declare a label, and where it is.  Don't
+use this unless you know what you are doing - I was thinking I could make
+a SPEEDREF.EXE that simply maps out all the headers and makes them all
+@DECLARE statements, followed by a @NOCHECK and puts them in the beginning.
+
+This would be tricky because every time you add something, the offset
+changes...
+
+
+NOTE:  Headers like all other commands in RTREADER are *NOT* case
+       sensitive.  You can type the whole thing in lowercase, or uppercase
+       - or mixed.  It just don't matter man.
+
+
+                      ** Basic command list: **
+
+
+@GRAPHICS IS <Num> :  3 or more enable remote ANSI.  If you never wanted
+                      to send ANSI, you could set this to 1. You will
+                      probably never touch this one.
+
+@ROUTINE <Header or label name> IN <Filename of .REF file>
+
+The @ROUTINE command is usefull - You can use it jump to a completely new
+.REF file - when it's finished there, instead of dropping to DOS, it will
+load back up the original .REF file and continue where it left off.
+
+@RUN <Header or label name> IN <Filename of .REF file>
+
+Same thing as above, but doesn't come back to the original .REF.
+
+@CHOICE
+<A choice>
+<another choice>
+<ect..When a @ is found in the beginning of a choice it quits>
+
+This gives the user a choice.
+
+The responce is put into varible RESPONCE.  To set which choice the curser
+starts on, put that number into `V01.
+
+** EXAMPLE OF @CHOICE COMMAND **
+
+@DO `V01 IS 1 ;which choice should be highlighted when they start
+
+(now the choice part)
+
+@CHOICE
+Yes   <- Defaults to this, since it's 1
+No
+I don't know
+Who cares
+@IF RESPONCE IS 3 THEN DO
+  @BEGIN
+  @DO `P01 IS RESPONCE
+  @SHOW
+
+You chose `P01!, silly boy!
+
+  @END
+
+The choice command is more usefull now; you can now define *IF* type
+statements so a certain choice will only be there if a conditional statement
+is met.
+
+
+For instance:
+
+@CHOICE
+Yes
+No
+=`p20 500 Hey, I have 500 exactly!
+!`p20 500 Hey, I have anything BUT 500 exactly!
+>`p20 500 Hey, I have MORE than 500!
+<`p20 100 Hey, I have LESS than 100!
+>`p20 100 <`p20 500 I have more then 100 and less than 500!
+
+Also:  If you are using bitchecking with `t (byte) vars, you can have a if
+bit is true or false, like this:
+
++`t12 1 Hey! Byte 12's bit 1 is TRUE! (which is 1)
+-`t12 3 Hey! Byte 12's bit 3 is FALSE! (which is 0)
+
+The = > and < commands can be stacked as needed.  If `p20 was 600, only
+option 2 would be available, and RESPONSE would be 2 after the user hit it.
+
+IMPORTANT NOTE:  Never have spaces AFTER lines under a choice command.. This
+can make options not show up, etc... still working on why..
+
+@VERSION  <Version it needs>  : For instance, you would put
+          @VERSION 2 for this version of RTREADER.  (002) If it is run
+          on Version 1, (could happen) a window will pop up warning the
+          person he had better get the latest version.
+
+@SHOW           : Shows following text/ansi.  Stops when a @ is hit on
+                  beginning of line.
+
+@SHOW SCROLL          : Same thing, but puts all the text in a nifty scroll
+                        window. (scroll window has commands line Next Screen,
+                        Previous Screen, Start, End and eXtract to file.
+                        (that last one is only shown and executed locally)
+
+@DO WRITE
+<Stuff to write>
+
+Same thing as regular @SHOW, but does only one line, without a
+line feed.  Used with @DO MOVE this is good for putting prompts,
+right in front of READNUM and READSTRING's.
+
+NOTE:  You can use Vars mixed with text, ansi and color codes in the
+<stuff to write> part.  Works this way with most stuff.
+
+@DISPLAYFILE <filename> <options> : This display an entire file.  Possible
+                                options are:  NOPAUSE and NOSKIP.  Put a
+                                space between options if you use both.
+
+@IF <Varible> <Math> <Thing the varible must be, or more or less then, or
+another varible>  (Possible math functions: EQUALS, MORE, LESS, NOT)
+
+
+@CLOSESCRIPT : This ends the script.
+@CLEAR SCREEN: Clears entire screen.
+@KEY : Does a [MORE] prompt, centered on current line.
+@KEY NODISPLAY : Waits for keypress without saying anything.
+
+@DO : This statement does a lot - It can be put a the end of a @IF statement
+      also.  (Some commands need @DO in front, some don't.  If they do, they
+      can be used at the end of an @IF statement, if not, you can't.  (like
+      @SHOW)  You would need to use the @BEGIN and @END with the @IF to do
+      it conditionally.
+
+EXAMPLES OF @DO:
+
+Possible DO math symbols are:
+
+@DO <Number To Change> <How To Change It> <Change With What>
+
+Ways to change it:
+
+- <- Take number away
++ <- Addition
+/ <- Division
+* <- Multiplication
+IS <- Makes same as
+
+NOTE:  You can also do this with `S (string vars) but you are limited to
+only using IS.  (no math can be done with strings) (See the string section)
+
+@IF `V04 MORE 500 THEN DO `V04 - 500
+(This would take 500 from `V04 if they had it)
+(+ would add money, IS would MAKE it 500)
+@IF `V04 MORE 500 THEN DO
+ @BEGIN
+ @SHOW
+ `2You have more then 500!  In fact you have `V04!
+ @END
+ (if @BEGIN is followed by a @DO it will be executed, otherwise skipped)
+ (In @DO WRITE, @SAY and @SHOW (Except SHOW SCROLL) it will print the `V,
+  `P and `S varibles - It also understands:
+ `N (user name)
+ `* (node number)
+
+@DO <Varible to put # in> RANDOM <Highest random number> <number to add to it>
+
+This is how you generate random numbers.  To generate a number between 500 and
+1000 and put it in varible `P05 you would put:
+
+@DO `P05 RANDOM 500 500
+
+@DO MOVE <X> <Y> : This moves the curser.  (like GOTOXY in TP) Enter 0 for
+                   a number will default to 'current location'.
+
+
+               **** STRING AND FILE COMMANDS ****
+
+@DO READCHAR <string var to put it in> -Waits for a key to be pressed, uses
+DV and windows time slicing while waiting.
+
+@DO READSPECIAL (String var to put it in> <legal chars, 1st is default>
+Example:
+
+@do write
+Would you like to kill the monster? Y/N :
+@DO READSPECIAL `s01 YN
+if `s01 is Y then do
+ @begin
+ @show
+You killed him!
+ @end
+
+The above would ONLY allow the person to hit Y or N - if he hit ENTER, it
+would be the same as hitting Y, because that was listed first.  
+
+@DO GETKEY <String var to put it in> : This command is usefull, *IF* a key
+                                       IS CURRENTLY being pressed, it puts
+                                       that key into the string var.
+                                       Otherwise, it puts a '_' in to signal
+                                       no key was pressed.
+
+                                       Good way to stop a loop.
+
+@DO READNUM <MAX LENGTH> (Optional: <FOREGROUND COLOR> <BACKGROUND COLOR>
+<DEFAULT>: The number is put into `V40.
+
+The READNUM procedure is a very nice string editer to get a number in. It
+supports arrow keys and such.
+
+@DO READSTRING <MAX LENGTH> <DEFAULT> <VAR TO PUT IT IN> : Get a string.
+Uses same string editer as READNUM.
+
+Note:  You can only use the `S01 through `S10 vars for READSTRING.  You
+can also use these vars for the default.  (or `N)  Use NIL if you want
+the default to be nothing.  (if no Var to put it in is specified, it will
+be put into `S10 for compatibilty with old .REF's)
+
+@DO COPY TO NAME  Put whatever is in `S10 into `N.  (name)
+
+To make a string EQUAL something, you would do it like this:
+@DO `S04 IS Hello I am
+(OR)
+@DO `S04 ADD A programmer
+(OR)
+
+@DO `S04 IS `S02 <- Would copy `S02 to `S04.
+
+Note:  There you can only have three spaces per string defination.
+       Use the ADD to make a long string.  OR use `X to make spaces, this
+       way you can have many spaces in one @DO.
+
+
+@IF <Word or var> INSIDE <Word or var> THEN (ect) :  Allows you to search
+a string for something inside of it.  Not case sensitive.
+
+@DO STRIP <string var> : This strips beginning and end spaces of a string.
+@DO UPCASE <string var> : Makes a string all capitals.
+@DO <num var> IS LENGTH <String var>  : Gets length, smart way.
+@DO <num var> IS REALLENGTH <String var>  : Gets length dumb way. (includes
+                                            '`' codes without deciphering
+                                            them.)
+
+
+@DO PAD <string var> <length> :  Adds spaces to end until string is as long
+                                 as <length>.
+
+NOTE:  Pad automatically does not include color codes in the length, and DOES
+       include varibles in the length.  (like if there was a `s02 inside the
+       string)  (my God.. If you were displaying `s01 and it had a `s01 in
+                it, wouldn't it display forever?  I'll have to check that.)
+       (note from 3 years later.. still haven't checked into that..maybe
+       next year..)
+
+@IF <name of file> EXISTS TRUE THEN (..ect..)
+@IF <name of file> EXISTS FALSE THEN (..ect..)
+
+NOTE:  The above "name of file" can be a var, num or string, or even mixed.
+       If if not stated, most commands are capable of this.
+
+@WRITEFILE <file name>
+<Thing to write>
+<Thing to write>
+<ect until next @ at beginning of string is hit>
+
+<Thing to write> can be a varible, (string or num) or it can be a word you
+ write - or a combination of the two.
+
+Note:  @WRITEFILE appends the lines if the file exists, otherwise it
+       creates it.  File locking techniques are used.
+
+@READFILE <file name>
+<Var to read into>
+<Var to read into>
+<Ect until next @ at beginning of string is hit>
+
+This works just like @WRITEFILE.  You can use String and Number vars, just
+be warned if a number var attempts to read a string, you will always get
+0.
+
+NOTE:  @READFILE is a smart procedure - It will not run-time error or
+       anything, even if you try to read past the end of the file. It
+       simply won't change the vars if the file isn't long enough.
+
+@DO DELETE <file name>  : Both delete a file.
+
+@DO TRIM <file name> <number to trim to> :  This nifty command makes text
+                                            file larger than <number to trim
+                                            to> get smaller.  (it deletes
+                                            lines from the top until file
+                                            is correct # of lines, if smaller
+                                            than num, it doesn't change the
+                                            file)
+
+Note:  On *ALL* of these file commands, you cannot give a path.  A path
+       will be put in the beginning, so file commands can only be used in
+       the current dir.
+
+
+
+                   ****** SPECIAL TALKING COMMANDS ******
+
+      These commands are tricky to use, they are used in RTNEWS02.REF,
+      (the talking to Seth part) but most people probably don't want to
+      hassle with getting the pics in the exact right spot for everything
+      to look right.  (it's a New World thing)
+
+
+@SAY : All text UNDER this will be put in the 'talk window' until a @ is
+hit.
+@KEY TOP : Does <MORE> prompt at game text window.
+@KEY BOTTOM : Does <MORE> prompt at user text window.
+@CLEAR NAME : Deletes the name line of the game window.
+@CLEAR USERSCREEN: Clears user text.
+@CLEAR TEXT: Clears game text.
+@CLEAR PICTURE: Clears pic.
+@CLEAR ALL : Clears user text, pic, game text, name and redraws screen.
+
+                 ****** THE SHELL COMMAND ******
+
+NOTE:  THIS FEATURE DOES NOT WORK IN LORD II AT THIS TIME.
+
+A powerful feature of RTREADER is the ability to run OTHER programs inside
+of it, and return to the exact spot it left automatically.
+
+@SHELL <.EXE, BAT or COM> <Parms, up to 8> (note, use `* for node num)
+
+When this happens, two files are created.
+
+DO<node num>.BAT is created.  This is actually the file that is run.
+
+INFO.<node num> is created.  Simular to LORD's INFO.? system.
+
+This text file contains the following:
+
+Users first name
+Users Last Name
+Ref file it was reading before shelling
+Offset of ref file (where it was when it shelled)
+Graphics <- Passed from drop file, usually between 2 and 5.
+Time Left
+Com Port
+Baud Rate
+Lockbaud
+FOSSIL (or INTERNAL or DIGI)
+
+Note:  The procedure RTREADER uses upon 're-entry' is it reads the proper
+       NODE<node num>.DAT file, *THEN* it reads the INFO.? file and fills
+       in the gaps.  It does read the Time Left back in also.
+

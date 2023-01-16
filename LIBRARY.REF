@@ -1,0 +1,142 @@
+@#PLANET
+@IF `p12 is 22 THEN DO
+ @BEGIN
+ @ROUTINE LIBRARY
+ @END
+@DO MOVEBACK
+@DO SAYBAR
+`%The library on this world seems vacant.
+
+@#LIBRARY
+@LABEL LMENU
+@CLEAR SCREEN
+@show
+
+                                 `$Schoolor Library`%
+                                    
+  The Library is drab and colorless.  A stuffy looking librarian shushes
+  you when your space boots squeak on the floor.  A volumes do stand out,
+  and you pause, wondering which one you should read.
+
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`9Read `$History Of The Universe
+`9Read `$The Story Behind Carnage
+`9Read `$Medieval Times
+`4Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW SCROLL
+
+
+`r1`%                           The History Of The Universe                      `r0
+                                    
+  `0Earth matured the quickest of the Planets, and was the first to actually
+  make contact with another one.  (Incedently, and to the astronauts great
+  delight, it was Baboria)  
+
+  After that, Earth's techonolgy LEAPED for the next 48 years, then finally
+  leveled out about 30 years ago.  Earth formed "The Alliance", and because
+  Earth had the most power, and was light years ahead of everyone else, no
+  one disputed it.  Then, 12 years ago, a man named Carnage killed an
+  Alliance representative, and stole his ship, and his cargo.  He became
+  rich, and very outspoken.  Carnage had plundered over 38 planets before the
+  Alliance found out about it. 
+
+  It was too late.  Hundreds of planets begin creating dangerous weapons
+  that were illegal before - to protect themselves, and some, to also steal
+  from other defenseless places.  Before, the Alliance had always been able  
+  crush trouble makers like this, but now, it was impossible, over half the
+  known world have reverted to mercanary tactics.
+``
+
+  `0Carnage was/is a master mind...He goaded many small planets into following
+  him, or scared ships into paying him a tribute - it would not have been put
+  up with, but Carnage had invented a very strange device...Many witnesses
+  sweared that he could COMPLETLY DISABLE their ships without firing a single
+  thing.  He became stronger and stronger, and now, he is the strongest he
+  has ever been. Virtually unstoppable, he dominates and destroys whoever
+  is in his path who doesn't comply to his standards of living.
+
+  Fear is the most deadly weapon of all.  The Alliance tried many times 
+  to regroup, but was never successful, and everytime it fails, more people
+  rebel.  
+
+  Some believe the known universe can be restored to peace, if the right
+  man joins them, and becomes their spokesperson.  Many also believe the
+  first peace meeting would have to be held at a very special place. 
+
+@DO GOTO LMENU
+@END
+
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW SCROLL
+
+
+`r1`%                           The Story behind Carnage                         `r0
+                                    
+  `0At eight years old, Jerard Knolfer, was the winner of an 8 planet
+  science fair.  He continued his studies, and at 15 was widely recognized
+  as a genuis.  
+  
+  Then it happened.  He fell in love with a very pretty girl, and because
+  she wasn't interested, (Jerard always was a bit ugly) he was very upset.
+
+  She did invite him to her wedding day however, and that proved to be
+  the biggest mistake she would ever make.  He was bitter.  In the middle
+  of the wedding ritual, he stalked out of the room angrily.  
+
+  Ten minutes later the entire wedding building was reduced to a pile of
+  ashes.  He had invented a lot of things, but this was the first weapon.  
+  He liked the power.  He had gone too far to turn back, so he put together
+  a band of rogues, and became strong...Slowly at first, then quicker, which
+  is the way with power or anything for that matter... 
+  ``
+
+  `0His last words to his home planet, Endora, were as follows:
+
+                
+                "I don't need my family, and don't need friends."
+                               "I am Carnage."
+
+               His ship then released some kind of warhead, of his own
+               device, and then the entire planet exploded.  No one knows
+               why, or exactly how he did it.
+
+@DO GOTO LMENU
+@END
+
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW SCROLL
+
+
+`r1`%                               Medieval Times                               `r0
+                                    
+  `0Ancient Earth scrolls of learning have depicted it to be a lifestyle
+  very different from todays.  People settled their differences with heavy
+  sharp things known as swords, actually enjoying the thought of cutting
+  off another mans head.  Scoffers may be interested to know that people
+  can actually live in this strange world of Dragons, Magic, Barmaids and
+  Blood, by playing the online game known as Legend Of The Red Dragon.
+
+@DO GOTO LMENU
+@END
+
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+@#END
+@drawmap
+@do moveback
+@update
+@routineabort

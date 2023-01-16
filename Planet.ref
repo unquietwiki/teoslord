@@ -1,0 +1,2137 @@
+;This REF file controls all the main Planet variables & common facilities.
+
+;Originally, there are 30 "planet tables" in this file. All are listed by
+;their names.
+
+;Check out the "Grey Planet" addon for a complete "guided" planet table.
+@#EARTH
+@DO `s04 IS `0Earth
+@DO `p12 IS 1    ;Planet #
+@DO `p35 IS 1    ;Bank Status: 1 means "bank", 0 means "no bank"
+@DO `p76 IS 7    ;Planet Image File (P1-P10.ANS)
+@DO `p57 IS 23   ;X
+@DO `p58 IS 12   ;Y        Where you appear in space at departure.
+@DO `p59 IS 641  ;MAP #
+@DO `p60 IS 67   ;X
+@DO `p61 IS 15   ;Y        Where you land on the planet.
+@DO `p62 IS 1522 ;MAP #
+
+;Shipyard Prices, 0 means "not available"
+@DO `p37 IS 200
+@DO `p38 IS 100000
+@DO `p39 IS 112
+
+;Trade Good Prices, 0 means "not available"
+@DO `p63 IS 500
+@DO `p64 IS 1500
+@DO `p65 IS 200
+@DO `p66 IS 350
+@DO `p67 IS 100
+@DO `p68 IS 800
+@DO `p69 IS 2000
+@DO `p70 IS 150
+@DO `p71 IS 450
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 200
+@DO `p75 IS 0
+@ROUTINE END
+
+@#HOTHOR
+@DO `s04 IS `7Hothor
+@DO `p12 IS 2
+@DO `p35 IS 0
+@DO `p76 IS 9
+@DO `p57 IS 36
+@DO `p58 IS 06 
+@DO `p59 IS 566
+@DO `p60 IS 68
+@DO `p61 IS 08
+@DO `p62 IS 1560
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 197
+
+@DO `p63 IS 670
+@DO `p64 IS 9000
+@DO `p65 IS 24
+@DO `p66 IS 430
+@DO `p67 IS 156
+@DO `p68 IS 0
+@DO `p69 IS 0
+@DO `p70 IS 147
+@DO `p71 IS 1305
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#VOLCANA
+@DO `s04 IS `@Volcana
+@DO `p12 IS 3
+@DO `p35 IS 0
+@DO `p76 IS 5
+@DO `p57 IS 20
+@DO `p58 IS 11 
+@DO `p59 IS 726
+@DO `p60 IS 19
+@DO `p61 IS 05
+@DO `p62 IS 1561
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 715
+@DO `p64 IS 270
+@DO `p65 IS 2464
+@DO `p66 IS 343
+@DO `p67 IS 0 
+@DO `p68 IS 2760
+@DO `p69 IS 0
+@DO `p70 IS 0
+@DO `p71 IS 256
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#METALLICA
+@DO `s04 IS `7Metallica
+@DO `p12 IS 4
+@DO `p35 IS 0
+@DO `p76 IS 4
+@DO `p57 IS 63
+@DO `p58 IS 08 
+@DO `p59 IS 722
+@DO `p60 IS 40
+@DO `p61 IS 17
+@DO `p62 IS 1562
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 75
+
+@DO `p63 IS 0
+@DO `p64 IS 0
+@DO `p65 IS 0
+@DO `p66 IS 220
+@DO `p67 IS 0 
+@DO `p68 IS 2760
+@DO `p69 IS 0
+@DO `p70 IS 0
+@DO `p71 IS 0
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#MEDOCA
+@DO `s04 IS `9Medoca
+@DO `p12 IS 5
+@DO `p35 IS 0
+@DO `p76 IS 4
+@DO `p57 IS 34
+@DO `p58 IS 10 
+@DO `p59 IS 643
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 115
+@DO `p64 IS 0
+@DO `p65 IS 248
+@DO `p66 IS 0
+@DO `p67 IS 187 
+@DO `p68 IS 3736
+@DO `p69 IS 0
+@DO `p70 IS 0
+@DO `p71 IS 243
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#GOJUON
+@DO `s04 IS `0Gojoun
+@DO `p12 IS 6
+@DO `p35 IS 0
+@DO `p76 IS 2
+@DO `p57 IS 28
+@DO `p58 IS 08 
+@DO `p59 IS 728
+@DO `p60 IS 28
+@DO `p61 IS 17
+@DO `p62 IS 1566
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 0
+@DO `p64 IS 1485
+@DO `p65 IS 2374
+@DO `p66 IS 304
+@DO `p67 IS 4384 
+@DO `p68 IS 712
+@DO `p69 IS 0
+@DO `p70 IS 18
+@DO `p71 IS 400
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#DESHAROCKNA
+@DO `s04 IS `1Desha`xRockna
+@DO `p12 IS 7
+@DO `p35 IS 0
+@DO `p76 IS 1
+@DO `p57 IS 51
+@DO `p58 IS 08 
+@DO `p59 IS 646
+@DO `p60 IS 47
+@DO `p61 IS 15
+@DO `p62 IS 1563
+
+@DO `p37 IS 0
+@DO `p38 IS 97000
+@DO `p39 IS 0
+
+@DO `p63 IS 670
+@DO `p64 IS 1860
+@DO `p65 IS 334
+@DO `p66 IS 311
+@DO `p67 IS 0
+@DO `p68 IS 5392
+@DO `p69 IS 1360
+@DO `p70 IS 0
+@DO `p71 IS 391
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#DOGAFETCH
+@DO `s04 IS `#Dogafetch
+@DO `p12 IS 8
+@DO `p35 IS 0
+@DO `p76 IS 7
+@DO `p57 IS 50
+@DO `p58 IS 13 
+@DO `p59 IS 563
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 268
+@DO `p38 IS 0
+@DO `p39 IS 137
+
+@DO `p63 IS 615
+@DO `p64 IS 0
+@DO `p65 IS 468
+@DO `p66 IS 343
+@DO `p67 IS 3750 
+@DO `p68 IS 696
+@DO `p69 IS 0
+@DO `p70 IS 2640
+@DO `p71 IS 103
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#EDEN
+@DO `s04 IS `0Eden
+@DO `p12 IS 9
+@DO `p35 IS 0
+@DO `p76 IS 7
+@DO `p57 IS 16
+@DO `p58 IS 15 
+@DO `p59 IS 569
+@DO `p60 IS 28
+@DO `p61 IS 17
+@DO `p62 IS 1566
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 500
+@DO `p64 IS 0
+@DO `p65 IS 0
+@DO `p66 IS 0
+@DO `p67 IS 0 
+@DO `p68 IS 88
+@DO `p69 IS 0
+@DO `p70 IS 0
+@DO `p71 IS 0
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 380
+@DO `p75 IS 25000
+@ROUTINE END
+
+@#RICHIANA
+@DO `s04 IS `#Richiana
+@DO `p12 IS 10
+@DO `p35 IS 01
+@DO `p76 IS 7
+@DO `p57 IS 43
+@DO `p58 IS 08 
+@DO `p59 IS 564
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 3270
+@DO `p64 IS 8460
+@DO `p65 IS 5076
+@DO `p66 IS 2639
+@DO `p67 IS 1277 
+@DO `p68 IS 3984
+@DO `p69 IS 6460
+@DO `p70 IS 4174
+@DO `p71 IS 2092
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 750
+@DO `p75 IS 0
+@ROUTINE END
+
+@#TRIBONIA
+@DO `s04 IS `9Tribonia
+@DO `p12 IS 11
+@DO `p35 IS 0
+@DO `p76 IS 3
+@DO `p57 IS 26
+@DO `p58 IS 09 
+@DO `p59 IS 644
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 935
+@DO `p64 IS 5175
+@DO `p65 IS 0
+@DO `p66 IS 6835
+@DO `p67 IS 5736 
+@DO `p68 IS 608
+@DO `p69 IS 1920
+@DO `p70 IS 6
+@DO `p71 IS 4041
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 185
+@DO `p75 IS 0
+@ROUTINE END
+
+@#DUNE
+@DO `s04 IS `$Dune
+@DO `p12 IS 12
+@DO `p35 IS 0
+@DO `p76 IS 3
+@DO `p57 IS 47
+@DO `p58 IS 07 
+@DO `p59 IS 647
+@DO `p60 IS 45
+@DO `p61 IS 18
+@DO `p62 IS 1564
+
+@DO `p37 IS 0
+@DO `p38 IS 85000
+@DO `p39 IS 160
+
+@DO `p63 IS 990
+@DO `p64 IS 1500
+@DO `p65 IS 1752
+@DO `p66 IS 427
+@DO `p67 IS 0 
+@DO `p68 IS 7120
+@DO `p69 IS 1760
+@DO `p70 IS 0
+@DO `p71 IS 0
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#PLAGUE
+@DO `s04 IS `5Plague
+@DO `p12 IS 13
+@DO `p35 IS 0
+@DO `p76 IS 4
+@DO `p57 IS 50
+@DO `p58 IS 10 
+@DO `p59 IS 648
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 1195
+@DO `p64 IS 1320
+@DO `p65 IS 0
+@DO `p66 IS 0
+@DO `p67 IS 3321 
+@DO `p68 IS 696
+@DO `p69 IS 2000
+@DO `p70 IS 199
+@DO `p71 IS 405
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#NORHAVEN
+@DO `s04 IS `8Norhaven
+@DO `p12 IS 14
+@DO `p35 IS 01
+@DO `p76 IS 7
+@DO `p57 IS 44
+@DO `p58 IS 11 
+@DO `p59 IS 649
+@DO `p60 IS 10
+@DO `p61 IS 16
+@DO `p62 IS 1529
+
+@DO `p37 IS 0
+@DO `p38 IS 100000
+@DO `p39 IS 112
+
+@DO `p63 IS 660
+@DO `p64 IS 1830
+@DO `p65 IS 190
+@DO `p66 IS 308
+@DO `p67 IS 60 
+@DO `p68 IS 792
+@DO `p69 IS 4660
+@DO `p70 IS 130
+@DO `p71 IS 450
+@DO `p72 IS 0
+@DO `p73 IS 100000
+@DO `p74 IS 200
+@DO `p75 IS 0
+@ROUTINE END
+
+@#LOONY
+@DO `s04 IS `2Loony
+@DO `p12 IS 15
+@DO `p35 IS 0
+@DO `p76 IS 6
+@DO `p57 IS 31
+@DO `p58 IS 13 
+@DO `p59 IS 727
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 560
+
+@DO `p63 IS 5615
+@DO `p64 IS 1500
+@DO `p65 IS 4648
+@DO `p66 IS 0
+@DO `p67 IS 1942 
+@DO `p68 IS 0
+@DO `p69 IS 0
+@DO `p70 IS 3003
+@DO `p71 IS 301
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 130
+@DO `p75 IS 0
+@ROUTINE END
+
+@#WEAPONWORLD
+@DO `s04 IS `!Weapon`xWorld
+@DO `p12 IS 16
+@DO `p35 IS 01
+@DO `p76 IS 3
+@DO `p57 IS 24
+@DO `p58 IS 12 
+@DO `p59 IS 561
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 112
+
+@DO `p63 IS 500
+@DO `p64 IS 1500
+@DO `p65 IS 242
+@DO `p66 IS 10
+@DO `p67 IS 0 
+@DO `p68 IS 0
+@DO `p69 IS 5740
+@DO `p70 IS 168
+@DO `p71 IS 450
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#ZOOLIE
+@DO `s04 IS `2Zoolie
+@DO `p12 IS 17
+@DO `p35 IS 0
+@DO `p76 IS 2
+@DO `p57 IS 35
+@DO `p58 IS 07 
+@DO `p59 IS 568
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 390
+@DO `p64 IS 5160
+@DO `p65 IS 5000
+@DO `p66 IS 0
+@DO `p67 IS 365 
+@DO `p68 IS 7840
+@DO `p69 IS 0
+@DO `p70 IS 150
+@DO `p71 IS 450
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 600
+@DO `p75 IS 0
+@ROUTINE END
+
+@#BABORIA
+@DO `s04 IS `$Baboria
+@DO `p12 IS 18
+@DO `p35 IS 0
+@DO `p76 IS 7
+@DO `p57 IS 16
+@DO `p58 IS 12 
+@DO `p59 IS 723
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 500
+@DO `p64 IS 1830
+@DO `p65 IS 176
+@DO `p66 IS 815
+@DO `p67 IS 544 
+@DO `p68 IS 3184
+@DO `p69 IS 4680
+@DO `p70 IS 6810
+@DO `p71 IS 1552
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#STOCKWORLD
+@DO `s04 IS `#Stock`xWorld
+@DO `p12 IS 19
+@DO `p35 IS 01
+@DO `p76 IS 4
+@DO `p57 IS 62
+@DO `p58 IS 07 
+@DO `p59 IS 642
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 100000
+@DO `p39 IS 115
+
+@DO `p63 IS 505
+@DO `p64 IS 1575
+@DO `p65 IS 194
+@DO `p66 IS 332
+@DO `p67 IS 107
+@DO `p68 IS 752
+@DO `p69 IS 2220
+@DO `p70 IS 165
+@DO `p71 IS 441
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 300
+@DO `p75 IS 0
+@ROUTINE END
+
+@#HUGELINDMAR
+@DO `s04 IS `5Hugelind`xMar
+@DO `p12 IS 20
+@DO `p35 IS 0
+@DO `p76 IS 2
+@DO `p57 IS 25
+@DO `p58 IS 11 
+@DO `p59 IS 726
+@DO `p60 IS 47
+@DO `p61 IS 15
+@DO `p62 IS 1563
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 585
+@DO `p64 IS 2835
+@DO `p65 IS 334
+@DO `p66 IS 5855
+@DO `p67 IS 0 
+@DO `p68 IS 0
+@DO `p69 IS 1760
+@DO `p70 IS 0
+@DO `p71 IS 5940
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#SICKONIA
+@DO `s04 IS `2Sickonia
+@DO `p12 IS 21
+@DO `p35 IS 0
+@DO `p76 IS 2
+@DO `p57 IS 51
+@DO `p58 IS 09 
+@DO `p59 IS 567
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 8780
+@DO `p64 IS 1500
+@DO `p65 IS 1132
+@DO `p66 IS 0
+@DO `p67 IS 0 
+@DO `p68 IS 2832
+@DO `p69 IS 0
+@DO `p70 IS 0
+@DO `p71 IS 5859
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#SCHOOLORIA
+@DO `s04 IS `9Schooloria
+@DO `p12 IS 22
+@DO `p35 IS 0
+@DO `p76 IS 3
+@DO `p57 IS 43
+@DO `p58 IS 08 
+@DO `p59 IS 721
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 0   
+@DO `p64 IS 1500
+@DO `p65 IS 200
+@DO `p66 IS 21 
+@DO `p67 IS 0  
+@DO `p68 IS 1872
+@DO `p69 IS 2680
+@DO `p70 IS 0  
+@DO `p71 IS 0  
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0  
+@DO `p75 IS 0
+@ROUTINE END
+
+@#UNILAND
+@DO `s04 IS `#Uniland
+@DO `p12 IS 23
+@DO `p35 IS 0
+@DO `p76 IS 10
+@DO `p57 IS 40
+@DO `p58 IS 12 
+@DO `p59 IS 565
+@DO `p60 IS 46
+@DO `p61 IS 10
+@DO `p62 IS 1565
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 0
+@DO `p64 IS 0
+@DO `p65 IS 0
+@DO `p66 IS 0
+@DO `p67 IS 0
+@DO `p68 IS 0
+@DO `p69 IS 0
+@DO `p70 IS 0
+@DO `p71 IS 0
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 150
+@DO `p75 IS 0
+@ROUTINE END
+
+@#HOMEWORLD
+@DO `s04 IS `5Homeworld
+@DO `p12 IS 24
+@DO `p35 IS 01
+@DO `p76 IS 7
+@DO `p57 IS 21
+@DO `p58 IS 07 
+@DO `p59 IS 562
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 8915
+@DO `p64 IS 3480
+@DO `p65 IS 6446
+@DO `p66 IS 119
+@DO `p67 IS 345 
+@DO `p68 IS 0
+@DO `p69 IS 2460
+@DO `p70 IS 814
+@DO `p71 IS 553
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#DREAMORA
+@DO `s04 IS `2Dreamora
+@DO `p12 IS 25
+@DO `p35 IS 0
+@DO `p76 IS 8
+@DO `p57 IS 34
+@DO `p58 IS 07 
+@DO `p59 IS 729
+@DO `p60 IS 28
+@DO `p61 IS 17
+@DO `p62 IS 1566
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 435
+@DO `p64 IS 1515
+@DO `p65 IS 1566
+@DO `p66 IS 0
+@DO `p67 IS 0 
+@DO `p68 IS 824
+@DO `p69 IS 0
+@DO `p70 IS 2233
+@DO `p71 IS 4086
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#NIRVANA
+@DO `s04 IS `0Nirvana
+@DO `p12 IS 26
+@DO `p35 IS 0
+@DO `p76 IS 5
+@DO `p57 IS 32
+@DO `p58 IS 13 
+@DO `p59 IS 724
+@DO `p60 IS 28
+@DO `p61 IS 17
+@DO `p62 IS 1566
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 280
+@DO `p64 IS 1170
+@DO `p65 IS 68
+@DO `p66 IS 0
+@DO `p67 IS 44 
+@DO `p68 IS 432
+@DO `p69 IS 1780
+@DO `p70 IS 36
+@DO `p71 IS 306
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 233
+@DO `p75 IS 0
+@ROUTINE END
+
+@#SNAKEN
+;Locate Snaken on the map & Eden Warp.
+@BITSET `t02 2 1
+
+;Proceed
+@DO `s04 IS `0Snaken
+@DO `p12 IS 27
+@DO `p35 IS 01
+@DO `p76 IS 7
+@DO `p57 IS 17
+@DO `p58 IS 14 
+@DO `p59 IS 718
+@DO `p60 IS 58
+@DO `p61 IS 06
+@DO `p62 IS 1527
+
+@DO `p37 IS 200
+@DO `p38 IS 100000
+@DO `p39 IS 112
+
+@DO `p63 IS 500
+@DO `p64 IS 1500
+@DO `p65 IS 200
+@DO `p66 IS 350
+@DO `p67 IS 100 
+@DO `p68 IS 800
+@DO `p69 IS 2000
+@DO `p70 IS 150
+@DO `p71 IS 450
+@DO `p72 IS 2500000
+@DO `p73 IS 200000
+@DO `p74 IS 200
+@DO `p75 IS 0
+@ROUTINE END
+
+@#UDORAN
+@DO `s04 IS `5U`xDoran
+@DO `p12 IS 28
+@DO `p35 IS 0
+@DO `p76 IS 7
+@DO `p57 IS 33
+@DO `p58 IS 10 
+@DO `p59 IS 560
+@DO `p60 IS 41
+@DO `p61 IS 10
+@DO `p62 IS 1525
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 475
+@DO `p64 IS 0
+@DO `p65 IS 0
+@DO `p66 IS 400
+@DO `p67 IS 0 
+@DO `p68 IS 200
+@DO `p69 IS 0
+@DO `p70 IS 100
+@DO `p71 IS 200
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#ALTAN
+@DO `s04 IS `6Altan
+@DO `p12 IS 29
+@DO `p35 IS 0
+@DO `p76 IS 3
+@DO `p57 IS 39
+@DO `p58 IS 13 
+@DO `p59 IS 717
+@DO `p60 IS 47
+@DO `p61 IS 15
+@DO `p62 IS 1563
+
+@DO `p37 IS 0
+@DO `p38 IS 0
+@DO `p39 IS 0
+
+@DO `p63 IS 0
+@DO `p64 IS 4000
+@DO `p65 IS 100
+@DO `p66 IS 0
+@DO `p67 IS 500 
+@DO `p68 IS 2000
+@DO `p69 IS 1000
+@DO `p70 IS 0
+@DO `p71 IS 700
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 0
+@DO `p75 IS 0
+@ROUTINE END
+
+@#MATRIX
+@DO `s04 IS `7Matrix
+@DO `p12 IS 30
+@DO `p35 IS 0
+@DO `p76 IS 10
+@DO `p57 IS 31
+@DO `p58 IS 08  
+@DO `p59 IS 878
+@DO `p60 IS 68
+@DO `p61 IS 03 
+@DO `p62 IS 1528
+
+@DO `p37 IS 0
+@DO `p38 IS 65000
+@DO `p39 IS 70
+
+@DO `p63 IS 0
+@DO `p64 IS 0
+@DO `p65 IS 0
+@DO `p66 IS 100
+@DO `p67 IS 0 
+@DO `p68 IS 0
+@DO `p69 IS 500 
+@DO `p70 IS 0
+@DO `p71 IS 0
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 250
+@DO `p75 IS 0
+@ROUTINE END
+
+
+
+
+
+;Common Facilities
+
+@#LOADER
+@DO SAYBAR
+`%People are busy loading materials onto orbital launchers.
+
+@#SHIPYARD
+@LABEL YARDMENU
+@DO `p28 IS 0
+@CLEAR SCREEN
+@SHOW
+                                `0Shipyard
+
+`%Current # of Holds/Limit:    `$`p55`%/`$`p54
+`%Current # of Reactors/Limit: `$`p48`%/`$`p47
+`%Current # of Shields/Limit:  `$`p02`%/`$`p03`%/`$`p34
+`%Your Money:                  `$&money
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>`p37 0 >&money `p37 <`p55 `p54 `%Buy `6Cargo Hold   `%Price: `$`p37
+>`p38 0 >&money `p38 <`p48 `p47 `%Buy `4Reactor      `%Price: `$`p38
+>`p39 0 >&money `p39 <`p03 `p34 `%Buy `4Shield Unit  `%Price: `$`p39
+<`p02 `p03 `%Shield recharge    `%Price: `$1 per unit
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@DO `p28 is `p54
+@DO `p28 - `p55
+@IF `v40 > `p28 THEN DO
+ @BEGIN
+ @DO GOTO MAX
+ @END
+@DO `p28 is `p37
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO MONEY - `p28
+@DO `p55 + `v40
+@DO `p56 + `v40
+@DO GOTO YARDMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@DO `p28 is `p47
+@DO `p28 - `p48
+@IF `v40 > `p28 THEN DO
+ @BEGIN
+ @DO GOTO MAX
+ @END
+@DO `p28 is `p38
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO MONEY - `p28
+@DO `p48 + `v40
+@DO GOTO YARDMENU
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@DO `p28 is `p34
+@DO `p28 - `p03
+@IF `v40 > `p28 THEN DO
+ @BEGIN
+ @DO GOTO MAX
+ @END
+@DO `p28 is `p39
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO MONEY - `p28
+@DO `p03 + `v40
+@DO `p02 IS `p03
+@DO GOTO YARDMENU
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@DO `p28 is `p03
+@DO `p28 - `p02
+@IF `v40 > `p28 THEN DO
+ @BEGIN
+ @DO GOTO MAX
+ @END
+@DO `p28 is 1
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO MONEY - `p28
+@DO `p02 + `v40
+@DO GOTO YARDMENU
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@ROUTINE OEND
+@END
+
+@LABEL MAX
+@SHOW
+
+     `4Request is beyond design capacity!
+@KEY
+@DO GOTO YARDMENU
+
+@LABEL NOGOLD
+@SHOW
+
+     `4Not enough money!
+@KEY
+@DO GOTO YARDMENU
+
+
+
+
+;Planetary Command
+@#COMMAND
+
+ @IF &playernum IS `p13 THEN DO
+ @BEGIN
+ @LABEL CMENU
+ @DO DELETE PLANETS\PLANET`p12.DAT
+ @WRITEFILE PLANETS\PLANET`p12.DAT
+`p13
+`p43
+`p44
+`p45
+`p46
+@
+ @CLEAR SCREEN
+ @DO MOVE 1 1
+ @SHOW
+`r1`%Planetary Command`r0
+
+
+`1Planet Name  : `0`s04
+`1Planet #     : `0`p12
+`1Planet Owner : `0`p13
+`1Population   : `0`p43
+`1Assault Power: `0`p44
+`1Defense Power: `0`p45
+`1Money        : `$&money
+
+@PAUSEOFF
+ @DISPLAYFILE ANSI\P`p76.ANS
+ @PAUSEON
+  @IF `p46 IS 0 THEN DO
+  @BEGIN
+  @DO MOVE 1 12
+  @SHOW
+`1Intermail Service `4Inactive
+
+  @END
+  @IF `p46 IS 1 THEN DO
+  @BEGIN
+  @DO MOVE 1 12
+  @SHOW
+`1Intermail Service `0Active
+
+  @END
+ @DO `V01 IS 1
+ @do write
+`x`x
+ @CHOICE
+`1Upgrade Assault System
+`1Upgrade Defense System
+<`p46 1 `0Enable Intermail
+>`p46 0 `4Disable Intermail
+`2Treasury
+`3Password Control
+`%Leave
+  @IF RESPONCE IS 1 THEN DO
+  @BEGIN
+  @CLEAR SCREEN
+  @SHOW
+`1Current Assault Power: `9`p44
+`1Current Money        : `$&money
+
+`$$100 `%per assault unit.
+
+  @DO READNUM 6
+  @DO `p28 is 0
+  @DO `p28 is `v40
+  @DO `p28 * 100
+   @IF `p28 > &money THEN DO
+   @BEGIN
+   @SHOW
+
+     `4Not enough money!
+   @KEY
+   @DO GOTO CMENU
+   @END
+  @DO `p44 + `v40
+  @DO money - `p28
+  @DO GOTO CMENU
+  @END
+
+  @IF RESPONCE IS 2 THEN DO
+  @BEGIN
+  @CLEAR SCREEN
+  @SHOW
+`1Current Defense Power: `9`p45
+`1Current Money        : `$&money
+
+`$$100 `%per defense unit.
+
+  @DO READNUM 6
+  @DO `p28 is 0
+  @DO `p28 is `v40
+  @DO `p28 * 100
+   @IF `p28 > &money THEN DO
+   @BEGIN
+   @SHOW
+
+     `4Not enough money!
+   @KEY
+   @DO GOTO CMENU
+   @END
+  @DO `p45 + `v40
+  @DO money - `p28
+  @DO GOTO CMENU
+  @END
+
+  @IF RESPONCE IS 3 THEN DO
+  @BEGIN
+  @DO `p46 IS 1
+  @DO GOTO CMENU
+  @END
+
+  @IF RESPONCE IS 4 THEN DO
+  @BEGIN
+  @DO `p46 IS 0
+  @DO GOTO CMENU
+  @END
+
+  @IF RESPONCE IS 5 THEN DO
+  @BEGIN
+  @ROUTINE MYBANK
+  @END
+
+  @IF RESPONCE IS 6 THEN DO
+  @begin
+  @do write
+`\`\  `9"And the new password, s&sir?" `1(`4NONE`1 is you only, `4ALL`1 is everybody welcome)`\  `1Password:`x
+  @do readstring 40 `s03 `s03
+  @do `p20 is length `s03
+   @if `p20 < 2 then do
+   @begin
+   @show
+`\`\  `1You decide the current password is ok.`\`\`k
+   @KEY
+   @do goto CMENU
+   @end
+  @do delete PLANETS\pown`p12.dat
+  @writefile PLANETS\pown`p12.dat
+&playernum
+`p23
+`s03
+`p24
+@
+  @show
+`\`\  `9"Yes s&sir, I will not forget it!" `1the Planet Officer promises.`\`\
+  @KEY
+  @do goto CMENU
+  @end
+
+  @IF RESPONCE IS 7 THEN DO
+  @BEGIN
+  @ROUTINE OEND
+  @END
+ @END
+
+ @IF &playernum NOT `p13 THEN DO
+ @BEGIN
+ @DO SAYBAR
+`%Sorry, only planet rulers may come here.
+ @DO MOVEBACK
+ @ROUTINEABORT
+ @END
+
+
+
+
+@#MYBANK
+;planet treasury
+@do moveback
+@do `p24 is 0
+@if PLANETS\pown`p12.dat exist true then do
+  @begin
+  @readfile PLANETS\pown`p12.dat
+`p23
+`s03
+`p24
+@
+  @end
+
+@clearblock 20 21
+@do move 3 21
+@do write
+`r0`1  Treasury is at `$$`p24`1 - (`9T`1)ake, (`9L`1)eave or (`9N`1)evermind? [`9N`1] :`%`x
+@do readspecial `s01 NTL
+@if `s01 is N then do
+ @begin
+ @show
+`9You close the safe, carefully.`k
+ @do goto cmenu
+ @end
+
+@if `s01 is T then do
+  @begin
+  @do move 5 23
+  @do write
+`9`r0Amount? `9: `%
+ @do readnum 10 0
+  @do `p21 is `v40
+  @if `p21 < 1 then `p21 is 0
+  @if `p21 > `p24 then do
+    @begin
+    @clearblock 21 24
+    @show
+`$Not enough in here for that.`k
+    @do goto cmenu
+    @end
+
+ @if `p21 is 0 then do
+   @begin
+    @clearblock 21 24
+    @show
+`9You take nothing.`k
+    @do goto cmenu
+   @end
+  @readfile PLANETS\pown`p12.dat
+`p23
+`s03
+`p24
+@
+
+  @if `p24 < `p21 then do
+    @begin
+    @clearblock 21 24
+    @show
+`$Oh no!  Someone took the money while you were thinking about it!`k
+    @do goto cmenu
+    @end
+
+    @do `p24 - `p21
+    @do money + `p21
+  @do delete PLANETS\pown`p12.dat
+  @writefile PLANETS\pown`p12.dat
+`p23
+`s03
+`p24
+@
+    @clearblock 21 24
+    @show
+`9You take `$`p21`9 from the treasury.`k
+
+;if not owner, lets notify him
+
+@readfile PLANETS\pown`p12.dat
+`p23
+`s03
+`p24
+@
+;load owner and current password
+
+@if `p23 not &playernum then do
+  @begin
+   @writefile mail\mail`p23.dat
+  `9`s04 `%Reports:
+`9-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+`9  `n`1 has taken `$$`p21 `1from the treasury.
+
+  @end
+  @do goto cmenu
+  @end
+
+@if `s01 is L then do
+  @begin
+  @do move 5 23
+  @do write
+`9`r0Amount? `9: `%
+ @do readnum 10 &money
+  @do `p21 is `v40
+  @if `p21 < 1 then `p21 is 0
+  @if `p21 > money then do
+    @begin
+    @clearblock 21 24
+    @show
+`$You are not carrying that much!`k
+    @do goto cmenu
+    @end
+
+ @if `p21 is 0 then do
+   @begin
+    @clearblock 21 24
+    @show
+`9You decide to leave nothing.  Ha!`k
+    @do goto cmenu
+   @end
+
+  @do money - `p21
+
+;deposit.. we read from the file again so cheating won't be possible with
+;correct timing
+  @readfile PLANETS\pown`p12.dat
+`p23
+`s03
+`p24
+@
+  @do `p24 + `p21
+  @do delete PLANETS\pown`p12.dat
+  @writefile PLANETS\pown`p12.dat
+`p23
+`s03
+`p24
+@
+    @clearblock 21 24
+;if not owner, lets notify him
+
+@readfile PLANETS\pown`p12.dat
+`p23
+`s03
+`p24
+@
+;load owner and current password
+
+@if `p23 not &playernum then do
+  @begin
+   @writefile mail\mail`p23.dat
+  `9`s04 Reports:
+`9-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+`9  `n`1 has deposited `$$`p21 `1to the treasury.
+
+  @end
+    @show
+`9You leave `$`p21`9 in the treasury.`k
+  @do goto cmenu
+  @end
+
+
+
+
+
+;Intermail message board. Each planet has one.
+@#INTERMAIL
+;If message board isn't active...
+@IF `p46 IS 0 THEN DO
+@BEGIN
+@DO SAYBAR
+`%Intermail services are not active on this world. Contact the ruler for help.
+@DO MOVEBACK
+@END
+
+;If message board is active...
+@IF `p46 IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+                              `9Planetary Intermail
+
+@if USERDAT\`p12.TXT exist false then do
+ @begin
+ @writefile USERDAT\`p12.TXT
+  `3Barnicle: `$Hello!
+ @end
+@if USERDAT\`p12.TXT exist true then do
+ @begin
+ @displayfile USERDAT\`p12.TXT
+ @end
+@show
+@
+(Do tricky stuff with name to determine how much they can type)
+@DO `s09 is `%
+@DO `s09 add `n
+@DO STRIP `s09 <-- Strips all none color ` codes out
+@DO `s09 add `x`1:`x`9
+@DO `p25 is length `s09
+@DO `p26 is 76
+@DO `p26 - `p25
+@DO WRITE
+  `1Enter your message or `9ENTER`1 to abort.`\  `s09
+@DO READSTRING `p26 NIL `s10 <--Read string, NIL is default. (nothing)
+@do stripbad `s10
+@SHOW
+
+@DO `p27 is length `s10
+@IF `p27 less 3 then do
+ @begin
+ @routine oend
+ @end
+ @writefile USERDAT\`p12.TXT
+  `%`n`1: `9`s10
+ @do trim USERDAT\`p12.TXT 17
+@ROUTINE OEND
+@END
+
+
+;Standard Bank: Is it available?
+@#BANK
+@IF `p35 IS 1 THEN DO
+ @BEGIN
+ @ROUTINE BANKSYS
+ @END
+@IF `p35 IS 0 THEN DO
+ @BEGIN
+ @DO SAYBAR
+ `%This planet's bank seems vacant.
+ @DO MOVEBACK
+ @END
+
+;Standard Bank
+@#BANKSYS
+@do `v01 is 1
+@offmap
+@do moveback
+@label bankstart
+@show
+`r0`c  `r1 `$Galactic Banking System `r0
+
+`1  A young clerk eyes you nervously.
+
+@if bank more 0 then do
+ @begin
+ @show
+`1  You are holding `$$&money`1, your account is at `$$&bank`1.
+
+ @end
+
+@if bank is 0 then do
+ @begin
+ @show
+`1  You currently don't have an account with them.
+
+ @end
+
+@do write
+`x`x
+@choice
+>&bank 0 Make a deposit.
+>&bank 0 Make a withdraw.
+=&bank 0 Apply for an account here.
+Leave
+@if response is 3 then do
+  @begin
+  @do `v01 is 1
+  @show
+
+
+  `1The nervous boy asks you to sit down.
+
+  `9"Your full name s&sir?"
+  @do `s01 is NIL
+  @do write
+`x`x
+  @do readstring 30 `s01
+  @show
+
+
+  `9"Your current residence?"
+
+  @do write
+`x`x
+  @do readstring 50 `s01
+
+  @show
+
+
+  `9"Your net income yearly?"
+
+  @do write
+`x`x
+  @do readnum 10
+  @if `v40 less 20 then do
+  @begin
+  @show
+
+  @end
+
+  @if `v40 more 19 then do
+   @begin
+   @show
+
+
+  `1You giggle to yourself `9-`1 how will they know you just totally lied on
+  that last question?!??  You only made `b19`1 gold pieces last year!
+  @end
+  @label bankagain
+  @show
+
+  `9"How much would you like to open your account with?" `1(you have `$$&money`1)
+
+  @do write
+`x`x
+  @do readnum 10 money
+  @if `v40 is 0 then do
+   @begin
+   @show
+
+
+  `1You decide you really don't want to open an account with this
+  branch.
+
+`k
+  @do goto bankstart
+  @end
+
+  @if `v40 > money then do
+   @begin
+   @show
+
+
+`1  You don't have this much!  Try again.
+   @do goto bankagain
+   @end
+
+  @if `v40 < 50 then do
+  @begin
+  @if money < 50 then do
+   @begin
+  @show
+
+  `1The clerk eyes your shabby clothing distastefully - as if he knew
+  this part was coming.
+
+  `9"I'm sorry s&sir, we do require `$$50 `1to open an account.  And could
+  you please leave the pen on your way out." `1he asks haughtily.
+
+`k  `1You carefully return the pen.  `$"I'll be back someday.  And you WILL
+  open an account for me then," `1you vow seriously.
+
+  `9"Of course you will, s&sir.  Please exit now, remember, the sign does
+  say no loitering.  And this means you." `1he says as he points to the
+  door.
+
+`k
+@drawmap
+@update
+@closescript
+   @end
+
+  @show
+
+
+  `9"S&Sir, `$$50 `9is required to open a new account!"
+  @do goto bankagain
+  @end
+  @do money - `v40
+  @do bank + `v40
+  @show
+
+
+  `9"Very good S&sir!  Your new account has been opened!"
+
+`k
+  @do goto bank
+  @end
+
+
+@if response is 1 then do
+  @begin
+  @do write
+`\
+  @label deposit
+  @do write
+`\  `9"Deposit how much, s&sir?"`\`\`x`x
+  @do readnum 10 money
+  @if `v40 more money then do
+  @begin
+  @show
+`\`\  `1Maybe you left the money in your other pants?  'cuz it sure ain't here.
+  @do goto deposit
+  @end
+  @if `v40 less 0 then do
+  @begin
+  @show
+`\`\  `1No, this isn't happening and you aren't here.
+  @do goto withdraw
+  @end
+
+  @do money - `v40
+  @do bank + `v40
+  @do goto bankstart
+
+  @end
+
+@if response is 2 then do
+  @begin
+  @do write
+`\
+  @label withdraw
+  @do write
+`\  `9"Withdraw how much, s&sir?"`\`\`x`x
+  @do `p21 is bank
+  @do `p21 - 1
+  @if `p21 < 0 then `p21 is 0
+  @do readnum 10 `p21
+  @if `v40 more bank then do
+  @begin
+  @show
+`\`\  `1You kind of don't have that much in your account.  Nice bookkeeping!
+  @do goto withdraw
+  @end
+
+  @if `v40 less 0 then do
+  @begin
+  @show
+`\`\  `1No, I don't think so.
+  @do goto withdraw
+  @end
+
+  @if `v40 is bank then do
+   @begin
+   @show
+
+
+  `9"But s&sir!  This will close your account with us, are you sure you wish
+  to do that?" `1the clerk chokes.
+
+  @do write
+`x`x
+  @do `v01 is 1
+  @choice
+Ok, nevermind then.
+Yeah.  Get my damn money.
+@if response is 1 then goto bank
+
+   @end
+
+  @do money + `v40
+  @do bank - `v40
+  @do goto bankstart
+  @end
+@drawmap
+@update
+
+;Launch to ship.
+@#BLAST
+@IF `p36 MORE 0 THEN DO
+ @BEGIN
+ @CLEAR SCREEN
+ @SHOW
+
+     `$You take off for your ship!
+
+ @KEY
+ @ROUTINE SHIP IN SHIPYARD.REF
+ @END
+@IF `p36 IS 0 THEN DO
+ @BEGIN
+ @DO SAYBAR
+ `%You don't have a ship!
+ @DO MOVEBACK
+ @END
+
+
+
+
+;Planetary control
+@#END
+;Swap out for Helperpad
+@IF `p30 IS 1 THEN DO
+ @BEGIN
+ @ROUTINE SHOWDATA IN ITEMS.REF
+ @END
+
+;Swap to planetary approach
+@IF `p30 IS 0 THEN DO
+@BEGIN
+ @IF `p49 LESS 1 THEN DO
+  @BEGIN
+  @DO SAYBAR
+`4Warning! Insufficent power to enter orbit!
+  @DO MOVEBACK
+  @ROUTINEABORT
+  @END
+ @IF `p49 MORE 0 THEN DO
+  @BEGIN
+  @LABEL APPMENU
+  @READFILE PLANETS\PLANET`p12.DAT
+`p13
+`p43
+`p44
+`p45
+`p46
+@
+  @CLEAR SCREEN
+  @PAUSEOFF
+  @DISPLAYFILE ANSI\P`p76.ANS
+  @PAUSEON
+  @DO MOVE 1 1
+  @SHOW
+`%Planet `$`p12`%: `s04
+
+
+`1Planet Owner : `0`p13
+`1Population   : `0`p43
+`1Assault Power: `0`p44
+`1Defense Power: `0`p45
+
+
+`3Your Reactor Power: `0`p49
+
+@DO `p24 IS &playernum
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`%Enter Orbit
+!`p24 `p13 `9Attack
+`@Leave
+ @IF RESPONCE IS 1 THEN DO
+ @BEGIN
+ @ROUTINE PASS
+ @LABEL PERMITTED
+ @DO `p49 - 1
+ @IF `p36 IS 20 THEN `p77 IS 1533
+ @IF `p36 NOT 20 THEN `p77 IS 1524
+ @DO X IS 48
+ @DO Y IS 10
+ @DO MAP IS `p77
+ @LOADMAP MAP
+ @drawmap
+ @update
+ @routineabort
+ @END
+  @IF RESPONCE IS 2 THEN DO
+ @BEGIN
+ @DO `p49 - 1
+ @ROUTINE ATTACK
+ @END
+  @IF RESPONCE IS 3 THEN DO
+ @BEGIN
+ @do moveback
+ @drawmap
+ @update
+ @routineabort
+ @END
+@END
+@END
+
+
+
+
+
+;Attacking the Planet
+@#ATTACK
+@LABEL AMENU
+@DO DELETE PLANETS\PLANET`p12.DAT
+@WRITEFILE PLANETS\PLANET`p12.DAT
+`p13
+`p43
+`p44
+`p45
+`p46
+@
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\P`p76.ANS
+@PAUSEON
+@DO MOVE 1 1
+@SHOW
+`%Planet `$`p12`%: `s04
+
+
+`1Population   : `0`p43
+`1Assault Power: `0`p44
+`1Defense Power: `0`p45
+
+
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>`i26 0 `4Delpoy Zone Atomic Bombs
+`9Attack
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO `i26 - 1
+@DO `p24 is 0
+@DO `p24 is `p43
+@DO `p24 / 10
+
+@DO `p25 is 0
+@DO `p25 is `p44
+@DO `p25 / 10
+
+@DO `p26 is 0
+@DO `p26 is `p45
+@DO `p26 / 10
+
+@DO `p43 - `p24
+@DO `p44 - `p25
+@DO `p45 - `p26
+@CLEAR SCREEN
+@SHOW
+
+`4The Zone Atomic does its work...
+
+
+`$`p24`% people are killed.
+`$`p25`% assault units lost.
+`$`p26`% defense units destroyed.
+
+
+@KEY
+@DO GOTO AMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@fight
+;name
+`s04 Defense
+;string said when you see him
+`%Planetary assault cannons lock on to you!
+;power move kill string
+`%The planetary shielding collapses!
+;sex - 1 is male, 2 is female, 3 is it
+3
+;weapon and strength for the weapon, up to 5
+fires at you with planetary cannons|`p44
+fires a `!Utopia Blast!|`p44 * 2
+NONE|NONE
+NONE|NONE
+NONE|NONE
+;defense
+50
+;gold reward
+50000
+;experience
+5000
+;hit points
+`p45
+;if win: ref file|name or NONE
+PLANET.REF|VICTORY
+;if lose: ref file|name or NONE
+GAMETXT.REF|DIE
+;if runs: ref file|name or NONE
+FIGHT.REF|END
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO GOTO APPMENU
+@END
+
+
+
+
+
+;Planet is Claimed
+@#VICTORY
+@CLEAR SCREEN
+@SHOW
+`r1`$Planet Claimed!`r0`%
+
+
+     The planet is now yours!
+
+     `4All planetary defense systems need to be rebuilt though.
+
+     You have been awarded a bounty that can help this though.
+
+     Visit the planetary control office to take action.
+
+@KEY
+@DO `p13 IS &playernum
+@DO `p44 IS 0
+@DO `p45 IS 0
+@DO DELETE PLANETS\PLANET`p12.DAT
+@WRITEFILE PLANETS\PLANET`p12.DAT
+`p13
+`p43
+`p44
+`p45
+`p46
+@
+@IF `p36 IS 20 THEN `p77 IS 1533
+@IF `p36 NOT 20 THEN `p77 IS 1524
+@DO X IS 48
+@DO Y IS 10
+@DO MAP IS `p77
+@LOADMAP MAP
+@drawmap
+@update
+@do talk `4Newsflash:`x`$`n`x`%defeated`x`$`E
+@do addlog
+  `9`n `1defeated `E
+@writefile lognow.txt
+                                 `1-`9=`1-`%=`1-`9=`1-
+@routineabort
+
+;Set password for planet.
+@#PASS
+@if PLANETS\pown`p12.dat exist false then do
+  @begin
+  @closescript
+  @end
+
+@readfile PLANETS\pown`p12.dat
+`p23
+`s03
+`p24
+@
+@if `p23 is &playernum then do
+  @begin
+  @closescript
+  @end
+
+@do moveback
+
+  @do `s02 is getname `p20
+  @do upcase `s03
+  @if `s03 is ALL then do
+   @begin
+   @do goto PERMITTED
+   @end
+  @if `s03 is NONE then do
+   @begin
+  @do moveback
+  @do saybar
+`9Planet Officer:  `1No one is allowed here! Private planet!
+
+   @closescript
+   @end
+
+  @show
+`r0`c  `r1 Entrance to the private planet `r0
+
+`1  `1The Planet Officer looks over at you.  `9"Hey!  What business do you have
+  being here?"
+
+@do write
+`x`x
+@do `v01 is 1
+@choice
+Offer an explanation
+Nevermind
+  @if response is 1 then do
+   @begin
+   @do write
+`\`\  `1Say what? :`x
+  @do readstring 40 NIL `s01
+  @do upcase `s03
+  @do upcase `s01
+
+  @if `s03 is `s01 then do
+    @begin
+    @show
+`\`\  `9"Ok, go on in then!"`\`\`k
+    @DO GOTO PERMITTED
+    @end
+   @writefile mail\mail`p23.dat
+  `9Planet Officer Reports:
+`1-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+`9  `n`1 attempted to get in orbit of `s04`1 by saying
+  `9"`s01"`1.  `1He was `bNOT`1 allowed in.
+
+   @show
+`\`\  `1The Planet Officer isn't impressed.`\`\`k
+   @do moveback
+   @ROUTINE OEND
+   @end
+  @ROUTINE OEND
+
+;Buy Weapons
+@#WSHOP
+@CLEAR SCREEN
+@SHOW
+`%Ship type: `$`p36
+`%Ship class: `$`s05
+`%Ship's weapon limit: `$`p50
+
+ @IF `p50 IS 1 THEN DO
+ @BEGIN
+ @BUYMANAGER
+ 9
+ 10
+ @END
+
+ @IF `p50 IS 2 THEN DO
+ @BEGIN
+ @BUYMANAGER
+ 9
+ 10
+ 11
+ 12
+ @END
+
+ @IF `p50 IS 3 THEN DO
+ @BEGIN
+ @BUYMANAGER
+ 9
+ 10
+ 11
+ 12
+ 13
+ 14
+ @END
+
+ @IF `p50 IS 4 THEN DO
+ @BEGIN
+ @BUYMANAGER
+ 9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ @END
+@ROUTINE OEND
+
+;Buy Armour
+@#ASHOP
+@CLEAR SCREEN
+@SHOW
+`%Ship type: `$`p36
+`%Ship class: `$`s05
+`%Ship's armour limit: `$`p51
+
+ @IF `p51 IS 1 THEN DO
+ @BEGIN
+ @BUYMANAGER
+ 2
+ 3
+ @END
+
+ @IF `p51 IS 2 THEN DO
+ @BEGIN
+ @BUYMANAGER
+ 2
+ 3
+ 4
+ 5
+ @END
+
+ @IF `p51 IS 3 THEN DO
+ @BEGIN
+ @BUYMANAGER
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ @END
+
+ @IF `p51 IS 4 THEN DO
+ @BEGIN
+ @BUYMANAGER
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ @END
+@ROUTINE OEND
+
+@#OEND
+@drawmap
+@do moveback
+@update
+@routineabort

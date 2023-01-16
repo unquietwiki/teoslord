@@ -1,0 +1,130 @@
+;var info for the game - so people that add/mess with this world know
+;what to change.  Use a comment ; in front of a line to have it not show
+;up in the player editor.  
+
+;player specific longint vars
+`p01 Experience
+`p02 Shielding
+`p03 Shielding Max
+`p04 Weapon Power
+`p05 Armour Power
+`p07 Alignment (negative is evil)
+`p08 Charm
+`p09 Level
+`p10 Day last played on
+`p11 Turns left today, if limited play is set in RULES.REF.
+`p12 Planet #
+`p13 Planet Owner #
+`p14 Quest origination
+`p15 Quest destination
+`p16 Quest payoff
+`p17 Quest item
+`p18 Quests completed
+`p19 Organization #: 0 Neutral; 1 Alliance; 2 Maraken; 3 Snaken
+`p20 reserved, common math variable
+`p21 reserved
+`p22 reserved
+`p23 reserved
+`p24 reserved
+`p25 reserved
+`p26 reserved
+`p27 reserved
+`p28 reserved, used to calculate cost
+`p29 reserved
+`p30 reserved, used to determine if helperpad is on
+`p31 Quests left today
+`p32 Quest age in days
+`p33 Gambles left for today
+`p34 Shielding Limit
+`p35 Bank Active: 0 No; 1 Yes
+`p36 Ship Type #
+`p37 Ship Hold Cost
+`p38 Ship Reactor Cost
+`p39 Ship Shield Cost
+`p40 Ship Name #
+`p41 Science Officer #
+`p42 Engineer #
+`p43 Planet Population
+`p44 Planet Attack Power
+`p45 Planet HP/Shielding Level
+`p46 Intermail Active: 0 No; 1 Yes
+`p47 Ship Reactor Limit
+`p48 Ship Reactors
+`p49 Ship Reactor Power
+`p50 Ship Weapon Limit
+`p51 Ship HP/Shielding Limit
+`p52 Ship Torpedo Limit
+`p53 Ship Torpedoes
+`p54 Ship Hold Limit
+`p55 Ship Holds
+`p56 Ship Holds Free
+`p57 Space X
+`p58 Space Y
+`p59 Space Map #
+`p60 Land X
+`p61 Land Y
+`p62 Land Map #
+`p63 Cost of Medical Unit
+`p64 Cost of Heating Unit
+`p65 Cost of Ice Unit
+`p66 Cost of Ground Weapon
+`p67 Cost of Novelty Pack
+`p68 Cost of Tree Growth Kit
+`p69 Cost of Jewel
+`p70 Cost of Plastic Trinket
+`p71 Cost of Clothes Bundle
+`p72 Cost of Zone Atomic Bomb
+`p73 Cost of Onboard Printing Kit
+`p74 Cost of Slug
+`p75 Cost of Eden Warp
+`p76 Planet ANSI number
+`p77 NPC Gender: 1 male; 2 female; 3 neuter/other
+`p78 NPC Alignment
+`p79 NPC Defense Odds
+`p80 NPC Attack
+`p81 NPC Shielding
+`p82 NPC Money
+`p83 NPC Experience
+
+;player specific byte vars.  Some are used with the bitcheck command to turn
+;the byte into 8 yes/no vars.
+
+`t01: Bit 1: Got the Ship's Catalog
+`t01: Bit 2: Got a Ship from Able
+`t01: Bit 3: Talked to Hook
+`t01: Bit 4: Bought a Uniform
+`t01: Bit 5: Snaken Catalog
+`t01: Bit 6: Ja'dra Found Out
+
+`t02: Bit 1: Found the wormhole exit
+`t02: Bit 2: Found Snaken
+
+`t03: Bit 1: Looked around the old station.
+`t03: Bit 2: Found the Command Center.
+`t03: Bit 3: Found the old man.
+
+`t04: Bit 1: Talked to Able about the old station.
+
+;Global longint vars used
+`v01 reserved
+`v02 inactive
+`v03 0 = Normal play, 1 = Unlimited deaths
+`v04 inactive
+`v05 Turns per day given at each newday - 0 for unlimited.
+`v06 inactive
+`v07 Quests chances per day allowed
+`v08 Gambles per day allowed
+`v39 reserved
+`v40 reserved
+
+;Global string vars
+`s01 reserved
+`s02 reserved
+`s03 reserved
+`s04 Planet Name
+`s05 Ship Class
+`s06 Ship Name
+`s07 Science Officer
+`s08 Engineering Officer
+`s09 reserved
+`s10 reserved

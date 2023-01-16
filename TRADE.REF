@@ -1,0 +1,611 @@
+;This REF covers the trade office. All prices are set in PLANET.REF
+
+@#OFFICE
+@CLEAR SCREEN
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`4Buy Trade Goods
+`2Sell Trade Goods
+`$Done!
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@ROUTINE BUY
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@ROUTINE SELL
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+@#BUY
+@LABEL BUYMENU
+@CLEAR SCREEN
+@SHOW
+`%Your Money: `$&money
+`%Free Holds: `$`p56
+
+@DO `V01 IS 1
+@DO `p28 IS 0
+@do write
+`x`x
+@CHOICE
+>`p63 0 >&money `p63 >`p56 0 `3Medical Unit         `%Amount: `$`i17  `%Price: `$`p63
+>`p64 0 >&money `p64 >`p56 0 `@Heating Unit         `%Amount: `$`i18  `%Price: `$`p64
+>`p65 0 >&money `p65 >`p56 0 `9Ice Unit             `%Amount: `$`i19  `%Price: `$`p65
+>`p66 0 >&money `p66 >`p56 0 `6Ground Weapon        `%Amount: `$`i20  `%Price: `$`p66
+>`p67 0 >&money `p67 >`p56 0 `%Novelty Pack         `%Amount: `$`i21  `%Price: `$`p67
+>`p68 0 >&money `p68 >`p56 0 `2Tree Growth          `%Amount: `$`i22  `%Price: `$`p68
+>`p69 0 >&money `p69 >`p56 0 `!Jewel                `%Amount: `$`i23  `%Price: `$`p69
+>`p70 0 >&money `p70 >`p56 0 `5Plastic Trinket      `%Amount: `$`i24  `%Price: `$`p70
+>`p71 0 >&money `p71 >`p56 0 `6Clothes Bundle       `%Amount: `$`i25  `%Price: `$`p71
+>`p72 0 >&money `p72 >`p56 0 `4Zone Atomic Bomb     `%Amount: `$`i26  `%Price: `$`p72
+>`p73 0 >&money `p73 >`p56 0 `#Onboard Printing Kit `%Amount: `$`i27  `%Price: `$`p73
+>`p74 0 >&money `p74 >`p56 0 `0Slug                 `%Amount: `$`i28  `%Price: `$`p74
+>`p75 0 >&money `p75 >`p56 0 `5Eden Warp            `%Amount: `$`i38  `%Price: `$`p75
+`$Done!
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p63
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i17 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p64
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i18 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p65
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i19 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p66
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i20 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p67
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i21 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p68
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i22 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p69
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i23 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p70
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i24 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p71
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i25 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 10 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p72
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i26 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 11 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p73
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i27 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 12 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p74
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i28 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 13 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `p56 THEN DO
+ @BEGIN
+ @DO GOTO NOHOLD
+ @END
+@DO `p28 + `p75
+@DO `p28 * `v40
+@IF `p28 > &money THEN DO
+ @BEGIN
+ @DO GOTO NOGOLD
+ @END
+@DO `i38 + `v40
+@DO MONEY - `p28
+@DO `p56 - `v40
+@DO GOTO BUYMENU
+@END
+@IF RESPONCE IS 14 THEN DO
+@BEGIN
+@ROUTINE OFFICE
+@END
+
+@LABEL NOHOLD
+@SHOW
+
+     `4Not enough holds!
+@KEY
+@DO GOTO BUYMENU
+@LABEL NOGOLD
+@SHOW
+
+     `4Not enough money!
+@KEY
+@DO GOTO BUYMENU
+
+@#SELL
+@LABEL SELLMENU
+@CLEAR SCREEN
+@SHOW
+`%Your Money: `$&money
+`%Free Holds: `$`p56
+
+@DO `V01 IS 1
+@DO `p28 IS 0
+@do write
+`x`x
+@CHOICE
+>`p63 0 >`i17 0 `3Medical Unit         `%Amount: `$`i17  `%Price: `$`p63
+>`p64 0 >`i18 0 `@Heating Unit         `%Amount: `$`i18  `%Price: `$`p64
+>`p65 0 >`i19 0 `9Ice Unit             `%Amount: `$`i19  `%Price: `$`p65
+>`p66 0 >`i20 0 `6Ground Weapon        `%Amount: `$`i20  `%Price: `$`p66
+>`p67 0 >`i21 0 `%Novelty Pack         `%Amount: `$`i21  `%Price: `$`p67
+>`p68 0 >`i22 0 `2Tree Growth          `%Amount: `$`i22  `%Price: `$`p68
+>`p69 0 >`i23 0 `!Jewel                `%Amount: `$`i23  `%Price: `$`p69
+>`p70 0 >`i24 0 `5Plastic Trinket      `%Amount: `$`i24  `%Price: `$`p70
+>`p71 0 >`i25 0 `6Clothes Bundle       `%Amount: `$`i25  `%Price: `$`p71
+>`p72 0 >`i26 0 `4Zone Atomic Bomb     `%Amount: `$`i26  `%Price: `$`p72
+>`p73 0 >`i27 0 `#Onboard Printing Kit `%Amount: `$`i27  `%Price: `$`p73
+>`p74 0 >`i28 0 `0Slug                 `%Amount: `$`i28  `%Price: `$`p74
+>`p75 0 >`i38 0 `5Eden Warp            `%Amount: `$`i38  `%Price: `$`p75
+`$Done!
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i17 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p63
+@DO `p28 * `v40
+@DO `i17 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i18 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p64
+@DO `p28 * `v40
+@DO `i18 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i19 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p65
+@DO `p28 * `v40
+@DO `i19 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i20 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p66
+@DO `p28 * `v40
+@DO `i20 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i21 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p67
+@DO `p28 * `v40
+@DO `i21 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i22 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p68
+@DO `p28 * `v40
+@DO `i22 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i23 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p69
+
+@DO `p28 * `v40
+@DO `i23 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i24 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p70
+
+@DO `p28 * `v40
+@DO `i24 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i25 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p71
+@DO `p28 * `v40
+@DO `i25 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 10 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i26 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p72
+
+@DO `p28 * `v40
+@DO `i26 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 11 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i27 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p73
+
+@DO `p28 * `v40
+@DO `i27 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 12 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i28 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p74
+
+@DO `p28 * `v40
+@DO `i28 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 13 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 4
+@IF `v40 > `i38 THEN DO
+ @BEGIN
+ @DO GOTO NOITEM
+ @END
+@DO `p28 + `p75
+
+@DO `p28 * `v40
+@DO `i38 - `v40
+@DO `p56 + `v40
+@DO MONEY + `p28
+@DO GOTO SELLMENU
+@END
+@IF RESPONCE IS 14 THEN DO
+@BEGIN
+@ROUTINE OFFICE
+@END
+
+@LABEL NOITEM
+@SHOW
+
+     `4Not enough items!
+@KEY
+@DO GOTO SELLMENU
+
+@#END
+@drawmap
+@do moveback
+@update
+@routineabort

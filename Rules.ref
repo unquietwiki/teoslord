@@ -1,0 +1,25 @@
+;This is the game rules and logon stuff.
+@#rules
+
+  ;The game's name. Don't change it unless you need to!
+  @progname
+  TEOS LORD: Version 1.70
+
+  ;-----------------------------------------------------------------------------
+  ;Rules for TEOS LORD.  You can change #'s here to affect the
+  ;rules of the game.
+
+  @do `v03 is 1 ;Can players die unlimited times per day?  0 is no, 1 is yes
+  @do `v04 is 1 ;Can the Schooloria Library be on the Galactic Inet? 0=N, 1=Y
+  @do `v05 is 0 ;turns per day given to a player, 0 for unlimited
+  @do `v07 is 10 ; Max random quests possible per day
+  @do `v08 is 50 ; Max uses of the slot machines/craps per day
+  ;-----------------------------------------------------------------------------
+
+  ;Intro screen access.
+  @clear screen
+  @pauseoff
+  @displayfile ANSI\INTRO.ANS
+  @pauseon
+  @key
+;END rules

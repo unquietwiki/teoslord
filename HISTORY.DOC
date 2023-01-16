@@ -1,0 +1,120 @@
+
+A history of TEOS LORD
+
+
+07/??/1997: Proto
+     World creation begins.
+
+
+11/10/1997: Version 0.7
+     Appears on The Slug BBS.
+
+
+11/23/1997: Version 0.8
+     1. Quests activated.
+     2. Shipyard code optimized.
+
+
+11/24/1997: Version 0.9
+     1. National governments readied. Now possible to join a party.
+     2. Shipyards completed. 19 ship designs available for use.
+
+
+11/28/1997: Version 0.92
+     1. Bug fixes.
+     2. Eden Warp made available.
+     3. Temple completed.
+     4. Helperpad revised. Trade data moved to "Z" key.
+
+
+12/06/1997: Version 0.95
+     1. Bug fixes.
+     2. Library repaired and enhanced with scrollable stories.
+     3. Visual enhancements.
+     4. Galactic poles and center defined on map.
+     5. 7 new planetary landscapes added (9 total).
+     6. SPECIAL.REF made to enhance planetary landscapes.
+     7. 0 added to single digit Y-coordinates (ex. 9 -> 09).
+     8. Temple repaired (Negative money could be donated).
+
+
+12/08/1997: Version 0.99
+     1. NPC Players activated.
+     2. Planetary control enabled. Now possible to own a planet.
+
+
+12/15/1997: Version 1.00
+     1. Shipyards repaired (Extra ship options were on the Neutral Dealer).
+     2. All "choice" menus corrected to omit blank entries.
+     3. Reactor power no longer deducted at planet entry. Now occurs only if
+        player enters orbit or attacks.
+     4. Graphic enhancements and corrections.
+     5. Ported in Jester's Casino from New World into the Asteroid Colony.
+     6. Ported the Bounty Hunter office from New World into the Maraken Cloud
+        Station.
+     7. Shipyard Beta redesigned: Now more graphical!
+     8. Quest point moved from Arms Dealer to the Torpedo Dealer.
+     9. Asteroid colony redesigned: Intermail & Planetary Command added.
+     10. Planetary control repaired: No longer goes to approach menu if not
+         owned.
+     11. Starting location changed to be in front of Ma's house on Earth.
+     12. Planet approach corrected to not allow attacks by its owner.
+     13. Planetary conquest now has a entry in the daily news.
+     14. Planetary passwords & treasuries implemented.
+
+01/20/1998: Version 1.01
+     1. Misaligned map shifts corrected.
+     2. Planetary control corrected.
+
+03/05/1998: Version 1.02
+     1. Corrected the math error caused by RULES.REF
+     2. Intro screens replaced by a modified version of a Planets:TEOS ANSI.
+     3. Elements from Version 2 begin to appear.
+       a. Deep Space Network established, minus Galactic Internet
+       b. Map enhancements.
+
+03/07/1998: Version 1.10
+     1. Restored the TEMPLE.REF (Accidentally had the game remove it;
+        I was able to recopy it from TEOS LORD 1.00). Also fixed the batch
+        file that caused the mishap.
+     2. Activated the Galactic Internet: has Message System & Virtual Library.
+     3. Did MAJOR repair on the planets. I think the system can do taxes now.
+     4. Some maps have been redesigned. It is now possible to command the
+        main worlds (Earth, Norhaven, Snaken).
+     5. Fixed the shipyards.
+     6. Removed the Grey Planet developer's addon. Working on new setup.
+     7. Added new ANSI's for the Deep Space Network.
+
+03/22/1998: Version 1.40
+     1. Did some MAJOR repair on options here and there: Planets work
+        properly; Ship selling/buying is complete; Weapons/Armour depots are
+        now working for all ships.
+     2. Reorganized the Asteroid Station. It is all map-based now.
+     3. Activated Intermail on all "Homeworld" planets.
+     4. Activated a "Earth/Shipyard Beta link" to help the shipless.
+     5. Added some more ANSI's to the "Deep Space Network," as well as
+        cutting down the price of transit significantly.
+     6. Modified the NPC system to allow several "Probe Encounters."
+     7. The HELP.REC/HELP.REF file is no longer compiled: Help will now work.
+     8. Added maintenance utility (TLMAINT.EXE).
+
+06/11/1998: Version 1.50
+     1. Removed maintenence utility.
+     2. Conducted work on Ja'dra map area.
+     3. Repaired the identification function. "No name" shouldn't appear
+        much anymore, and a startup error associated with it should now be
+        fully averted.
+     4. Replaced RULES.REC with RULES.REF: REF is editable.
+     5. Minor bug fixes.
+     6. Completed "Waystation Alpha."
+     7. Created the "Mariner Ship" and ship-switching: there are now two
+        ship maps instead of one.
+
+10/30/1998: Version 1.60
+     1. Corrected Shipyard overcharging on its services and goods.
+     2. Remade Engineer's "I'm fine" quote.
+     3. Added 2 new NPC's.
+
+08/15/2001: Version 1.70
+     1. Undocumented fixes by a fan.
+     2. Eliminated REC files (merged in devel kit).

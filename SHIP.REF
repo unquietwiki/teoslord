@@ -1,0 +1,148 @@
+@#REACTOR
+@CLEAR SCREEN
+@SHOW
+`r1`%Reactor Array Status`r0
+
+     `5Max # of Reactors in Array    : `$`p47
+     `6Current # of Reactors in Array: `$`p48
+     `0Amount of Reactor             : `$`p49
+
+@KEY
+@ROUTINE END
+
+@#SINK
+@DO SAYBAR
+`%You wash your hands in intense energy waves.
+
+@#TOILET
+@DO SAYBAR
+`%This toilet has got to be the most complex device in the Galaxy!
+
+@#BATH
+@DO SAYBAR
+`%This bath gets most of its water from recycled urine... `$Gross!
+
+@#HATCH
+@CLEAR SCREEN
+@SHOW
+
+     `$You leave the ship. Wonders await you!
+
+@KEY
+@DO X IS `p60
+@DO Y IS `p61
+@DO MAP IS `p62
+@LOADMAP MAP
+@drawmap
+@update
+@routineabort
+
+@#VIEW
+@DO SAYBAR
+`%This device uses a complex system of cameras & sensors for showing images.
+
+@#TREE
+@DO SAYBAR
+`%This is your favorite reading spot, among the hydroponic `2trees`%.
+
+@#SEAT
+@CLEAR SCREEN
+@SHOW
+
+     `$You take command!
+
+@KEY
+@DO X IS `p57
+@DO Y IS `p58
+@DO MAP IS `p59
+@LOADMAP MAP
+@drawmap
+@update
+@routineabort
+
+@#ENGINE
+@LABEL ENGINEER
+@CLEAR SCREEN
+@SHOW
+`r1`%Engineer `$`s08`r0
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`6Ship's Status?
+`3How are you?
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`6Ship Statistics
+`%Ship Class                    : `s05
+`%Ship's Name                   : `s06
+`%Ship's Science Officer        : `s07
+`%Ship's Engineering Officer    : `s08
+`%Ship's Reactor Limit          : `$`p47
+`%Current # of Reactors         : `$`p48
+`%Amount of Reactor Power       : `$`p49
+`%Ship's Weapon Limit           : `$`p50
+`%Current Attack Power          : `$s&wep_num
+`%Ship's Armour Limit           : `$`p51
+`%Current Defense Power         : `$s&arm_num
+`%Current # of Shield Units     : `$`p03
+`%Ship's Shield Limit           : `$`p34
+`%Ship's Torpedo Limit          : `$`p52
+`%Current # of Torpedoes        : `$`p53
+`%Ship's Hold Limit             : `$`p54
+`%Current # of Holds            : `$`p55
+`%Current # of Free Holds       : `$`p56
+@KEY
+@DO GOTO ENGINEER
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+
+     `7Well Captain, have a look around for yourself. I'd help ya look, but
+     my programming isn't very well laid out. You can ask me about ship's
+     status though. And my programmer says to enjoy the game.
+
+@KEY
+@DO GOTO ENGINEER
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+@#SCIENCE
+@CLEAR SCREEN
+@SHOW
+`r1`%Science Officer `$`s07`r0
+
+
+`%Report on planet `$`p12`%: `s04
+
+`1Planet Owner : `0`p13
+`1Population   : `0`p43
+`1Assault Power: `0`p44
+`1Defense Power: `0`p45
+
+@KEY
+@ROUTINE END
+
+@#FOOD
+@DO SAYBAR
+`%You sit at an advanced food serving booth and enjoy your favorite meal.
+
+@#SHOWER
+@DO SAYBAR
+`%You shower yourself with high-energy waves.
+
+@#END
+@itemexit
+@drawmap
+@do moveback
+@update
+@routineabort

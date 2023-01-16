@@ -1,0 +1,594 @@
+@#ITEM16
+;Helperpad Info
+@CLEAR SCREEN
+@SHOW
+`9Helperpad
+
+`@Status Report
+`%Helperpad Model  : `$Adams Custom, build 11
+`%Helperpad OS     : `$Version 2.0
+`%Linear Processor : `$Terran Electronic, model LP-H-1015
+`%Storage Capacity : `$7 Terabytes
+`%Battery Condition: `$Good
+
+`@Map Menu Functions
+`%Press `$M`% to access the navigational map.
+`%Press `$Z`% to access trade data functions.
+
+@KEY
+@ROUTINE END
+
+@#HELPERPAD
+;Helperpad Trade Data
+@do `p30 is 1
+@show
+@do delete TEMP`*.HP
+@WRITEFILE TEMP`*.HP
+`p12
+`p19
+`p57
+`p58
+`p59
+`p60
+`p61
+`p62
+`p37
+`p38
+`p39
+`p63
+`p64
+`p65
+`p66
+`p67
+`p68
+`p69
+`p70
+`p71
+`p72
+`p73
+`p74
+`p75
+@
+@LABEL HELPERM
+@DO `p28 IS 0
+@clear screen
+@show
+                            `0Helperpad: `$Trade Data
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`1Planets 1 - 15
+`9Planets 15 - 30
++`t01 1 `0Shipyard Beta ships
++`t01 5 `0Snaken ships
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO PLAN1
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@DO GOTO PLAN2
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@DO GOTO AMSHIPS
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO GOTO SSHIPS
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@ROUTINE HEND
+@END
+
+@LABEL PLAN1
+@DO `p28 IS 1
+@clear screen
+@show
+                            `0Trade data: `$Planets 1 - 15
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`0Earth
+`7Hothor
+`@Volcana
+`7Metallica
+`9Medoca
+`0Gojoun
+`1Desha Rockna
+`#Dogafetch
+`0Eden
+`#Richiana
+`9Tribonia
+`$Dune
+`5Plague
+`8Norhaven
+`2Loony
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@ROUTINE EARTH IN PLANET.REF
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@ROUTINE HOTHOR IN PLANET.REF
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE VOLCANA IN PLANET.REF
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@ROUTINE METALLICA IN PLANET.REF
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@ROUTINE MEDOCA IN PLANET.REF
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@ROUTINE GOJOUN IN PLANET.REF
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@ROUTINE DESHAROCKNA IN PLANET.REF
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@ROUTINE DOGAFETCH IN PLANET.REF
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@ROUTINE EDEN IN PLANET.REF
+@END
+@IF RESPONCE IS 10 THEN DO
+@BEGIN
+@ROUTINE RICHIANA IN PLANET.REF
+@END
+@IF RESPONCE IS 11 THEN DO
+@BEGIN
+@ROUTINE TRIBONIA IN PLANET.REF
+@END
+@IF RESPONCE IS 12 THEN DO
+@BEGIN
+@ROUTINE DUNE IN PLANET.REF
+@END
+@IF RESPONCE IS 13 THEN DO
+@BEGIN
+@ROUTINE PLAGUE IN PLANET.REF
+@END
+@IF RESPONCE IS 14 THEN DO
+@BEGIN
+@ROUTINE NORHAVEN IN PLANET.REF
+@END
+@IF RESPONCE IS 15 THEN DO
+@BEGIN
+@ROUTINE LOONY IN PLANET.REF
+@END
+@IF RESPONCE IS 16 THEN DO
+@BEGIN
+@DO GOTO HELPERM
+@END
+
+@LABEL PLAN2
+@DO `p28 IS 2
+@clear screen
+@show
+                            `0Trade data: `$Planets 15 - 30
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`!Weapon World
+`2Zoolie
+`$Baboria
+`#Stock World
+`5Hugelind Mar
+`2Sickonia
+`9Schooloria
+`#Uniland
+`5Homeworld
+`2Dreamora
+`0Nirvana
+`0Snaken
+`5U Doran
+`6Altan
+`7Matrix
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@ROUTINE WEAPONWORLD IN PLANET.REF
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@ROUTINE ZOOLIE IN PLANET.REF
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE BABORIA IN PLANET.REF
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@ROUTINE STOCKWORLD IN PLANET.REF
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@ROUTINE HUGELINDMAR IN PLANET.REF
+@END
+@IF RESPONCE IS 6 THEN DO
+@BEGIN
+@ROUTINE SICKONIA IN PLANET.REF
+@END
+@IF RESPONCE IS 7 THEN DO
+@BEGIN
+@ROUTINE SCHOOLORIA IN PLANET.REF
+@END
+@IF RESPONCE IS 8 THEN DO
+@BEGIN
+@ROUTINE UNILAND IN PLANET.REF
+@END
+@IF RESPONCE IS 9 THEN DO
+@BEGIN
+@ROUTINE HOMEWORLD IN PLANET.REF
+@END
+@IF RESPONCE IS 10 THEN DO
+@BEGIN
+@ROUTINE DREAMORA IN PLANET.REF
+@END
+@IF RESPONCE IS 11 THEN DO
+@BEGIN
+@ROUTINE NIRVANA IN PLANET.REF
+@END
+@IF RESPONCE IS 12 THEN DO
+@BEGIN
+@ROUTINE SNAKEN IN PLANET.REF
+@END
+@IF RESPONCE IS 13 THEN DO
+@BEGIN
+@ROUTINE UDORAN IN PLANET.REF
+@END
+@IF RESPONCE IS 14 THEN DO
+@BEGIN
+@ROUTINE ALTAN IN PLANET.REF
+@END
+@IF RESPONCE IS 15 THEN DO
+@BEGIN
+@ROUTINE MATRIX IN PLANET.REF
+@END
+@IF RESPONCE IS 16 THEN DO
+@BEGIN
+@DO GOTO HELPERM
+@END
+
+@LABEL AMSHIPS
+@CLEAR SCREEN
+@SHOW
+                                `$Ship's Catalog`1
+
+Cost     Name          Wep/Arm-L  HP-L   Torp-L  Hold-L  React-L  Org.
+`$58599    `!Thrustmaster`$    1   1      75     1       50      11       `!N
+`$13000    `6Garbage Scow`$    1   1      100    0       40      9        `!N
+`$33500    `$Bantam`$          1   1      20     0       25      13       `!N
+`$237000   `#Maxiport`$        1   1      300    0       125     11       `!N
+`$1224200  `!Sentinel`$        2   2      50     2       70      13       `!N
+`$1840000  `1Reconnoiter`$     3   3      100    3       90      12       `!N
+`$5000000  `4Mauler`$          4   4      100    4       150     14       `!N
+`$3500000  `$Ardent Supplier`$ 2   2      500    0       400     8        `0A
+`$7243900  `4Revelation`$      2   2      500    4       75      11       `0A
+`$9220000  `#Prophecy`$        4   4      1000   6       225     12       `0A
+`$36000000 `!Accolade`$        4   4      10000  10      100     16       `0A
+`$2269999  `$Mayhem Master`$   3   3      100    6       75      12       `4M
+`$5699999  `4Nognutter`$       4   4      1000   2       100     14       `4M
+`$6499999  `4Quietus`$         2   2      100    10      50      16       `4M
+`$13438999 `9Lexor`$           4   4      1000   5       200     14       `4M
+`$29339999 `8Apocalypse`$      4   4      10000  10      300     16       `4M
+
+@KEY
+@DO GOTO HELPERM
+
+@LABEL SSHIPS
+@CLEAR SCREEN
+@SHOW
+                                `$Ship's Catalog`1
+
+Cost     Name          Wep/Arm-L  HP-L   Torp-L  Hold-L  React-L  Org.
+`$1000000  `0Snaken Porter`$   1   1      100    0       250     8        `0S
+`$5000000  `0S. Def. Frig.`$   3   3      500    5       50      12       `0S
+`$20000000 `0Megolus`$         4   4      1000   20      100     16       `0S
+
+@KEY
+@DO GOTO HELPERM
+
+@#SHOWDATA
+@CLEAR SCREEN
+@SHOW
+`1Planet name: `s04`%
+
+Good                   Price
+@IF `p37 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Ship Hold            : `$`p37
+ @END
+@IF `p38 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Reactor              : `$`p38
+ @END
+@IF `p39 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Shield Unit          : `$`p39
+ @END
+@IF `p63 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Medical Unit         : `$`p63
+ @END
+@IF `p64 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Heating Unit         : `$`p64
+ @END
+@IF `p65 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Ice Unit             : `$`p65
+ @END
+@IF `p66 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Ground Weapon        : `$`p66
+ @END
+@IF `p67 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Novelty Pack         : `$`p67
+ @END
+@IF `p68 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Tree Growth Kit      : `$`p68
+ @END
+@IF `p69 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Jewel                : `$`p69
+ @END
+@IF `p70 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Plastic Trinket      : `$`p70
+ @END
+@IF `p71 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Clothes Bundle       : `$`p71
+ @END
+@IF `p72 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Zone Atomic Bomb     : `$`p72
+ @END
+@IF `p73 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Onboard Printing Kit : `$`p73
+ @END
+@IF `p74 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Slug                 : `$`p74
+ @END
+@IF `p75 NOT 0 THEN DO
+ @BEGIN
+ @SHOW
+`1Eden Warp            : `$`p75
+ @END
+@KEY
+@IF `p28 IS 1 THEN DO
+ @BEGIN
+ @DO GOTO PLAN1
+ @END
+@IF `p28 IS 2 THEN DO
+ @BEGIN
+ @DO GOTO PLAN2
+ @END
+
+@#HEND
+@do `p30 is 0
+@READFILE TEMP`*.HP
+`p12
+`p19
+`p57
+`p58
+`p59
+`p60
+`p61
+`p62
+`p37
+`p38
+`p39
+`p63
+`p64
+`p65
+`p66
+`p67
+`p68
+`p69
+`p70
+`p71
+`p72
+`p73
+`p74
+`p75
+@
+@do delete TEMP`*.HP
+@drawmap
+@update
+@routineabort
+
+
+
+
+
+@#ITEM38
+;Eden Warp
+
+@LABEL EDENWARP
+@clear screen
+@show
+                                    `5Eden Warp
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`9Earth
+`!Wormhole
+`4Norhaven
++`t02 2 `0Snaken
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@do map is 641
+@loadmap 641
+@do x is 40
+@do y is 20
+@ROUTINE WARPEND
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@do map is 645
+@loadmap 645
+@do x is 40
+@do y is 9
+@ROUTINE WARPEND
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@do map is 649
+@loadmap 649
+@do x is 11
+@do y is 7
+@ROUTINE WARPEND
+@END
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@do map is 718
+@loadmap 718
+@do x is 30
+@do y is 15
+@ROUTINE WARPEND
+@END
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+@#WARPEND
+@do `i38 - 1
+@itemexit
+@drawmap
+@update
+@do saybar
+`%Warp Complete!
+@routineabort
+
+
+
+
+
+@#ITEM39
+  ;Communicator
+  @CLEAR SCREEN
+  @ROUTINE ID IN id.ref
+  @SHOW
+  `9Communicator
+
+
+`%Who do you wish to contact?
+
+  @DO `V01 IS 1
+  @DO WRITE
+`x`x
+  @CHOICE
+`6Engineer `$`s08
+`9Science Officer `$`s07
+`%Leave
+  @IF RESPONCE IS 1 THEN DO
+  @BEGIN
+    @ROUTINE ENGINE IN SHIP.REF
+  @END
+  @IF RESPONCE IS 2 THEN DO
+  @BEGIN
+    @ROUTINE SCIENCE IN SHIP.REF
+  @END
+  @IF RESPONCE IS 3 THEN DO
+  @BEGIN
+    @ROUTINE END
+  @END
+;END ITEM39 Communicator
+
+@#QUEST
+;help them remember where they need to deliver something
+
+;get location and name
+@do `p20 is `p15
+@routine getname in quest.ref
+@routine getplace in quest.ref
+
+@clearblock 13 23
+@do move 1 13
+@do `s02 is `2You`xstarted`xthis`xquest`x`0`p32`2`xdays`xago.
+@if `p32 is 0 then `s02 is You`xstarted`xthis`xquest`xtoday.
+@if `p32 is 1 then `s02 is `2You`xstarted`xthis`xquest`xyesterday.
+@show
+  `2You need to take this to `0`s01`2 in `0`s03`2.
+
+  `s02
+
+@do `v01 is 1
+@do write
+`x`x
+@choice
+Continue your journey
+Throw the thing away like a bad little s&boy
+@if responce is 1 then do
+  @begin
+  @closescript
+  @end
+
+//setting quest stuff to 0, they chose throw sack away
+@do `p14 is 0
+@do `p15 is 0
+@do `p16 is 0
+@do `p17 is 0
+
+//take away quest items
+
+@do `i33 is 0
+@do `i34 is 0
+@do `i35 is 0
+@do `i36 is 0
+@do `i37 is 0
+@show
+`r0
+
+  You have it dumped into space.  Haw!
+
+`k
+@closescript
+
+@#END
+@itemexit
+@drawmap
+@update
+@routineabort

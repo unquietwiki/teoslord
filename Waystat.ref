@@ -1,0 +1,305 @@
+;This file is for the elements in Waystation Alpha
+
+
+;Map Definition
+@#DOCK
+@DO `s04 IS `4Facility
+@DO `p12 IS 99
+@DO `p43 IS 20
+@DO `p44 IS 0
+@DO `p45 IS 0
+@DO `p46 IS 1
+@DO `p57 IS 41
+@DO `p58 IS 11 
+@DO `p59 IS 743
+@DO `p60 IS 66
+@DO `p61 IS 16
+@DO `p62 IS 1531
+@ROUTINE SHIP IN SHIPYARD.REF
+
+
+
+;The Mariner Ship
+@#MARINER
+
+@LABEL MARIMENU
+@CLEAR SCREEN
+@SHOW
+`r1`!Mariner Dock`r0`%
+
+
+     Here is where you can switch into a `!Mariner Ship`%. The dockmaster says
+     that it cannot have cargo bays, but it can support all standard weaponry
+     and high-level shielding. If you pay `$$3000000`%, you can switch into
+     the `!Mariner Ship`%, and we'll store the old one for when you want to
+     go trading again: that switchback is free!
+
+     `4Notice: Only weapons, armour, and items are transferred between ships.
+     Torpedoes, current shielding, reactors, etc. are not.
+
+     `$Important: Overnight recharging of reactors only occur on "active"
+     vehicles; the ship you quit with today is the one that gets a recharge.
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+!`p36 20 >&money 2999999 `%I'll switch into the `!Mariner Ship`% now!
+=`p36 20 `4I'm done with my `!Mariner Ship`4 for now.
+`%Can I leave now?
+@IF RESPONCE IS 1 THEN DO
+
+     ;Ship -> Mariner
+@BEGIN
+
+        ;Determine if items are possessed
+@IF `i17 MORE 0 THEN GOTO IWARN
+@IF `i18 MORE 0 THEN GOTO IWARN
+@IF `i19 MORE 0 THEN GOTO IWARN
+@IF `i20 MORE 0 THEN GOTO IWARN
+@IF `i21 MORE 0 THEN GOTO IWARN
+@IF `i22 MORE 0 THEN GOTO IWARN
+@IF `i23 MORE 0 THEN GOTO IWARN
+@IF `i24 MORE 0 THEN GOTO IWARN
+@IF `i25 MORE 0 THEN GOTO IWARN
+@IF `i26 MORE 0 THEN GOTO IWARN
+@IF `i27 MORE 0 THEN GOTO IWARN
+@IF `i28 MORE 0 THEN GOTO IWARN
+
+@DO money - 3000000
+@DO `p77 IS 1533
+@DO DELETE MARINER\S&playernum.DAT
+@WRITEFILE MARINER\S&playernum.DAT
+`p34
+`p02
+`p03
+`p36
+`p47
+`p48
+`p49
+`p50
+`p51
+`p52
+`p54
+`p55
+`p56
+@
+ @IF MARINER\M&playernum.DAT EXISTS FALSE THEN DO
+ @BEGIN
+ @DO `s05 is `!Mariner`xShip
+ @DO `p34 is 9999
+ @DO `p02 is 100
+ @DO `p03 is 100
+ @DO `p36 is 20
+ @DO `p47 is 20
+ @DO `p48 is 10
+ @IF `p49 MORE `p48 THEN DO
+  @BEGIN
+  @DO `p49 is `p48
+  @END
+ @DO `p50 is 4
+ @DO `p51 is 4
+ @DO `p52 is 20
+ @DO `p54 is 0
+ @DO `p55 is 0
+ @DO `p56 is 0
+ @END
+
+ @IF MARINER\M&playernum.DAT EXISTS TRUE THEN DO
+ @BEGIN
+ @READFILE MARINER\M&playernum.DAT
+`p34
+`p02
+`p03
+`p36
+`p47
+`p48
+`p49
+`p50
+`p51
+`p52
+`p54
+`p55
+`p56
+@
+ @END
+
+@DO GOTO MARIMENU
+@END
+
+
+@IF RESPONCE IS 2 THEN DO
+     ;Mariner -> Ship
+@BEGIN
+@DO `p77 IS 1524
+@DO DELETE MARINER\M&playernum.DAT
+@WRITEFILE MARINER\M&playernum.DAT
+`p34
+`p02
+`p03
+`p36
+`p47
+`p48
+`p49
+`p50
+`p51
+`p52
+`p54
+`p55
+`p56
+@
+@READFILE MARINER\S&playernum.DAT
+`p34
+`p02
+`p03
+`p36
+`p47
+`p48
+`p49
+`p50
+`p51
+`p52
+`p54
+`p55
+`p56
+@
+@DO GOTO MARIMENU
+@END
+
+
+@IF RESPONCE IS 3 THEN DO
+     ;This routine is complete.
+@BEGIN
+@drawmap
+@do moveback
+@update
+@routine id in id.ref
+@END
+
+
+     ;Trade-Items Warning
+@LABEL IWARN
+@CLEAR SCREEN
+@SHOW
+
+     `%You still have items onboard. Go sell them!
+
+@KEY
+@DO GOTO MARIMENU
+
+
+
+;Arms Dealer
+@#ARMDEALER
+
+ @IF `p36 NOT 20 THEN DO
+ @BEGIN
+ @DO SAYBAR
+`4Sorry, I only deal with Mariner ships
+ @DO MOVEBACK
+ @END
+
+
+ @IF `p36 IS 20 THEN DO
+ @BEGIN
+ @CLEAR SCREEN
+ @SHOW
+`r1`%Mr. Armon's `!Mariner Ship`% Armory`r0
+
+`%Ship type: `$`p36
+`%Ship class: `$`s05
+`%Ship's weapon limit: `$`p50
+`%Ship's armour limit: `$`p51
+ 
+ @BUYMANAGER
+ 9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ @END
+ @END
+
+@ROUTINE END
+
+
+
+;The Office
+@#OFFICE
+@DO `p20 RANDOM 3 1
+@IF `p20 IS 1 THEN DO
+@BEGIN
+@DO SAYBAR
+`%This place is crazy!
+@END
+@IF `p20 IS 2 THEN DO
+@BEGIN
+@DO SAYBAR
+`$Feel free to wander about. Many visitors dock here daily.
+@END
+@IF `p20 IS 3 THEN DO
+@BEGIN
+@DO SAYBAR
+`@The Mariner ship has no cargo bays, but it fights good.
+@END
+
+
+
+;Sayings & Displays
+@#BAY
+@DO SAYBAR
+`%This bay is used to launch Mariner ships.
+@DO MOVEBACK
+
+@#BAY2
+@DO SAYBAR
+`%A standard docking bay, already in use.
+@DO MOVEBACK
+
+@#ASHIP
+@DO SAYBAR
+`%An alien ship is docked here and you can't go in it!
+@DO MOVEBACK
+
+@#SKYPORT
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\STARS.ANS
+@PAUSEON
+@KEY
+@drawmap
+@update
+@routineabort
+
+@#DANCER1
+@DO SAYBAR
+`%Hey, I can dance!
+@DO MOVEBACK
+
+@#DANCER2
+@DO SAYBAR
+`0I am actually a slug in disguise!
+@DO MOVEBACK
+
+@#LADY
+@DO SAYBAR
+`!Mr. Armon was just treating me to a drink. What's wrong with that?
+@DO MOVEBACK
+
+
+
+;End
+@#END
+@drawmap
+@do moveback
+@update
+@routineabort

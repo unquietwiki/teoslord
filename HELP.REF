@@ -1,0 +1,403 @@
+;help inside of help.ref (yeah, this file) is run if a user hits ? from
+;the main screen in the game.  This way, if you want to add a complicated
+;help system, (ie, they can get help on certain things, whatever) you can.
+
+@#NOTIME
+`r1`%                      TIME HAS RUN OUT FOR YOU FRIEND                   `r0
+
+`9  Yep.  The jig is up.  The time the BBS has said you get for this door is
+  up `8- `9so we have to kick you out now.
+
+  `4Buh-bye.`s
+
+@#talk
+@do move 3 21
+@do write
+`r1`% ENTER SCREEN MESSAGE :`x
+@do readstring 51 NIL `s01
+@do stripbad `s01
+@do `p21 is length `s01
+@if `p21 more 1 then do
+ @begin
+ @do `s02 is `r1`%`x`n`%:`x
+ @do `s02 add `s01
+ @do talk `s02
+ @end
+@do statbar
+
+@#yell
+@do move 3 21
+@do write
+`r1`% ENTER GLOBAL MESSAGE :`x
+@do readstring 51 NIL `s01
+@do stripbad `s01
+@do `p21 is length `s01
+@if `p21 more 1 then do
+ @begin
+ @do `s02 is `r1`%`x`n`%:`x
+ @do `s02 add `s01
+ @do talk `s02 all
+ @end
+@do statbar
+
+@#whoison
+;our whos on list
+@show
+`r0`c  `r1                        `%PEOPLE ON NOW                             `r0  
+
+  `9Name                       Level           Location
+
+@whoison
+@show
+
+@key
+@drawmap
+@update
+
+@#Z
+;if player hits Z from the map menu
+@if `i16 > 0 then do
+  @begin
+  @ROUTINE HELPERPAD IN ITEMS.REF
+  @end
+@do saybar
+`4You don't have a helperpad.
+
+@#map
+;if player hits M from the map menu
+@if `i16 > 0 then do
+  @begin
+  @do write
+`r0
+  @overheadmap
+  ;now we do any additions to our map,  like text or marks on the map
+  ;we had npc players do so they know where to go
+
+  @do move 1 9 ;Earth
+  @do write
+`r2`9Ü
+  @do move 9 9 ;Norhaven
+  @do write
+`r2`@þ
+  @do move 5 9 ;Wormhole
+  @do write
+`r2`5*
+  @if bitcheck `t02 1 1 then do
+  @begin
+  @do move 79 9 ;Wormhole Exit
+  @do write
+`r2`5*
+  @end
+  @if bitcheck `t02 2 1 then do
+  @begin
+  @do move 78 9 ;Snaken
+  @do write
+`r2`%ø
+  @end
+
+  ;this math converts your 'block #' to x y cords to show the
+  ;"you are here" blip.  We use lmap instead of map, lmap is the
+  ;the last 'visible' map the player was on.
+
+  @do `p20 is &lmap
+  @do `p20 / 80
+  @do `p21 is &lmap
+  @do `p22 is `p20
+  @do `p22 * 80
+  @do `p21 - `p22
+  @do `p20 + 1
+  @if `p21 is 0 then do
+   @begin
+   @do `p21 is 80
+   @do `p20 - 1
+   @end
+  @do move `p21 `p20
+  @do write
+`r2`b`r0
+
+;draw the help
+@do move 1 14
+@show
+`r1`%Reading your map.
+`1ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  `9Ü `9Earth
+  `@þ `9Norhaven
+  `%ø `9Notable Planet
+  `5* `9Spatial Distortion
+  `4 `9Your current location
+
+  @do move 1 22
+  @do write
+`k
+  @drawmap
+  @update
+  @closescript
+  @end
+@do saybar
+`4You don't have a helperpad.
+
+@#rank1
+;this is the format for experience ranking
+@do `s01 is `n
+@do pad `s01 21
+@if sexmale is 1 then `s02 is `9M
+@if sexmale is 0 then `s02 is `#F
+@do `s03 is `p01
+@do frontpad `s03 14
+@do `s10 is `p09
+@do frontpad `s10 2
+@if dead is 1 then `s09 is `4Dead
+@if dead is 0 then `s09 is `%Alive
+
+@writefile temp`*.dat
+`s02 `1`s01`%`s03   `s10     `s09
+@#listplayers
+@do write
+`r0`c  `9Ranking players...
+
+@do delete temp`*.dat         ;`* is node number
+@writefile temp`*.dat
+`r0`c`r1                             `9 TEOS LORD RANKINGS                            `r0
+                
+  `9Name                     Experience  Level   Status Alignment Quests
+`1-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+@
+
+;rank lets us specify WHAT `p to rank, and what the name of the procedure
+;that formats the rank.
+@rank temp`*.dat 1 rank1
+@convert_file_to_ansi temp`*.dat score.ans
+@convert_file_to_ascii temp`*.dat score.txt
+@displayfile temp`*.dat
+@key bottom
+@drawmap
+@update
+
+
+
+@#help
+@do `v01 is 1
+@label helpstart
+@show
+`r0`c  `r1  `%TEOS LORD V1.70 `r0
+
+  `1Use your `9ARROW-KEYS`1 or numpad (with numlock turned on) to select an
+  option then press `9ENTER`1.
+
+@do write
+`x`x
+@choice
+`1List hotkeys that do things on the map mode
+`1What symbols mean on the `9'your stats'`1 screen
+`1How to move
+`1WHAT IS THIS?
+`1About us and how to report bugs and suggestions
+`1Beginners help and strategy
+`4Quit back to the BBS
+`1View `9Game Settings`1
+`%Play the game!
+@if responce is 8 then do
+  @begin
+   @if `v06 is 1 then `s01 is On
+   @if `v06 is 0 then `s01 is Off
+   @do `s02 is `v05
+   @if `v05 < 1 then `s02 is `%unlimited
+   @show
+`r0`c  `r1  `%Settings for this game  `r0
+
+   @if `v03 is 0 then write
+  `1You get only `9one`1 life per day.`\
+   @if `v03 not 0 then write
+  `1You may die `9unlimited`1 times per day.`\
+   @show
+  `1You get `9`s02`1 turns per day.
+  `1Clean mode is `9`s01`1.
+  `1Quest opportunities per day is `9`v07`1.
+  `1This game has been running for `9&time`1 days. 
+@if `v09 < 1 then do
+  @begin
+  @show
+  `1Players are safe in Inns the entire game.
+  @end
+@if `v09 > 0 then do
+  @begin
+  @show
+  `1Players can be attacked in Inns at level `9`v09`1+.
+  @end
+
+ @show
+
+  @if 3rdparty.dat exist false then do
+  @begin
+  @show
+  `1No `9IGM's`1 are installed.
+
+  @end
+  @if 3rdparty.dat exist true then do
+  @begin
+  @show
+  `1`%IGM'S INSTALLED ON THIS SYSTEM:
+
+  @displayfile 3rdparty.dat
+    @show
+
+  @end
+  @show
+`k
+  @do goto helpstart
+  @end
+
+@if responce is 1 then do
+ @begin
+ @pauseoff
+ @SHOW SCROLL
+
+
+  `%Commands that work from the main map screens:
+
+  `9? `1- `9This help screen
+  `9R `1- `9Redraw the screen
+  `9V `1- `9View your stats/inventory
+  `9T `1- `9Talk - Everyone in the game can hear you
+  `9D `1- `9Daily Happenings
+  `9H `1- `9Hail - Trade with/talk to/kill a person. (must be on their square)
+  `9L `1- `9List warriors, lets you know who's on top
+  `9W `1- `9Write mail to someone
+  `9P `1- `9People online right now
+  `9S `1- `9Show names of everyone on the current screen
+  `9B `1- `9BackBuffer, log of recent messages.
+  `9F `1- `9Fast BackBuffer, shows last 3 messages only, for speed.
+  `9M `1- `9Helperpad Map
+  `9Z `1- `9Helperpad Trade Data
+  `9Q `1- `9Quit back to the BBS
+@do goto helpstart
+ @end
+
+@if responce is 2 then do
+ @begin
+ @pauseoff
+ @SHOW SCROLL
+
+
+  `%ABOUT ITEM SYMBOLS:
+
+  `r4`*W`r0`1 `8- `1It can be used as a weapon.
+  `r2`*A`r0`1 `8- `1It can be used as armour.
+  `r5`*1`r0`1 `8- `1It can only be used once.
+
+  `1Remember - press `9V `1to view your stats, this is also where you
+  equip weapons and armour.
+@do goto helpstart
+
+ @end
+
+@if responce is 3 then do
+ @begin
+ @pauseoff
+ @SHOW SCROLL
+
+
+  `%ABOUT MOVEMENT:
+
+  `1Use the `9arrow-keys`1 or the `9numpad`1 to move around/select options
+  in most areas.  To use the numpad, make `4SURE`1 that the num lock
+  key is `4ON`1. `1(`9it will work either way if your terminal supports arrow
+  keys`1)
+
+  If using arrow keys causes the daily log to pop up randomly, you should
+  switch to the numpad.
+@do goto helpstart
+ @end
+
+
+@if responce is 4 then do
+ @begin
+ @clear screen
+ @show
+`r1`%What is this?`r0
+
+
+     `LWhy `Lit's `L`9TEOS `LLORD`%!
+
+     This game began back in July, 1997. Working with fellow BBS users and
+     Seth Able, creator of the game engine, this project slowly developed
+     into the great game it is today!
+     
+ @key
+ @do goto helpstart
+ @end
+
+
+@if responce is 5 then do
+ @begin
+ @pauseoff
+ @SHOW SCROLL
+
+
+`r1`%ABOUT Robinson Technologies`r0
+
+  `9LORD II`8:         `1(c) Copyright 1997: Robinson Technologies, Inc.
+  `9Planets:TEOS`8:    `1(c) Copyright 1992,1996 : Robinson Technologies, Inc.
+  `9WWW  `8:           `1www.rtsoft.com
+  `9Email`8:           `1sethable@rtsoft.com
+
+
+`r1`%ABOUT TEOS LORD`r0
+
+  `9TEOS LORD V1.70`8: `1Compiled 8/15/2001
+  `9Author`8:          `1Michael Adams & Contributors
+  `9Email`8:           `1wolfsheep@linuxfreemail.com
+  `9Other Contact:`8:  `1Donald Tidmore: donald.tidmore@usa.net
+
+@do goto helpstart
+ @end
+
+@if responce is 6 then do
+ @begin
+ @pauseoff
+ @SHOW SCROLL
+
+`c`%`r1                         Information On The Game                            `r0
+
+  `9Welcome to Planets: `%T`9he `%E`9xploration `%O`9f `%S`9pace.  
+
+  `%IMPORTANT THINGS TO KNOW:
+
+  `9Your ship only has enough `$Power`9 to travel to a certain number of Planets
+  per day.
+
+`k
+`c`%`r1                         Things On The To Do List                           `r0
+
+
+  `s`!* `9Capture planets and rule them.
+  `s`!* `9Learn the power of the `0Zone Atomic`9.
+  `s`!* `9Buy new ships.
+  `s`!* `!IGM `9Support - Use (`!G`9)ame Stats to see which are installed.
+  `s`!* `9(`%T`9)alk to all the players online when multiple people are on.
+  `s`!* `9Make friends and enemies out of NPC's that can think and talk.
+  `s`!* `9Get offered a job by the `%Alliance`9 or - if you're a nasty sort, the `4Maraken`9.
+  `s`!* `9Visit or join the `0Snaken`9.
+  `9Not necessarily in that order. ;>
+
+
+@do goto helpstart
+ @end
+
+@if response is 7 then do
+  @begin
+  @show
+`\`\  Goodbye.
+  @halt 0
+  @end
+
+ ;default
+ @pauseon
+ @if `p09 > 0 then do
+   @begin
+   @drawmap
+   @update
+   @end
+ @closescript
+
+@#done

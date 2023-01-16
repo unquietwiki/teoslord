@@ -1,0 +1,111 @@
+@#CHAMBER
+@IF `p12 is 25 THEN DO
+ @BEGIN
+ @ROUTINE TEMPLE
+ @CLOSESCRIPT
+ @END
+@DO SAYBAR
+`%The temple on this world seems vacant.
+@DO MOVEBACK
+
+@#TEMPLE
+@LABEL CMENU
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\DREAM.ANS
+@PAUSEON
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`$Donate
+`0Look Around
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%Enter the amount desired.
+@DO READNUM 6
+@if `v40 more money then do
+ @BEGIN
+ @SHOW
+
+ `4Not enough money!
+
+ @KEY
+ @DO GOTO CMENU
+ @END
+@DO MONEY - `v40
+@IF `v40 MORE 99999 THEN GOTO AWARD
+@SHOW
+
+     `%You're cheap. Give more!
+
+@KEY
+@DO GOTO CMENU
+
+@LABEL AWARD
+@DO `p20 RANDOM 4 1
+@IF `p20 IS 1 THEN DO
+ @BEGIN
+ @DO `p08 + 1
+ @SHOW
+
+     `%Your `$charm`% increases by 1!
+
+ @KEY
+ @END
+@IF `p20 IS 2 THEN DO
+ @BEGIN
+ @DO `p04 + 1
+ @SHOW
+
+     `%Your `$weapon power`% increases by 1!
+
+ @KEY
+ @END
+@IF `p20 IS 3 THEN DO
+ @BEGIN
+ @DO `p05 + 1
+ @SHOW
+
+     `%Your `$armour power`% increases by 1!
+
+ @KEY
+ @END
+@IF `p20 IS 4 THEN DO
+ @BEGIN
+ @DO `p07 + 1
+ @SHOW
+
+     `%Your `$alignment`% increases by 1!
+
+ @KEY
+ @END
+@DO GOTO CMENU
+@END
+
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+
+          `4You look around for a bit. However, you think you see some
+          strange priests following you, so you flee back to the main
+          chamber.
+
+@KEY
+@DO GOTO CMENU
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+@#END
+@drawmap
+@do moveback
+@update
+@routineabort

@@ -1,0 +1,284 @@
+;Planet Events
+
+@#GREEN
+@DO SAYBAR
+`0All this green is very mind refreshing!
+
+@#POND
+@DO SAYBAR
+`%Large ice fragments float in the pond.
+@do moveback
+
+@#COLD
+@DO SAYBAR
+`%Bitter cold winds bite at your face.
+
+@#BCLOUD
+@DO SAYBAR
+`8Black clouds `%move overhead.
+
+@#VOLCANO
+@CLEAR SCREEN
+@SHOW
+`r4`%The Volcano Guy`r0`%
+
+
+     Hello and welcome to the `4volcano`%. It is a small one, just emits a
+steady `4lava flow`%. However, when it first popped up some 5 years ago, it
+filled in half the lake and took out most of the local `2forest`%.
+
+     `$That must have been rough, you say.`%
+
+     Yeah, but it wasn't so bad. Now the `4volcano's`% a tourist attraction
+for the vistors to this spaceport.
+
+     `$How innovative.
+
+@KEY
+@ROUTINE END
+
+@#METAL
+@DO SAYBAR
+`%The `7metallic`% soil is relieved only by the nearby `2trees`% & `9water`%.
+
+@#DUST
+@DO SAYBAR
+`6Dusty`% winds blow across the `6barren`%, `7rocky`% landscape.
+
+@#WATER
+@CLEAR SCREEN
+@SHOW
+`r1`%The Waterhole`r0
+
+
+     `%This is the only `1waterhole`% in the area. Considering the `6barren`%
+     terrain, this is indeed a lucky find. And the `2trees`% help, as they
+     protect it from the `6dusty`% winds abound.
+
+@KEY
+@ROUTINE END
+
+@#SAND
+@DO SAYBAR
+`$Dry sand `%blows across your face.
+
+@#DGUY
+@DO `p20 RANDOM 5 1
+@IF `p20 IS 1 THEN DO
+@BEGIN
+@DO SAYBAR
+`%This oasis gives water to the residents of this spaceport.
+@END
+@IF `p20 IS 2 THEN DO
+@BEGIN
+@DO SAYBAR
+`%I suppose you don't want any `6camels`% to travel with.
+@END
+@IF `p20 IS 3 THEN DO
+@BEGIN
+@DO SAYBAR
+`%Have a glass of `6camel spit`%!
+@END
+@IF `p20 IS 4 THEN DO
+@BEGIN
+@DO SAYBAR
+`%I think this heat's getting to me.
+@END
+@IF `p20 IS 5 THEN DO
+@BEGIN
+@DO SAYBAR
+`%If I found out you were a `4Maraken`%, I'd shoot you. They killed my family!
+@END
+
+@#MOON
+@DO SAYBAR
+`%The stars look very `$bright`% within this thin moon atmosphere.
+
+@#FOREST
+@DO SAYBAR
+`%The massive `2forests`% makes this planet ideal for nature lovers.
+
+@#HIPPIE
+@CLEAR SCREEN
+@SHOW
+`r1`%The Hippie`r0
+
+
+`0Hey man, what's shaking?
+
+`$Not much, you say.
+
+`0Want some mystic powder?
+
+`$Put that away, it's illegal!
+
+`0Oh yeah, thanks man! Anyway, I'm just here communing with the pond and the
+animals. You should go see the temple man. It's like groovy man!
+
+`$I will. Thanks for the tip.
+
+`0Peace brother. Peace.
+
+@KEY
+@ROUTINE END
+
+
+
+;Earth Transport
+@#ESHIP
+@LABEL EMENU
+@CLEAR SCREEN
+@SHOW
+`r1`%Earth-Shipyard Transport`r0
+
+
+
+`%You see people boarding a large transport vessel. A readable sign is nearby.
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`6Read the sign!
+<`p36 1 `9Board the Vessel
+`$Done!
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\ESHIP.ANS
+@PAUSEON
+@SHOW
+
+
+
+@KEY
+@DO GOTO EMENU
+@END
+
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+     ;Indicate Shipyard Beta
+@DO `s04 IS `4Facility
+@DO `p12 IS 99
+@DO `p43 IS 20
+@DO `p44 IS 0
+@DO `p45 IS 0
+@DO `p46 IS 1
+@DO `p57 IS 41
+@DO `p58 IS 07 
+@DO `p59 IS 1363
+@DO `p60 IS 40
+@DO `p61 IS 03
+@DO `p62 IS 1526
+     ;Arrive at Shipyard Beta
+@DO X IS 16
+@DO Y IS 03
+@do map is 1526
+@loadmap 1526
+@drawmap
+@update
+@do saybar
+`%You arrive on Shipyard Beta.
+@routineabort
+@END
+
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+;Shipyard Beta Transport
+@#BSHIP
+@LABEL BMENU
+@CLEAR SCREEN
+@SHOW
+`r1`%Shipyard-Earth Transport`r0
+
+
+
+`%You see people boarding a large transport vessel. A readable sign is nearby.
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`6Read the sign!
+<`p36 1 `9Board the Vessel
+`$Done!
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\BSHIP.ANS
+@PAUSEON
+@SHOW
+
+
+
+@KEY
+@DO GOTO BMENU
+@END
+
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+     ;Indicate Earth
+@DO `s04 IS `0Earth
+@DO `p12 IS 1
+@DO `p35 IS 1
+@DO `p76 IS 7
+@DO `p57 IS 23
+@DO `p58 IS 12
+@DO `p59 IS 641
+@DO `p60 IS 67
+@DO `p61 IS 15
+@DO `p62 IS 1522
+@DO `p37 IS 200
+@DO `p38 IS 100000
+@DO `p39 IS 112
+@DO `p63 IS 500
+@DO `p64 IS 1500
+@DO `p65 IS 200
+@DO `p66 IS 350
+@DO `p67 IS 100
+@DO `p68 IS 800
+@DO `p69 IS 2000
+@DO `p70 IS 150
+@DO `p71 IS 450
+@DO `p72 IS 0
+@DO `p73 IS 0
+@DO `p74 IS 200
+@DO `p75 IS 0
+     ;Arrive at Earth
+@DO X IS 55
+@DO Y IS 05
+@do map is 1521
+@loadmap 1521
+  @READFILE PLANETS\PLANET`p12.DAT
+`p13
+`p43
+`p44
+`p45
+`p46
+@
+@drawmap
+@update
+@do saybar
+`%You arrive on Earth.
+@routineabort
+@END
+
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+@#END
+@drawmap
+@do moveback
+@update
+@routineabort

@@ -1,0 +1,104 @@
+@#ID
+
+  ; Set Defaults
+  @DO `s04 IS `4Unknown
+  @DO `s05 IS `4No`xShip
+  @DO `s06 IS `$N/A`9
+  @DO `s07 IS `$N/A`9
+  @DO `s08 IS `$N/A`9
+
+  ;Name your ship.
+  @IF `p40 MORE 0 THEN DO
+  @BEGIN
+    @IF `p40 IS 1 THEN `s06 IS Enterprise
+    @IF `p40 IS 2 THEN `s06 IS Voyager
+    @IF `p40 IS 3 THEN `s06 IS Century`xFalcon
+    @IF `p40 IS 4 THEN `s06 IS Machine
+    @IF `p40 IS 5 THEN `s06 IS Able
+  @END
+
+  ;Name your science officer.
+  @IF `p41 MORE 0 THEN DO
+  @BEGIN
+    @IF `p41 IS 1 THEN `s07 IS Spock
+    @IF `p41 IS 2 THEN `s07 IS Kim
+    @IF `p41 IS 3 THEN `s07 IS Furry
+    @IF `p41 IS 4 THEN `s07 IS Larry
+    @IF `p41 IS 5 THEN `s07 IS Estella
+  @END
+
+  ;Name your engineer.
+  @IF `p42 MORE 0 THEN DO
+  @BEGIN
+    @IF `p42 IS 1 THEN `s08 IS Scotty
+    @IF `p42 IS 2 THEN `s08 IS Torres
+    @IF `p42 IS 3 THEN `s08 IS Solo
+    @IF `p42 IS 4 THEN `s08 IS Joe
+    @IF `p42 IS 5 THEN `s08 IS Pip
+  @END
+
+  ;If you have a ship, classify it.
+  @IF `p36 MORE 0 THEN DO
+  @BEGIN
+    @IF `p36 IS 01 THEN `s05 IS `!Thrustmaster
+    @IF `p36 IS 02 THEN `s05 IS `6Garbage`xScow
+    @IF `p36 IS 03 THEN `s05 IS `$Bantam
+    @IF `p36 IS 04 THEN `s05 IS `#Maxiport
+    @IF `p36 IS 05 THEN `s05 IS `!Sentinel
+    @IF `p36 IS 06 THEN `s05 IS `1Reconnoiter
+    @IF `p36 IS 07 THEN `s05 IS `$Mayhem`xMaster
+    @IF `p36 IS 08 THEN `s05 IS `$Ardent`xSupplier
+    @IF `p36 IS 09 THEN `s05 IS `4Mauler
+    @IF `p36 IS 10 THEN `s05 IS `4Nognutter
+    @IF `p36 IS 11 THEN `s05 IS `4Quietus
+    @IF `p36 IS 12 THEN `s05 IS `4Revelation
+    @IF `p36 IS 13 THEN `s05 IS `#Prophecy
+    @IF `p36 IS 14 THEN `s05 IS `!Accolade
+    @IF `p36 IS 15 THEN `s05 IS `9Lexor
+    @IF `p36 IS 16 THEN `s05 IS `8Apocalypse
+    @IF `p36 IS 17 THEN `s05 IS `0Snaken`xPorter
+    @IF `p36 IS 18 THEN `s05 IS `0Snaken`x`9Defense`xFrigate
+    @IF `p36 IS 19 THEN `s05 IS `0Megolus
+    @IF `p36 IS 20 THEN `s05 IS `!Mariner`xShip
+  @END
+
+  ;If you're on a planet, name it.
+  @IF `p12 MORE 0 THEN DO
+  @BEGIN
+    @IF `p12 IS 1 THEN `s04 IS `0Earth
+    @IF `p12 IS 2 THEN `s04 IS `7Hothor
+    @IF `p12 IS 3 THEN `s04 IS `@Volcana
+    @IF `p12 IS 4 THEN `s04 IS `7Metallica
+    @IF `p12 IS 5 THEN `s04 IS `9Medoca
+    @IF `p12 IS 6 THEN `s04 IS `0Gojoun
+    @IF `p12 IS 7 THEN `s04 IS `1Desha`xRockna
+    @IF `p12 IS 8 THEN `s04 IS `#Dogafetch
+    @IF `p12 IS 9 THEN `s04 IS `0Eden
+    @IF `p12 IS 10 THEN `s04 IS `#Richiana
+    @IF `p12 IS 11 THEN `s04 IS `9Tribonia
+    @IF `p12 IS 12 THEN `s04 IS `$Dune
+    @IF `p12 IS 13 THEN `s04 IS `5Plague
+    @IF `p12 IS 14 THEN `s04 IS `8Norhaven
+    @IF `p12 IS 15 THEN `s04 IS `2Loony
+    @IF `p12 IS 16 THEN `s04 IS `!Weapon`xWorld
+    @IF `p12 IS 17 THEN `s04 IS `2Zoolie
+    @IF `p12 IS 18 THEN `s04 IS `$Baboria
+    @IF `p12 IS 19 THEN `s04 IS `#Stock`xWorld
+    @IF `p12 IS 20 THEN `s04 IS `5Hugelind`xMar
+    @IF `p12 IS 21 THEN `s04 IS `2Sickonia
+    @IF `p12 IS 22 THEN `s04 IS `9Schooloria
+    @IF `p12 IS 23 THEN `s04 IS `#Uniland
+    @IF `p12 IS 24 THEN `s04 IS `5Homeworld
+    @IF `p12 IS 25 THEN `s04 IS `2Dreamora
+    @IF `p12 IS 26 THEN `s04 IS `0Nirvana
+    @IF `p12 IS 27 THEN `s04 IS `0Snaken
+    @IF `p12 IS 28 THEN `s04 IS `5U`xDoran
+    @IF `p12 IS 29 THEN `s04 IS `6Altan
+    @IF `p12 IS 30 THEN `s04 IS `7Matrix
+    @IF `p12 IS 99 THEN `s04 IS `4Facility
+  @END
+
+  ;Map-switching support
+  @IF `p36 IS 20 THEN `p77 IS 1533
+  @IF `p36 NOT 20 THEN `p77 IS 1524
+;END ID

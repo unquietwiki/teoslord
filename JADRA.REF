@@ -1,0 +1,62 @@
+@#JADRA
+@DO `s04 IS `$Ja'dra              ;Name of Planet (`x needed for spaces)
+@DO `p12 IS 31                    ;Planet Number (Must differ from others)
+@DO `p35 IS 1                     ;Bank status: 1 is on, 0 is off.
+@DO `p76 IS 9                     ;Planet image file (P1-P10.ANS)
+@DO `p57 IS 54                    ;Space Exit X (Please use a 0 with <10 #'s)
+@DO `p58 IS 10                    ;Space Exit Y
+@DO `p59 IS 618                   ;Space Exit Map #
+@DO `p60 IS 68                    ;Planet Entry X
+@DO `p61 IS 08                    ;Planet Entry Y
+@DO `p62 IS 1560                  ;Planet Entry Map #
+
+     ;Shipyard costs (0 means not available)
+@DO `p37 IS 0                     ;Cost of Holds
+@DO `p38 IS 0                     ;Cost of Reactors
+@DO `p39 IS 197                   ;Cost of Shield Units
+
+     ;Go to Planet Approach
+@ROUTINE END IN PLANET.REF
+
+
+
+@#HOMEGATE
+
+;Outside the field
+@IF LASTX IS 19 THEN
+ @BEGIN
+ @DO X IS 21
+ @DO SAYBAR
+`%The Ja'dra homeworld is under construction!
+ @END
+
+;Inside the field
+@IF LASTX IS 21 THEN
+ @BEGIN
+ @DO X IS 19
+ @DO SAYBAR
+`%The Ja'dra homeworld is under construction!
+ @END
+
+
+
+@#EASTGATE
+@DO SAYBAR
+`%The Ja'dra realm is under construction!
+@DO MOVEBACK
+
+@#SOUTHGATE
+@DO SAYBAR
+`%The Ja'dra realm is under construction!
+@DO MOVEBACK
+
+@#WESTGATE
+@DO SAYBAR
+`%The Ja'dra realm is under construction!
+@DO MOVEBACK
+
+@#END
+@drawmap
+@do moveback
+@update
+@routineabort

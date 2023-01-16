@@ -1,0 +1,257 @@
+;This is Sitth's secret house.
+@#SECRET
+@LABEL SECMENU
+@CLEAR SCREEN
+@SHOW
+`0Sitth's `%Secret House
+
+     `%How can I help you?
+
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`%Who are you?
+`%Any quest work here?
+>`p46 0 `$Intermail
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`9
+     I am `0Sitth`9, the great `0Snaken`9 Quest Master!
+
+     I have served the `0Snaken`9 for 200 years, & as long as I shall live,
+     I shall continue to do so.
+
+@KEY
+@DO GOTO SECMENU
+@END
+
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@do `p20 is 6
+@run getquest in quest.ref
+@END
+
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+                              `9Planetary Intermail
+
+@if USERDAT\`p12.TXT exist false then do
+ @begin
+ @writefile USERDAT\`p12.TXT
+  `3Barnicle: `$Hello!
+ @end
+@if USERDAT\`p12.TXT exist true then do
+ @begin
+ @displayfile USERDAT\`p12.TXT
+ @end
+@show
+@
+(Do tricky stuff with name to determine how much they can type)
+@DO `s09 is `%
+@DO `s09 add `n
+@DO STRIP `s09 <-- Strips all none color ` codes out
+@DO `s09 add `x`1:`x`9
+@DO `p25 is length `s09
+@DO `p26 is 76
+@DO `p26 - `p25
+@DO WRITE
+  `1Enter your message or `9ENTER`1 to abort.`\  `s09
+@DO READSTRING `p26 NIL `s10 <--Read string, NIL is default. (nothing)
+@do stripbad `s10
+@SHOW
+
+@DO `p27 is length `s10
+@IF `p27 less 3 then do
+ @begin
+ @DO GOTO SECMENU
+ @end
+ @writefile USERDAT\`p12.TXT
+  `%`n`1: `9`s10
+ @do trim USERDAT\`p12.TXT 17
+@DO GOTO SECMENU
+@END
+
+@IF RESPONCE IS 4 THEN DO
+@ROUTINE END
+
+
+
+;The Snaken Center
+@#SNAKEN
+     ;Creates roster if non-existant.
+@if USERDAT\SMEMBER.DAT exist false then do
+ @begin
+ @writefile USERDAT\SMEMBER.DAT
+  `0Snaken Roster
+
+ @end
+
+     ;The Grounds
+@LABEL SM1
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\SBASE.ANS
+@PAUSEON
+@SHOW
+`9Where do you want to go?
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`0Recruiting Office
+`0Shedding Pit
+`0Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@DO GOTO SM2
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@SHOW
+
+`1The Shedding Pit is already filled up with the sheddings of the natives.
+
+@KEY
+@DO GOTO SM1
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+     ;Recruiting Office
+@LABEL SM2
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\SHEAD.ANS
+@PAUSEON
+@SHOW
+`9Where do you want to go?
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>`i31 0 !`p19 3 `$Apply for membership.
+`0See the membership roster.
+-`t01 4 `@Buy a uniform (Needed to join).
+`0Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+;The induction
+
+@CLEAR SCREEN
+@SHOW
+
+`0You face many officers & the high admiral herself.
+
+`0Do you swear to follow our great order until the end?
+Type AGREE if you do!
+
+
+@DO READSTRING 5 NIL `s03
+@IF `s03 IS AGREE THEN DO
+ @BEGIN
+ @CLEAR SCREEN
+ @DO `p19 IS 3
+ @writefile USERDAT\SMEMBER.DAT
+  `%`N
+ @SHOW
+
+`@Welcome to our great order!
+
+
+ @KEY
+ @DO GOTO SM2
+ @END
+@IF `s03 NOT AGREE THEN DO
+ @BEGIN
+ @CLEAR SCREEN
+ @SHOW
+
+`0You hath rejected us! Go now from this place!
+
+
+ @KEY
+ @DO GOTO SM2
+ @END
+@END
+
+@IF RESPONCE IS 2 THEN DO
+;The roster
+@BEGIN
+@CLEAR SCREEN
+@DISPLAYFILE USERDAT\SMEMBER.DAT
+@KEY
+@DO GOTO SM2
+@END
+
+@IF RESPONCE IS 3 THEN DO
+;The uniform
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+
+`9You might want to buy a uniform!
+
+`9It's only `$5000`9 gold!
+
+`@Y `9is Yes
+`8N `9is No
+@DO READSPECIAL `s01 YN
+@IF `s01 IS N THEN DO
+ @BEGIN
+ @SHOW
+
+`9You can't afford the `0Snaken Uniform`9. Rats!
+
+ @KEY
+ @END
+@IF `s01 IS Y THEN DO
+ @BEGIN
+ @IF money MORE 4999 THEN DO
+  @BEGIN
+  @DO money - 5000
+  @DO `i31 + 1
+  @BITSET `t01 4 1
+  @SHOW
+
+`9You don an `0Snaken Uniform`9. How spiffy!
+
+  @KEY
+  @END
+ @IF money LESS 5000 THEN DO
+  @BEGIN
+  @SHOW
+
+`9You can't afford the `0Snaken Uniform`9. Rats!
+
+  @KEY
+  @END
+ @END
+@DO GOTO SM2
+@END
+
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@DO GOTO SM1
+@END
+
+@#EXIT
+@DO SAYBAR
+`0Outsiders are not welcome outside the tradeport!
+@DO MOVEBACK
+
+@#END
+@drawmap
+@do moveback
+@update
+@routineabort

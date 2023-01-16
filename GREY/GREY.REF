@@ -1,0 +1,57 @@
+@#GREY
+;This is the "Grey Planet" addon. It creates an Ice World north of Uniland.
+;Use this as a guide for other addons.
+
+
+;Notes
+;
+;1. All ANSI's are in the ANSI subdirectory.
+;2. Use L2CFG and cycle through the bottom row in the map to look for
+;   planetforms. You can even make a new one if you like.
+;3. This REF uses a PLANET31.DAT file. Check the ORIGINAL subdir. for it.
+
+
+;Layout of PLANET31.DAT
+;0        Planet Owner #
+;13331    Population
+;300      Weapon Power
+;250      Armor Power
+;0        Intermail Access (0 = No, 1 = Yes)
+
+
+;Planet table
+
+     ;Planet in general
+@DO `s04 IS `7Grey`xPlanet        ;Name of Planet (`x needed for spaces)
+@DO `p12 IS 31                    ;Planet Number (Must differ from others)
+@DO `p35 IS 0                     ;Bank status: 1 is on, 0 is off.
+@DO `p76 IS 9                     ;Planet image file (P1-P10.ANS)
+@DO `p57 IS 53                    ;Space Exit X (Please use a 0 with <10 #'s)
+@DO `p58 IS 13                    ;Space Exit Y
+@DO `p59 IS 485                   ;Space Exit Map #
+@DO `p60 IS 68                    ;Planet Entry X
+@DO `p61 IS 08                    ;Planet Entry Y
+@DO `p62 IS 1560                  ;Planet Entry Map #
+
+     ;Shipyard costs (0 means not available)
+@DO `p37 IS 0                     ;Cost of Holds
+@DO `p38 IS 0                     ;Cost of Reactors
+@DO `p39 IS 197                   ;Cost of Shield Units
+
+     ;Trade office costs (0 means not available)
+@DO `p63 IS 670                   ;Cost of Medical Unit
+@DO `p64 IS 9000                  ;Cost of Heating Unit
+@DO `p65 IS 24                    ;Cost of Ice Unit
+@DO `p66 IS 430                   ;Cost of Ground Weapon
+@DO `p67 IS 156                   ;Cost of Novelty Pack
+@DO `p68 IS 0                     ;Cost of Tree Growth Kit
+@DO `p69 IS 0                     ;Cost of Jewel
+@DO `p70 IS 147                   ;Cost of Plastic Trinket
+@DO `p71 IS 1305                  ;Cost of Clothes Bundle
+@DO `p72 IS 0                     ;Cost of Zone Atomic Bomb
+@DO `p73 IS 0                     ;Cost of Onboard Printing Kit
+@DO `p74 IS 0                     ;Cost of Slug
+@DO `p75 IS 0                     ;Cost of Eden Warp
+
+     ;Go to Planet Approach
+@ROUTINE END IN PLANET.REF

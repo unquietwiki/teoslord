@@ -1,0 +1,118 @@
+*AMENDED 12-26-2009 with updated contact info
+
+TEOS LORD, Version 1.70
+Michael Adams Programming
+August 15, 2001
+
+
+What's New?
+
+     This is maintenance encouraged by some anonymous updates from people
+     who are still actively engaged in L2 gameplay: as for myself, my BBS
+     has been offline since March of 1999, and my programming has been
+     lacking. :( I encourage anyone who is interested to take up my work
+     and make this the game it should be (or port it to another platorm).
+
+
+Introduction
+
+     This is a full version of the "TEOS LORD" project: a LORD2 world based
+     on Seth Able Robinson's "Planets:TEOS" software.
+
+
+Features
+
+     1. 350+ Graphical Maps, interchanging between surface/ship/space terrains.
+     2. 3 Parties: Alliance, Maraken, Snaken.
+     3. The original 26 planets, plus 4 "Snaken" worlds.
+     4. The original 16 ships, plus 3 "Snaken" vessels.
+        (Each ship has proper weapon, armour, HP, react., torp. & hold limits)
+     5. Most of the original trade goods from "Planets."
+        (Slugs added; 17 goods in all)
+     6. A LORD2-style quest system.
+        (6 locations, 5 goods)
+     7. 7 weapons & 7 armours.
+        (To replace fighters & provide defense ability)
+     8. Use of HP's as shields.
+     9. Reactors, torpedoes, & ships holds.
+     10. The Schooloria Library, Dremora Temple, & Galactic Banks.
+     11. Most of the original ANSI's, plus some new ones.
+     12. New World style Bounty Hunting & Casino.
+
+
+Installation
+
+     1. You've already unzipped this program (assumed). Be sure you used
+        "PKUNZIP -D", & not "PKUNZIP".
+     2. Use L2CFG to plug in the proper settings & reg. codes.
+     3. Edit RULES.REF to change in-game settings.
+     4. Modify LORD2.BAT to accomodate your system.
+     5. Modify your BBS to accomodate TEOS LORD.
+
+
+Resetting
+
+     1. Go to the game directory.
+     2. Use RESET.BAT. Follow its instructions!
+
+
+Addons
+
+     Please consult my Developer's Kit for TEOS LORD if you want to make
+     addons. You can find it at one of my websites listed at the end of this
+     document.
+
+
+Other
+
+     List of subdirectories:
+
+     ANSI      Ansi files
+     MAIL      Mail files
+     ORIGINAL  Original planet data (Used in reset)
+     PLANETS   Current planet data
+     USERDAT   User texts, lists, & Intermail files
+     MARINER   Stores ship-swapping data
+
+
+     Project history can be found in HISTORY.DOC
+
+
+In the future...
+
+     *. My development of this game is probably complete. It will be you, the
+        developer, to continue my work as proposed below...
+
+     1. The Ja'dra Realm: The massive new area in the game; currently unused.
+                          This will be very calculatory in nature, and will
+                          combine the forces of the other galactic nations.
+
+     2. The Great Flight: The end of the game. Ja'dra technology will permit
+                          the allied nations to produce a warp-ship, designed
+                          to cross extra-galactic space.
+
+
+Credits
+
+     1. Seth Able Robinson
+        (Author of Planets:TEOS & LORD2; kept an eye on this project)
+     2. Mike Baxter
+        (Gave me his reg. code for LORD2 when he took his BBS down)
+     3. Fellow Slug BBS users
+        (They put up with my "harrassing" on testing out the game)
+     4. My Family
+        (They put up with an egotistic computer-nerd in the house)
+     5. Genie Bohn
+        (Helped me send off file-included e-mails from her system)
+     6. The Internet
+        (Allows me to expand my influence)
+     7. Friendly & loyal users who play this more than me. <wink>
+
+
+Contacts....
+
+Michael Adams, creator:     unquietwiki@gmail.com
+                            http://www.unquietwiki.com/
+
+Donald Tidmore, LORD2 buff: ktidmore@bellsouth.net
+                            http://camelot.legendarydragons.com/menusets.htm

@@ -1,0 +1,48 @@
+;daily log functions are here
+
+@#readlog
+@pauseon
+@show
+`r0`c                     `%The Daily Happenings for day &time
+`1-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+@if lognow.txt exist false then do
+ @begin
+ @writefile lognow.txt
+  `1Young Nedrick comes home crying - he says he saw an `0Snaken`1!  `$Eww!`1
+                                 `1-`9=`1-`%=`1-`9=`1-
+@pauseoff
+@end
+
+@if lognow.txt exist true then do
+ @begin
+ @displayfile lognow.txt
+ @end
+
+
+
+@label logprompt
+
+@do write
+`\          `1(`0Y`1)esterday news  (`0T`1)odays news again (`0C`1)ontinue [`0C`1] : `%
+@do readspecial `s01 CYT
+
+ @if `s01 is Y then do
+ @begin
+ @do `p20 is &time
+ @do `p20 - 1
+ @pauseon
+ @show
+`r0`c               `%The Daily Happenings for yesterday, day `p20
+`1-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+ @if logold.txt exist true then do
+ @begin
+ @displayfile logold.txt
+ @end
+ @pauseoff
+
+ @do goto logprompt
+ @end
+
+@if `s01 is T then goto readlog
+
+@#alldone

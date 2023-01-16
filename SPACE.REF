@@ -1,0 +1,249 @@
+;This is the asteroid depot.
+@#ASTEROID
+@LABEL ASTMENU
+@CLEAR SCREEN
+@SHOW
+`r1`%Asteroid Depot`r0
+
+
+     `%How can we I help you?
+
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`%Who are you?
+`%Any quest work here?
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+`%
+     Hello, my name is `$Nickabrick`%. I bid you welcome.
+
+     This place is a waystation for traders on both sides of the border.
+     We try to remain Neutral, but some of the workers here prefer different
+     governments.
+
+     We also run the gambling casino that occupies most of the space here.
+     Don't worry, it's legal: it's under license from both sides of the
+     border.
+
+@KEY
+@DO GOTO ASTMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@do `p20 is 3
+@run getquest in quest.ref
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+
+;This is the outpost in the Maraken Clouds. Only revealed to people who have
+;visited Hook on Norhaven.
+@#CLOUD
+@IF BITCHECK `t01 3 1 THEN DO
+@BEGIN
+ @LABEL CLDMENU
+ @CLEAR SCREEN
+ @SHOW
+`r4`%Maraken Cloud Station`r0
+
+
+     `%How can we I help you?
+
+
+ @DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+`%Who are you?
+`%Any quest work here?
+`!Bounty Office
+`%Leave
+ @IF RESPONCE IS 1 THEN DO
+ @BEGIN
+ @CLEAR SCREEN
+ @SHOW
+`5
+     Hello, my name is `%Selena`5. Welcome to this station.
+
+     It's not as busy as it used to be when the `4Maraken`5 weren't in charge.
+     However, any friend of `8Hook`5 is a friend of ours!
+
+ @KEY
+ @DO GOTO CLDMENU
+ @END
+ @IF RESPONCE IS 2 THEN DO
+ @BEGIN
+ @do `p20 is 4
+ @run getquest in quest.ref
+ @END
+ @IF RESPONCE IS 3 THEN DO
+ @BEGIN
+ @RUN BOUNTY IN BOUNTY.REF
+ @END
+ @IF RESPONCE IS 4 THEN DO
+ @BEGIN
+ @ROUTINE END
+ @END
+@END
+
+@IF BITCHECK `t01 3 0 THEN DO
+@BEGIN
+ @DO SAYBAR
+`%Something in the mist is locking weapons! Better go!
+@END
+
+@#OLDSTATION
+@LABEL OSMENU
+@CLEAR SCREEN
+@SHOW
+`r1`%The Old Space Station`r0
+
+
+     `%You have arrived at an old space station.
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+-`t03 1 Look around
++`t03 1 -`t03 2 Enter the Command Center
++`t03 2 Talk to the Old Man
++`t04 1 About Able's request
+`%Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@BITSET `t03 1 1
+@CLEAR SCREEN
+@SHOW
+
+     `%The station looks much abandoned. No activity anywhere. You feel you
+should check the Command Center.
+
+
+@KEY
+@DO GOTO OSMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@BITSET `t03 2 1
+@CLEAR SCREEN
+@SHOW
+`r1`%Command Center`r0
+
+
+     `%The Command Center looks active. Various monitors are displaying data
+and various indicators are flashing about. Among them, is an old man, working
+at various consoles. He seems to be ignoring you.
+
+
+@KEY
+@DO GOTO OSMENU
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@BITSET `t03 3 1
+@CLEAR SCREEN
+@SHOW
+`r1`%Talking with the Old Man`r0
+
+
+     `%"Hello?" you ask.
+
+     `$(mumbling) ...gotta check shields, gotta check that power spike...
+
+     `%Hello?
+
+     `$... oh. (Turns to you) Hello. Forgive me, I've been busy. Are you a
+     bounty hunter?
+
+     `%Yes I am. Why?
+
+
+@KEY
+@CLEAR SCREEN
+@SHOW
+`r1`%Talking with the Old Man`r0
+
+
+     `$Someone has to deal with the Ja'dra. They are rumored to be planning
+an invasion of `0Snaken Space`$.
+
+     `%Who are they?
+
+     `$They are the most powerful force in the galaxy. Their space is divided
+from ours by an electronic frontier. Three gates provide entry into a heavily
+guarded regime. This regime is controlled by spread-out space stations, each
+coordinating a section of Ja'dra space.
+
+     `%Why should I be concerned with the invasion plan?
+
+     `$Because they won't stop there! They'll use the wormhole to conquer us!
+
+
+@KEY
+@CLEAR SCREEN
+@SHOW
+`r1`%Talking with the Old Man`r0
+
+
+     `%What should I do?
+
+     `$Go talk to Able. He'll set you straight.
+
+     `%How do you know Able?
+
+     `$Don't ask me that, just know that he is my friend.
+
+     `%Thank you old man.
+
+     `$Thank you. You shall save us all.
+
+     `%Hummm....
+     
+
+@KEY
+@DO GOTO OSMENU
+@END
+
+@IF RESPONCE IS 4 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+
+     `%Can you tell me more about the Ja'dra?
+
+     `$Nope.
+
+     `%Why?
+
+     `$Because this is only `@TEOS LORD 1.1`$!
+
+     `$Ok. Thank you.
+
+     `%Watch for future versions of `@TEOS LORD`%, from MAP!
+
+@KEY
+@DO GOTO OSMENU
+@END
+
+@IF RESPONCE IS 5 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+@#END
+@do moveback
+@drawmap
+@update
+@routineabort

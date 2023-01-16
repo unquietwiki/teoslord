@@ -1,0 +1,555 @@
+@#NPC
+;NPC Identification
+@DO `p20 RANDOM 15 1
+
+;Use the following as a model for new NPC's.
+@IF `p20 IS 1 THEN DO
+ @BEGIN
+ ;Name
+ @DO `s09 IS Droznic
+ ;Ship Name
+ @DO `s10 IS Death`xMachine
+ ;Gender (1-Male 2-Female 3-It)
+ @DO `p77 IS 1
+ ;Alignment (50 or more: Good, 49 or less: Bad)
+ @DO `p78 IS 44
+ ;Defensive Odds
+ @DO `p79 IS 65
+ ;Assault Power
+ @DO `p80 IS 113
+ ;Defense Power (HP's)
+ @DO `p81 IS 257
+ ;Money (Won money is Money * 10 / Alignment)
+ @DO `p82 IS 562
+ ;Experience (Won experience is Experience * 10 / Alignment)
+ @DO `p83 IS 200
+ @END
+
+@IF `p20 IS 2 THEN DO
+ @BEGIN
+ @DO `s09 IS Nordinko
+ @DO `s10 IS The`xNora
+ @DO `p77 IS 1
+ @DO `p78 IS 62
+ @DO `p79 IS 50
+ @DO `p80 IS 67
+ @DO `p81 IS 500
+ @DO `p82 IS 20727
+ @DO `p83 IS 361
+ @END
+@IF `p20 IS 3 THEN DO
+ @BEGIN
+ @DO `s09 IS Kahn
+ @DO `s10 IS The`xDagger
+ @DO `p77 IS 1
+ @DO `p78 IS 45
+ @DO `p79 IS 60
+ @DO `p80 IS 200
+ @DO `p81 IS 750
+ @DO `p82 IS 368516
+ @DO `p83 IS 1024
+ @END
+@IF `p20 IS 4 THEN DO
+ @BEGIN
+ @DO `s09 IS Norhalien
+ @DO `s10 IS -=Fullmobile=-
+ @DO `p77 IS 1
+ @DO `p78 IS 59
+ @DO `p79 IS 40
+ @DO `p80 IS 150
+ @DO `p81 IS 500
+ @DO `p82 IS 513846
+ @DO `p83 IS 1123
+ @END
+@IF `p20 IS 5 THEN DO
+ @BEGIN
+ @DO `s09 IS Lord`xDread
+ @DO `s10 IS Death`xOn`xWheels
+ @DO `p77 IS 1
+ @DO `p78 IS 45
+ @DO `p79 IS 60
+ @DO `p80 IS 48
+ @DO `p81 IS 400
+ @DO `p82 IS 20941
+ @DO `p83 IS 316
+ @END
+@IF `p20 IS 6 THEN DO
+ @BEGIN
+ @DO `s09 IS Captain`xPicard
+ @DO `s10 IS Generation
+ @DO `p77 IS 1
+ @DO `p78 IS 55
+ @DO `p79 IS 45
+ @DO `p80 IS 104
+ @DO `p81 IS 1875
+ @DO `p82 IS 31267
+ @DO `p83 IS 2734
+ @END
+@IF `p20 IS 7 THEN DO
+ @BEGIN
+ @DO `s09 IS Crazy`xMorray
+ @DO `s10 IS Fanaticmobile
+ @DO `p77 IS 1
+ @DO `p78 IS 50
+ @DO `p79 IS 30
+ @DO `p80 IS 21
+ @DO `p81 IS 114
+ @DO `p82 IS 2306
+ @DO `p83 IS 206
+ @END
+@IF `p20 IS 8 THEN DO
+ @BEGIN
+ @DO `s09 IS Tree`xBoar
+ @DO `s10 IS Guardian`xof`xthe`xEarth
+ @DO `p77 IS 1
+ @DO `p78 IS 54
+ @DO `p79 IS 50
+ @DO `p80 IS 150
+ @DO `p81 IS 500
+ @DO `p82 IS 1854840
+ @DO `p83 IS 767
+ @END
+@IF `p20 IS 9 THEN DO
+ @BEGIN
+ @DO `s09 IS Beanboy
+ @DO `s10 IS Fathermobile
+ @DO `p77 IS 1
+ @DO `p78 IS 50
+ @DO `p79 IS 50
+ @DO `p80 IS 15
+ @DO `p81 IS 16
+ @DO `p82 IS 234
+ @DO `p83 IS 82
+ @END
+@IF `p20 IS 10 THEN DO
+ @BEGIN
+ @DO `s09 IS Borg
+ @DO `s10 IS A`xsmall`xcube
+ @DO `p77 IS 3
+ @DO `p78 IS 47
+ @DO `p79 IS 35
+ @DO `p80 IS 1000
+ @DO `p81 IS 3500
+ @DO `p82 IS 3229200
+ @DO `p83 IS 5782
+ @END
+@IF `p20 IS 11 THEN DO
+ @BEGIN
+ @DO `s09 IS Sisko
+ @DO `s10 IS DS9
+ @DO `p77 IS 1
+ @DO `p78 IS 61
+ @DO `p79 IS 30
+ @DO `p80 IS 1000
+ @DO `p81 IS 3000
+ @DO `p82 IS 13391619
+ @DO `p83 IS 21026
+ @END
+@IF `p20 IS 12 THEN DO
+ @BEGIN
+ @DO `s09 IS Captain`xJaneway
+ @DO `s10 IS Voyager
+ @DO `p77 IS 2
+ @DO `p78 IS 65
+ @DO `p79 IS 40
+ @DO `p80 IS 1200
+ @DO `p81 IS 4000
+ @DO `p82 IS 15000000
+ @DO `p83 IS 25000
+ @END
+@IF `p20 IS 13 THEN DO
+ @BEGIN
+ @DO `s09 IS Maderak
+ @DO `s10 IS Vou-Neays
+ @DO `p77 IS 3
+ @DO `p78 IS 30
+ @DO `p79 IS 70
+ @DO `p80 IS 5000
+ @DO `p81 IS 9999
+ @DO `p82 IS 7000000
+ @DO `p83 IS 50000
+ @END
+@IF `p20 IS 14 THEN DO
+ @BEGIN
+ @DO `s09 IS San`xSalvadan
+ @DO `s10 IS Mehicoship
+ @DO `p77 IS 1
+ @DO `p78 IS 50
+ @DO `p79 IS 50
+ @DO `p80 IS 2350
+ @DO `p81 IS 700
+ @DO `p82 IS 12000
+ @DO `p83 IS 2000
+ @END
+@IF `p20 IS 15 THEN DO
+     ;Accesses Probe Routine
+ @BEGIN
+ @ROUTINE PROBE
+ @END
+
+
+;NPC Encounter
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\APPROACH.ANS
+@PAUSEON
+@KEY
+@LABEL NMENU
+@CLEAR SCREEN
+@SHOW
+`r1`%NPC Encounter`r0
+
+
+`0`s09`1 in `$`s10`1 is here.
+
+`1Alignment     : `0`p78
+`1Defense Factor: `0`p79
+`1Shield Power  : `0`p81
+`1Assault Power : `0`p80
+`1Onboard Wealth: `0`p82
+`1Experience    : `0`p83
+
+`9Advice: The higher the alignment, the lower the reward.
+`9        Also, whenever you have a torpedo on board, it'll be ready for use.
+
+@DO `V01 IS 1
+@do write
+`x`x
+@CHOICE
+>`i01 0 `4Fire a torpedo!
+`4Attack
+`9Leave
+@IF RESPONCE IS 1 THEN DO
+@BEGIN
+@CLEAR SCREEN
+@SHOW
+
+`L`4Torpedo `LFired!
+
+
+@IF `p23 MORE 99 THEN DO
+ @BEGIN
+ @SHOW
+ `$Shielding reduced by 100 units!
+
+ @KEY
+ @END
+@IF `p23 LESS 100 THEN DO
+ @BEGIN
+ @SHOW
+ `4Shields obliterated!
+
+ @KEY
+ @END
+@DO `p23 - 100
+@DO GOTO NMENU
+@END
+@IF RESPONCE IS 2 THEN DO
+@BEGIN
+@ROUTINE FIGHTNPC
+@END
+@IF RESPONCE IS 3 THEN DO
+@BEGIN
+@ROUTINE END
+@END
+
+
+
+;NPC Battle
+@#FIGHTNPC
+@DO `p21 is `p80
+@DO `p21 * 2
+@DO `p22 is `p80
+@DO `p22 / 2
+@DO `p24 is `p83
+@DO `p24 * 10
+@DO `p24 / `p78
+@DO `p25 is `p82
+@DO `p25 * 10
+@DO `p25 / `p78
+@fight
+;name
+`0`s09
+;string said when you see him
+`$`s10 `%moves in!
+;power move kill string
+`%Too easy!
+;sex - 1 is male, 2 is female, 3 is it
+`p77
+;weapon and strength for the weapon, up to 5
+fires at you with its laser cannons|`p80
+fires a heavy-shot|`p21
+focuses its shields upon you|`p81
+blunts a shot off your shielding|`p22
+NONE|NONE
+;defense
+`p79
+;gold reward
+`p25
+;experience
+`p24
+;hit points
+`p81
+;if win: ref file|name or NONE
+FIGHT.REF|NPCWIN
+;if lose: ref file|name or NONE
+GAMETXT.REF|DIE
+;if runs: ref file|name or NONE
+FIGHT.REF|END
+
+
+
+;Victory over NPC
+@#NPCWIN
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\BLOW.ANS
+@SHOW
+
+`r1`%Victory!`r0
+
+
+`1Your foe defeated, you collect whatever valuables are left in the debris.
+Unfortunately, you were too good a shot to leave any trade goods or hull items
+intact. However, you did seize some `$gold`1 and `9experience`1 points!
+
+`1Gold          : `0`p25
+`1Experience    : `0`p24
+
+@PAUSEON
+@KEY
+@ROUTINE END
+
+
+
+
+
+;The following fighters are Snaken based. If a person is a Snaken, they'll
+;just say hi. If not, they attack.
+@#STRAY
+@fight
+;name
+`%Stray Mercenary Shuttle
+;string said when you see him
+`%A stray mercenary shuttle warps in!
+;power move kill string
+`%Too easy!
+;sex - 1 is male, 2 is female, 3 is it
+3
+;weapon and strength for the weapon, up to 5
+fires at you with its laser cannons|30
+fires a heavy-shot|60
+focuses its shields upon you|35
+NONE|NONE
+NONE|NONE
+;defense
+20
+;gold reward
+200
+;experience
+200
+;hit points
+35
+;if win: ref file|name or NONE
+FIGHT.REF|END
+;if lose: ref file|name or NONE
+GAMETXT.REF|DIE
+;if runs: ref file|name or NONE
+FIGHT.REF|END
+
+@#SNAKEN
+@if `p19 is 3 then do
+ @begin
+ @do saybar
+`0Merc Shuttle: `$Greetings fellow officer!
+ @end
+
+@if `p19 not 3 then do
+ @begin
+@fight
+;name
+`0Snaken Mercenary Shuttle
+;string said when you see him
+`%A stray mercenary shuttle warps in!
+;power move kill string
+`%Too easy!
+;sex - 1 is male, 2 is female, 3 is it
+3
+;weapon and strength for the weapon, up to 5
+fires at you with its laser cannons|50
+fires a heavy-shot|100
+focuses its shields upon you|50
+NONE|NONE
+NONE|NONE
+;defense
+20
+;gold reward
+300
+;experience
+300
+;hit points
+50
+;if win: ref file|name or NONE
+FIGHT.REF|END
+;if lose: ref file|name or NONE
+GAMETXT.REF|DIE
+;if runs: ref file|name or NONE
+FIGHT.REF|END
+ @end
+
+@#SA
+@if `p19 is 3 then do
+ @begin
+ @do saybar
+`0Asteroid Miner: `$Greetings fellow officer!
+ @end
+
+@if `p19 not 3 then do
+ @begin
+@fight
+;name
+`0Snaken Asteroid Miner
+;string said when you see him
+`%An asteroid miner has noticed you!
+;power move kill string
+`%Piece of cake!
+;sex - 1 is male, 2 is female, 3 is it
+3
+;weapon and strength for the weapon, up to 5
+fires at you with its laser cannons|50
+fires a heavy-shot|100
+focuses its shields upon you|50
+NONE|NONE
+NONE|NONE
+;defense
+20
+;gold reward
+300
+;experience
+300
+;hit points
+50
+;if win: ref file|name or NONE
+FIGHT.REF|END
+;if lose: ref file|name or NONE
+GAMETXT.REF|DIE
+;if runs: ref file|name or NONE
+FIGHT.REF|END
+ @end
+
+@#CORE
+@if `p19 is 3 then do
+ @begin
+ @do saybar
+`0Defense Frigate: `$Greetings fellow officer!
+ @end
+
+@if `p19 not 3 then do
+ @begin
+@fight
+;name
+`0Snaken `9Defense Frigate
+;string said when you see him
+`%A `0Snaken `9Defense Frigate `%approaches!
+;power move kill string
+`%Piece of cake!
+;sex - 1 is male, 2 is female, 3 is it
+3
+;weapon and strength for the weapon, up to 5
+fires at you with its pulse cannons|80
+fires a torpedo|150
+focuses its shields upon you|100
+NONE|NONE
+NONE|NONE
+;defense
+40
+;gold reward
+500
+;experience
+500
+;hit points
+100
+;if win: ref file|name or NONE
+FIGHT.REF|END
+;if lose: ref file|name or NONE
+GAMETXT.REF|DIE
+;if runs: ref file|name or NONE
+FIGHT.REF|END
+ @end
+
+
+
+;Probe Event
+@#PROBE
+@CLEAR SCREEN
+@PAUSEOFF
+@DISPLAYFILE ANSI\APPROACH.ANS
+@CLEAR SCREEN
+@DISPLAYFILE ANSI\POD.ANS
+@PAUSEON
+@DO `p21 RANDOM 4 1
+
+ @IF `p21 IS 1 THEN DO
+ @BEGIN
+ @DO `p22 RANDOM 25000 1
+ @DO money + `p22
+ @SHOW
+
+     `0You have found `$`p22`0 gold inside the probe!
+
+ @KEY
+ @ROUTINE END
+ @END
+
+ @IF `p21 IS 2 THEN DO
+ @BEGIN
+ @DO `p22 RANDOM 5000 1
+ @DO `p01 + `p22
+ @SHOW
+
+     `0This probe is a rare artifact!
+     You have gained `$`p22`0 experience for finding it!
+
+ @KEY
+ @ROUTINE END
+ @END
+
+ @IF `p21 IS 3 THEN DO
+ @BEGIN
+  @IF `p53 LESS `p52 THEN DO
+  @DO `p53 + 1
+  @SHOW
+
+     `0You have found a new torpedo!
+
+  @KEY
+  @ROUTINE END
+  @END
+  @IF `p53 MORE `p52 THEN DO
+  @SHOW
+
+     `0You have found a new torpedo, but had to toss it (No room for it)!
+
+  @KEY
+  @ROUTINE END
+  @END
+ @END
+
+ @IF `p21 IS 4 THEN DO
+ @BEGIN
+ @SHOW
+
+     `7This probe is a dud!
+     `4You get absolutely nothing!
+
+
+ @KEY
+ @ROUTINE END
+ @END
+
+
+
+@#END
+@drawmap
+@update
+@routineabort

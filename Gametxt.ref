@@ -1,0 +1,749 @@
+This one of the main .ref files the LORD II engine will use as
+references.  For help on making your OWN, check out REFHELP.DOC.
+
+Default LORD II files use the vars like this:
+
+The gold and bank vars are special cases, other vars do not have names.
+
+The list of how the variables are used has moved to VARLIST.DAT.  This file
+is read by the configuration program - it gives descriptions in the player
+editor from this file.  Check this file if you want to know what a var is
+for, or what free ones are available.
+
+
+@#showlog
+@routine readlog in logstuff.ref
+@drawmap
+@update
+
+@#busy
+;player cannot play, someone is attacking him or something
+@show
+`c  `r1                             `%PROBLEM.                                 `r0
+
+  `9Someone is attacking/giving you an item, please try again in few
+  minutes.
+
+`k
+@halt 0
+
+@#FULL
+`c`r1`%                              THE UNIVERSE IS FULL                           `r0
+                                    
+  `9Uh oh.  The galaxy has no room for you - 200 people are already in the
+  current game.  Adding one more could cause a chain reaction that would
+  `bdestroy `9the known worlds.
+
+  `!Is this what you want?
+
+`k  `9Oh.  Well in spite of that we will not let you play until some players
+  are deleted for inactivity, which is done daily.
+
+  `!Thanks for understanding!
+
+`k
+
+@#drawstats
+@do move 1 5
+@do `s10 is `p01
+@do pad `s10 18
+@do write
+  `1Experience  : `9`s10  `1Hitpoints    : (`9`p02`1 of `9`p03`1)`\
+@do `p20 is gold
+@do `s10 is `p20
+@do pad `s10 18
+@do `p20 is bank
+@do `s09 is `p20
+@do write
+  `1Gold on hand: `$`s10  `1Gold in bank : `$`s09`\
+@do `s10 is `9
+@if `p07 less 0 then `s10 is `4
+@do `s10 add `p07
+@do pad `s10 18
+
+;Organization Indicator
+
+@if `p19 is 0 then `s09 is Neutral
+@if `p19 is 1 then `s09 is Alliance
+@if `p19 is 2 then `s09 is Maraken
+@if `p19 is 3 then `s09 is Snaken
+@do write
+  `1Alignment   : `9`s10  `1Organization : `9`s09`\
+@do `s10 is `p11
+@if `p11 is 0 then `s10 is `4None
+@if `v05 < 1 then `s10 is Unlimited
+@do pad `s10 18
+@do write
+  `1Turns Left  : `9`s10  `1Time left    : `9&timeleft`\
+
+@do `s10 is S&weapon
+@do pad `s10 18
+@do `p20 is S&wep_num
+@do `p20 + `p04 (adding muscle to weapon strength to show it)
+@do write
+  `1Weapon      : `9`s10  `1Total Attack : `9`p20    `\
+@do `s10 is S&armour
+@do pad `s10 18
+@do `p20 is S&arm_num
+@do `p20 + `p05 (adding dodge to armour defense to show it)
+@do write
+  `1Armour      : `9`s10  `1Total Defense: `9`p20     `\
+
+@do `s10 is `p08
+@do pad `s10 18
+@do write
+  `1Charm       : `9`s10  `1Quest Points : `9`p18`\
+
+
+@#drawwep
+;code to redraw the weapon for arming/unarming.
+@do move 3 9
+@do `s10 is S&weapon
+@do pad `s10 18
+@do `p20 is S&wep_num
+@do `p20 + `p04 (adding muscle to weapon strength to show it)
+@do write
+`r0`1Weapon      : `9`s10  `1Total Attack : `9`p20  `\
+
+@#drawarm
+;code to redraw the armour for arming/unarming.
+@do move 3 10
+@do `s10 is S&armour
+@do pad `s10 18
+@do `p20 is S&arm_num
+@do `p20 + `p05 (adding dodge to armour defense to show it)
+@do write
+`r0`1Armour      : `9`s10  `1Total Defense: `9`p20  `\
+
+@#stats
+@show
+`r0`c`9  `n`1's status and information. (level `9`p09`1)
+`9-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+@routine drawstats in gametxt.ref
+@do move 1 12
+@show
+`r5  `%Item                                  Quantity                               `r0
+@do move 1 24 
+@do write
+`r5`%  `$`%Q `$to quit, `%ENTER`$ to use/equip/eat, `%D`$ to drop, `%N`$ for next page & `%P`$ for prev.  `r0
+@do move 1 12
+
+@#closestats
+@drawmap
+@update
+@closescript
+
+@#startgame
+  ;do startgame routines here
+  @VERSION 99
+  ;if version 99 or newer isn't detected, it will tell the player to upgrade
+  @do `v01 is 1
+  @if map < 2 then map is 1521
+  @if map > 1600 then map is 1521
+  @ROUTINE ID in id.ref
+
+@do write
+`r0`c
+
+@if `p10 is &time then do
+ @begin
+ ;guy has already played today
+
+@if dead is 1 then do
+ @begin
+  @if mail\mail&playernum.dat exist true then do
+   @begin
+   @checkmail
+   @key
+   @end
+
+  @if `v03 is 0 then do
+   @begin
+   @do `v01 is 1
+   @label deadstart
+    @show
+`r0`c  `r1 `%A PROBLEM. `r0
+
+`9  You are lying battered and bruised on the ground.  You can't do much
+  in this state.
+
+  `9Try again tomorrow.
+
+@do write
+`x`x
+@choice
+See todays news
+List players
+`4Quit back to the BBS
+@if responce is 1 then do
+  @begin
+  @routine readlog in logstuff.ref
+  @do goto deadstart
+  @end
+@if responce is 2 then do
+  @begin
+@do write
+`r0`c  `9Ranking players...
+
+@do delete temp`*.dat         ;`* is node number
+@writefile temp`*.dat
+`r0`c`r1                             `%  TEOS WORLD RANKINGS                            `r0
+                
+  `9Name                     Experience  Level   Status Alignment Quests
+`9-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+@
+@lordrank temp`*.dat 1
+@displayfile temp`*.dat
+@key bottom
+  @do goto deadstart
+  @end
+
+@show
+`\`\  `9Bye.
+
+       @halt
+      @end
+     @end
+
+
+  @show
+  `r1 `% DAY &time  `r0
+
+
+`1  You have already been out and about today.
+
+   @IF `p36 MORE 0 THEN DO
+   @BEGIN
+   @SHOW
+
+`9  Your `s05`9 is ready for use!
+
+   @END
+ @if `p11 > 0 then do
+  @begin
+  @show
+  `1You have `9`p11`1 turns left today.
+
+  @end
+ @end
+
+@if `p10 not &time then do
+  @begin
+  ;NEWDAY!
+  @do `p10 is &time
+  @do `p11 is `v05 ;this will give them the turns set in rules.ref
+  @do `p02 is `p03 ;<-- Give 'em max hit points
+  @do dead is 0 ;<-- Is now alive
+  @do `p31 is `v07 ;<-- Reset quests per day possible 
+  @do `p33 is `v08 ;<-- Reset gambles per day possible 
+  @do `p32 + 1 ;<-- Advance quest age.. doesn't matter if there is one active
+  @do `p49 is `p48 ;<-- Recharge reactors
+  @if s&wep_num > 0 then do
+  @begin
+  @show
+  `r1 `% DAY &time  `r0
+
+ @if `p11 > 0 then do
+  @begin
+  @show
+  `1It is morning.  You have `9`p11`1 turns left today.
+
+  @end
+  @show
+`1  You wake up early, activate your `9s&weapon`1, and prepare for
+  adventure!
+
+  @end
+
+  @if dead is 0 then do
+   @begin
+
+    @if s&wep_num is 0 then do
+    @begin
+    @show
+  `r1`%  DAY &time  `r0
+
+ @if `p11 > 0 then do
+  @begin
+  @show
+  `1It is morning.  You have `9`p11`1 turns left today.
+
+  @end
+@show
+`9  You wake up early, and prepare for adventure!
+
+     @end
+    @end
+
+  @if `v05 > 0 then do
+    @begin
+  @end
+
+
+
+@if `v03 is 1 then do
+ @begin
+ @if dead is 1 then do
+ ;if he is dead when he logs on
+  @begin
+   @do dead is 0 ;he is now alive
+   @do `p02 is `p03 (give 'em max hit points)
+   @do `p31 is `v07 ;<-- Reset quests per day possible 
+   @do `p33 is `v08 ;<-- Reset gambles per day possible 
+  ;Reload Earth (Found in PLANET.REF)
+  @DO `s04 IS Earth
+  @DO `p12 IS 1    ;Planet #
+  @DO `p35 IS 1    ;Bank Status: 1 means "bank", 0 means "no bank"
+  @DO `p57 IS 23   ;X
+  @DO `p58 IS 12   ;Y        Where you appear in space at departure.
+  @DO `p59 IS 641  ;MAP #
+  @DO `p60 IS 67   ;X
+  @DO `p61 IS 15   ;Y        Where you land on the planet.
+  @DO `p62 IS 1522 ;MAP #
+  @DO `p37 IS 200
+  @DO `p38 IS 100000
+  @DO `p39 IS 112
+  @DO `p63 IS 500
+  @DO `p64 IS 1500
+  @DO `p65 IS 200
+  @DO `p66 IS 350
+  @DO `p67 IS 100
+  @DO `p68 IS 800
+  @DO `p69 IS 2000
+  @DO `p70 IS 150
+  @DO `p71 IS 450
+  @DO `p72 IS 0
+  @DO `p73 IS 0
+  @DO `p74 IS 200
+  @DO `p75 IS 0
+  @READFILE PLANETS\PLANET`p12.DAT
+`p13
+`p43
+`p44
+`p45
+`p46
+@
+  @end
+ @end
+
+
+@if map < 0 then map is 1521
+@if map is 1 then do
+  @begin
+  @do map is 1521
+    @show
+  `9Your mother is sitting by your bed, weeping.
+
+`k  `$"Mom?  Why the tears?  Is it something I've done?" `1you ask.
+
+`k  `9"I was so worried!" `1you mother sobs, `9"When the town elders
+  brought you here last night I was sure you were dead!"
+
+  `$"I'm sorry mother.  I shall never scare you like this again!" `1you
+  promise.
+
+  @end
+ @end
+
+@if x < 1 then x is 14
+@if y < 1 then y is 17
+@if x > 80 then x is 14
+@if y > 24 then y is 17
+
+@show
+`k
+@do talk `9`n`x`%has`xentered`xthe`xrealm. all
+
+@routine readlog in logstuff.ref
+
+
+;do end routines here
+@#endgame
+@do talk `9`n`x`1has`xleft. all
+@if dead is 0 then do
+ @begin
+ @do move 1 24
+ @show
+
+`r0  `9You are lulled to sleep by a gentle breeze...
+
+  `9Come back soon.
+`9
+ @end
+
+@#RUN ;if the guy runs
+@drawmap
+@update
+
+@#DIE
+@do move 3 24
+@do write
+`r0                                                                           `x
+
+  @do X is 14
+  @do Y is 17
+  @do money / 2
+  @do `p02 is `p03 (give 'em max hit points)
+  @do `p20 is `p01
+  @do `p20 / 5
+  @do `p01 - `p20
+  @do MAP is 1521
+  ;Reload Earth (Found in PLANET.REF)
+  @DO `s04 IS Earth
+  @DO `p12 IS 1    ;Planet #
+  @DO `p35 IS 1    ;Bank Status: 1 means "bank", 0 means "no bank"
+  @DO `p57 IS 23   ;X
+  @DO `p58 IS 12   ;Y        Where you appear in space at departure.
+  @DO `p59 IS 641  ;MAP #
+  @DO `p60 IS 67   ;X
+  @DO `p61 IS 15   ;Y        Where you land on the planet.
+  @DO `p62 IS 1522 ;MAP #
+  @DO `p37 IS 200
+  @DO `p38 IS 100000
+  @DO `p39 IS 112
+  @DO `p63 IS 500
+  @DO `p64 IS 1500
+  @DO `p65 IS 200
+  @DO `p66 IS 350
+  @DO `p67 IS 100
+  @DO `p68 IS 800
+  @DO `p69 IS 2000
+  @DO `p70 IS 150
+  @DO `p71 IS 450
+  @DO `p72 IS 0
+  @DO `p73 IS 0
+  @DO `p74 IS 200
+  @DO `p75 IS 0
+  @READFILE PLANETS\PLANET`p12.DAT
+`p13
+`p43
+`p44
+`p45
+`p46
+@
+  @do dead is 1
+  @update_update
+
+  @do talk `4Newsflash:`9`x`n`x`$was`xdefeated`xby`x`9`e`1! all
+  @do addlog
+  `9`n`1 was whipped up on by `9`e`1!
+  @routine seperate
+@do move 3 24
+@PAUSEOFF
+@displayfile ANSI\BLOW.ANS
+@PAUSEON
+@KEY
+
+ @if `v03 is 0 then do
+   @begin
+ ;rules.ref file says unlimited deaths not allowed, so we will boot them
+ ;till tomorrow
+
+ ;take them off the map
+  @do map is 1
+   @halt
+   @end
+
+ @pauseon
+
+ @do dead is 0
+
+ @if `p07 less 0 then do
+ @begin
+ @show
+
+`r4`%An Evil Death`r0
+
+
+`4Your escape pod files out of the explosion. Soon, enemy pirates come to your
+aid, and tow your disabled ship and unconcious body back to `0Earth`4.
+
+ @key
+ @end
+
+ @if `p07 more -1 then do
+ @begin
+ @show
+
+`r1`%A Good Death`r0
+
+
+`9Your escape pod flies out of the explosion. You go unconcious as you set the
+course for `0Earth`9. Perhaps you will be revived. Only time will tell.
+
+ @key
+ @end
+@show
+`c  `r1`%AWAKENING.`r0
+
+  `0"Can you hear me, `n?" `2a stressed voice shouts.
+
+  `$"Yeah.  Christ mom, lemmie up, I'm fine." `2you assure your mother.
+
+  `0"You're alive!! The officers brought your body here yesterday, you must
+  have fainted out there." `2your mother shouts, tears of joy streaming down
+  her wrinkled face.
+
+  `$"Ok, ok - nice little happy reunion and all that, but I gotta hit the
+  road now. Buhbye." `2you tell her.  Afterall, you need to make the most of
+  this new lease on life.
+
+`k
+  @loadmap map
+  @drawmap
+  @update
+
+@#iwon
+;is run after someone kills a player - if in multinode combat, L2
+;calls it directly, otherwise @#live calls it with a @routine.
+;the enemy guy they just killed is automatically put in `v39.
+  @if bounty.`v39 exist true then do
+    @begin
+    @readfile bounty.`v39
+`p23
+`p24
+   @do money + `p24
+   @do delete bounty.`v39
+   @do quebar
+`9BONUS: `%You collect a `$$`p24 `%bounty for this kill!
+  @do addlog
+  `9`n`1 collects a `$$`p24 `1bounty for the kill!
+@writefile lognow.txt
+                                 `1-`9=`1-`%=`1-`9=`1-
+   @if `p23 not &playernum then do
+     @begin
+   @writefile mail\mail`p23.dat
+  `9`n `1reports:
+`1-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+`9  `e`1 has been `4killed`1.  Good doing business with you.
+
+     @end
+
+ @if `p23 is &playernum then do
+    @begin
+   @do quebar
+Haha, you got back your own money!  Nice.
+    @end
+
+   @end
+
+
+@#live
+@do talk `4Newsflash:`9`x`n`x`1has`xslain`x`9`e`1! all
+@do `V40 random 10 1
+@if `v40 is 1 then addlog
+  `9`n`1 has killed `9`e`1 over a dispute involving cattle!
+@if `v40 is 2 then addlog
+  `9`n`1 has crushed `9`e`1's skull.
+@if `v40 is 3 then addlog
+  `9`n`1 has beaten `9`e`1 in a fair battle!
+@if `v40 is 4 then addlog
+  `9`n`1 has killed `9`e`1 to avenge his mother!
+@if `v40 is 5 then addlog
+  `9`n`1 buries `9`e`1's rotting body.
+
+@if `v40 is 6 then addlog
+  `9`n`1 thanks `4Belar`1 for the power to destroy `9`e`1.
+
+@if `v40 is 7 then addlog
+  `9`n`1 kills `9`e`1 for trespassing on s&his land.
+
+@if `v40 is 8 then addlog
+  `9`n`1 deprives `9`e`1 of living another minute.
+@if `v40 is 9 then addlog
+  `9`n`1 makes quick work of `9`e`1.
+@if `v40 is 10 then addlog
+  `9`n`1 slays `9`e`1.
+
+
+@routine seperate
+@run iwon
+@#newplayer
+
+@routine help in help.ref
+
+@do `V40 random 5 1
+@if `v40 is 1 then `s10 is Terran
+@if `v40 is 2 then `s10 is Maraken
+@if `v40 is 3 then `s10 is Star`xCreature
+@if `v40 is 4 then `s10 is Snaken
+@if `v40 is 5 then `s10 is Pirate
+
+
+@show
+`c  `%IN THE BEGINNING.
+
+  `1There once was a poor `$`s10 `1couple who lived in a `2Earth`1 town called
+  `9New Greentree`1.
+
+  One day the mother felt very sick.  Scared, her husband took her to Nathan,
+  the town physician - after careful examination he smiled wide.
+
+  `9"Dear woman, you aren't sick - you are with child!"
+
+@KEY
+@show
+`c  `%IN THE BEGINNING.
+
+  `1The baby was born six months later - strangely enough on `9Gryphon Moon`1 day.
+
+  The young mother was delighted to find she had a new baby
+@do `v01 is 1
+@do move 61 7
+@choice
+boy.
+`#girl.
+@if responce is 1 then sexmale is 1
+@if responce is 2 then sexmale is 0
+@show
+
+@label namebaby
+@do `v01 is 1
+@if sexmale is 1 then `s10 is him`x
+@if sexmale is 0 then `s10 is her`x
+@show
+
+@do write
+  `9The mother decided to name `s10
+  @do readstring 20 NIL
+  @do stripbad `s10
+  ; change dark blue to light blue in their name
+  @do replaceall `1 `! `s10
+  @do `p20 is length `s10
+  @if `p20 less 1 then do
+    @begin
+    @do move 35 y
+    @show
+`bNothing`1.
+
+  `1She decided to name the baby nothing `8-`1 instead she sold the child
+  for `$20`1 gold pieces.  That night she was overcome with guilt and hung
+  herself on the rotting pine behind the cottage.
+
+  Have a nice day, loser!
+
+    @closescript
+    @end
+
+
+
+  @if `p20 less 3 then do
+    @begin
+    @show
+
+
+  `1But the husband disagreed.  `9"Not such a short name, dear!"
+    @do goto namebaby
+    @end
+
+  @if checkdupe `s10 true then do
+    @begin
+    @show
+
+
+  `1But the husband disagreed.  `9"We already know someone with that name!"
+    @do goto namebaby
+    @end
+   
+    @end
+
+
+
+@show
+`\`\  `1She decided on `9`s10`1.  The husband studied his wife carefully.`\
+@do write
+`x`x
+@choice
+"That is a good name.  You have chosen very well, wife."
+"I don't think so.  Try again."
+@if response is 2 then goto namebaby
+@do copytoname
+@if sex is 1 then `s09 is she
+@if sex is 0 then `s09 is he
+@show
+`c`r1                        `%THE PLOT                                 `r0
+
+`!  The universe has changed a lot in the last twenty years.
+
+`%  The Alliance `9no longer controls every planet.  A new and evil power has
+  encroached itself across the galaxy `8- `9they call themselves the `4Maraken`9.
+
+  `9They are lead by an old man known as `4Carnage`9.  His infamous name has
+  recruited millions into flying under his banner.
+
+  `3Will you be next?  Or will you choose to help `%The Alliance`3?
+
+  `9The choice is up to you.  
+
+`k
+
+@show
+`c `r1 `%The Beginning `r0
+
+  `9One day you hear your mother shrieking from the kitchen of your small
+  cottage.
+
+  `1You'd better get out of bed and find out what she wants.
+
+  `|`b* `%NOTE `b*
+
+  `1This game requires a fully `1A`3N`4S`5I `1compliant terminal.  If screens appear
+  jumbled `8- `1we suggest you try another terminal program, as this game is
+  not compatible with all of them.  `%ALSO`1:  Instead of arrow keys, you may
+  also use the `$numeric keypad`1, turn numlock on to do this.
+
+@KEY
+;Give them starting stuff
+  @do `p01 is 0
+  @do `p02 is 10
+  @do `p03 is 10
+  @do `p04 is 5
+  @do `p05 is 5
+  @do `p08 is 0
+  @do `p09 is 1
+  @do `p31 is `v07 ;<-- Reset quests per day possible 
+  @do `p33 is `v08 ;<-- Reset gambles per day possible 
+  @do X is 14
+  @do Y is 17
+  @do MAP is 1521
+  ;Reload Earth (Found in PLANET.REF)
+  @DO `s04 IS Earth
+  @DO `p12 IS 1    ;Planet #
+  @DO `p35 IS 1    ;Bank Status: 1 means "bank", 0 means "no bank"
+  @DO `p57 IS 23   ;X
+  @DO `p58 IS 12   ;Y        Where you appear in space at departure.
+  @DO `p59 IS 641  ;MAP #
+  @DO `p60 IS 67   ;X
+  @DO `p61 IS 15   ;Y        Where you land on the planet.
+  @DO `p62 IS 1522 ;MAP #
+  @DO `p37 IS 200
+  @DO `p38 IS 100000
+  @DO `p39 IS 112
+  @DO `p63 IS 500
+  @DO `p64 IS 1500
+  @DO `p65 IS 200
+  @DO `p66 IS 350
+  @DO `p67 IS 100
+  @DO `p68 IS 800
+  @DO `p69 IS 2000
+  @DO `p70 IS 150
+  @DO `p71 IS 450
+  @DO `p72 IS 0
+  @DO `p73 IS 0
+  @DO `p74 IS 200
+  @DO `p75 IS 0
+  @READFILE PLANETS\PLANET`p12.DAT
+`p13
+`p43
+`p44
+`p45
+`p46
+@
+  @addchar
+
+@#seperate
+@writefile lognow.txt
+                                 `1-`9=`1-`%=`1-`9=`1-
+@closescript
+
+@#DONE
